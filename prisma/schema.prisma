@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(EDITOR)
+  avatar       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[]
+}
+
+model Post {
+  id             String     @id @default(cuid())
+  slug           String     @unique
+  title          String
+  excerpt        String
+  content        String     @db.Text
+  coverImage     String?
+  status         PostStatus @default(DRAFT)
+  publishedAt    DateTime?
+  category       String     @default("Engineering")
+  tags           String[]
+  featured       Boolean    @default(false)
+  readingTime    Int        @default(1)
+  seoTitle       String?
+  seoDescription String?
+  authorId       String?
+  author         User?      @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+model Project {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  client         String
+  url            String?
+  summary        String
+  content        String   @db.Text
+  coverImage     String?
+  gallery        String[]
+  category       String   @default("Web Platform")
+  services       String[]
+  techStack      String[]
+  year           Int
+  featured       Boolean  @default(false)
+  published      Boolean  @default(true)
+  order          Int      @default(0)
+  accent         String   @default("#3DF2FF")
+  /// [{ label: string, value: string }]
+  metrics        Json     @default("[]")
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([published, order])
+}
+
+model Service {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  tagline        String
+  icon           String   @default("Code2")
+  summary        String
+  content        String   @db.Text
+  /// string[]
+  deliverables   String[]
+  /// [{ q: string, a: string }]
+  faqs           Json     @default("[]")
+  order          Int      @default(0)
+  published      Boolean  @default(true)
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  department  String
+  location    String
+  type        String   @default("Full-time")
+  remote      Boolean  @default(true)
+  summary     String
+  description String   @db.Text
+  applyUrl    String?
+  open        Boolean  @default(true)
+  salaryMin   Int?
+  salaryMax   Int?
+  currency    String   @default("NGN")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  budget    String?
+  service   String?
+  body      String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([read, createdAt])
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  bio       String?
+  photo     String?
+  linkedin  String?
+  twitter   String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String
+  author    String
+  role      String
+  company   String
+  avatar    String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+/// Singleton row (id = "site")
+model SiteSettings {
+  id             String   @id @default("site")
+  tagline        String
+  description    String
+  email          String
+  phone          String
+  address        String
+  city           String
+  country        String   @default("Nigeria")
+  twitter        String?
+  linkedin       String?
+  github         String?
+  instagram      String?
+  /// [{ label: string, value: number, suffix: string }]
+  stats          Json     @default("[]")
+  updatedAt      DateTime @updatedAt
+}

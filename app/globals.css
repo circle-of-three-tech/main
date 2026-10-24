@@ -1,0 +1,439 @@
+@import "tailwindcss";
+
+/* ---------- Brand tokens (see design-system/co3/MASTER.md) ---------- */
+:root {
+  --ink: #05061a;
+  --indigo: #0b0f3a;
+  --circuit: #1e2a8c;
+  --cyan: #3df2ff;
+  --violet: #7b5cff;
+  --fg: #f5f7ff;
+  --muted: #8a93c9;
+  --line: rgb(138 147 201 / 0.16);
+  --surface: #070926;
+  --danger: #ff7a90;
+  --warn: #ffb547;
+  --ok: #19d3a2;
+  --violet-soft: #b4a3ff;
+  --glow: rgb(61 242 255 / 0.6);
+  --shadow: rgb(0 0 0 / 0.6);
+  --halo: rgb(30 42 140 / 0.55);
+  --trace: #1e2a8c;
+  --glass-from: rgb(30 42 140 / 0.22);
+  --glass-to: rgb(11 15 58 / 0.55);
+  --iris-flash: 1.6;
+  --grain: 0.05;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --iris-x: 50%;
+  --iris-y: 50%;
+  color-scheme: dark;
+}
+
+/* Light theme: same brand, inverted surfaces. Accents are deepened to keep text contrast at AA on white. */
+:root[data-theme="light"] {
+  --ink: #f4f6fc;
+  --indigo: #ffffff;
+  --circuit: #dfe4f7;
+  --cyan: #0077a3;
+  --violet: #5a3fe0;
+  --fg: #0b0f3a;
+  --muted: #535b8a;
+  --line: rgb(11 15 58 / 0.11);
+  --surface: #ffffff;
+  --danger: #c8264a;
+  --warn: #a05f00;
+  --ok: #0a8a68;
+  --violet-soft: #5a3fe0;
+  --glow: rgb(0 119 163 / 0.28);
+  --shadow: rgb(11 15 58 / 0.14);
+  --halo: rgb(61 242 255 / 0.18);
+  --trace: #c3cbee;
+  --glass-from: rgb(255 255 255 / 0.82);
+  --glass-to: rgb(255 255 255 / 0.62);
+  --iris-flash: 1.08;
+  --grain: 0.03;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-indigo: var(--indigo);
+  --color-circuit: var(--circuit);
+  --color-cyan: var(--cyan);
+  --color-violet: var(--violet);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-danger: var(--danger);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --color-violet-soft: var(--violet-soft);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-exo), var(--font-inter), sans-serif;
+  --font-mono: var(--font-roboto-mono), ui-monospace, monospace;
+  --ease-expo: var(--ease-out-expo);
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-pulse-line: pulse-line 3s var(--ease-out-expo) infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulse-line {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--ink);
+  transition: background-color 0.4s var(--ease-out-expo);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--ink);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--cyan);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Hide native cursor only when the custom cursor is active (fine pointers). */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* ---------- Utilities ---------- */
+@utility glass {
+  background: linear-gradient(160deg, var(--glass-from), var(--glass-to));
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+@utility text-gradient {
+  background: linear-gradient(100deg, var(--fg) 10%, var(--cyan) 55%, var(--violet) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+@utility grid-bg {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+@utility container-x {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Per-project accent as text: deepened on light backgrounds so bright brand colours stay readable */
+.accent-text {
+  color: var(--accent);
+}
+:root[data-theme="light"] .accent-text {
+  color: color-mix(in oklab, var(--accent) 55%, var(--fg));
+}
+
+/* HUD corner brackets: add class="hud" to any relatively positioned box. */
+.hud::before,
+.hud::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--cyan);
+  opacity: 0.7;
+  pointer-events: none;
+  transition: all 0.4s var(--ease-out-expo);
+}
+.hud::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.hud::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.hud:hover::before,
+.hud:hover::after {
+  width: 28px;
+  height: 28px;
+  opacity: 1;
+}
+
+/* Film grain overlay */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- Page transitions: iris wipe from the click point ---------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+/* Theme switch: the new theme irises in from the toggle */
+html.theme-swap::view-transition-old(root) {
+  animation: none;
+}
+html.theme-swap::view-transition-new(root) {
+  animation: theme-iris 800ms var(--ease-out-expo) both;
+}
+@keyframes theme-iris {
+  from {
+    clip-path: circle(0% at var(--iris-x) var(--iris-y));
+  }
+  to {
+    clip-path: circle(150% at var(--iris-x) var(--iris-y));
+  }
+}
+::view-transition-group(.iris) {
+  animation-duration: 900ms;
+}
+::view-transition-old(.iris) {
+  animation: iris-recede 700ms var(--ease-out-expo) both;
+}
+::view-transition-new(.iris) {
+  animation: iris-open 900ms var(--ease-out-expo) both;
+}
+@keyframes iris-open {
+  from {
+    clip-path: circle(0% at var(--iris-x) var(--iris-y));
+    filter: brightness(var(--iris-flash)) saturate(1.4);
+  }
+  to {
+    clip-path: circle(150% at var(--iris-x) var(--iris-y));
+    filter: none;
+  }
+}
+@keyframes iris-recede {
+  to {
+    transform: scale(0.94);
+    opacity: 0.25;
+    filter: blur(6px);
+  }
+}
+::view-transition-group(.morph) {
+  animation-duration: 650ms;
+  animation-timing-function: var(--ease-out-expo);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  40% {
+    filter: blur(4px);
+  }
+}
+
+/* ---------- Long-form article typography ---------- */
+.prose-co3 {
+  color: color-mix(in srgb, var(--fg) 86%, transparent);
+  font-size: 1.075rem;
+  line-height: 1.8;
+}
+.prose-co3 > * + * {
+  margin-top: 1.25em;
+}
+.prose-co3 h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  color: var(--fg);
+  margin-top: 2.2em;
+  line-height: 1.2;
+  scroll-margin-top: 7rem;
+}
+.prose-co3 h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-top: 1.8em;
+  scroll-margin-top: 7rem;
+}
+.prose-co3 a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--cyan) 40%, transparent);
+}
+.prose-co3 a:hover {
+  text-decoration-color: var(--cyan);
+}
+.prose-co3 strong {
+  color: var(--fg);
+}
+.prose-co3 ul,
+.prose-co3 ol {
+  padding-left: 1.4em;
+}
+.prose-co3 ul {
+  list-style: none;
+}
+.prose-co3 ul > li {
+  position: relative;
+}
+.prose-co3 ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.1em;
+  top: 0.75em;
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+  transform: rotate(45deg);
+}
+.prose-co3 ol {
+  list-style: decimal;
+}
+.prose-co3 li + li {
+  margin-top: 0.5em;
+}
+.prose-co3 blockquote {
+  border-left: 2px solid var(--violet);
+  padding-left: 1.2em;
+  font-style: italic;
+  color: var(--fg);
+}
+.prose-co3 code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--circuit) 40%, transparent);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+.prose-co3 pre {
+  background: var(--indigo);
+  border: 1px solid var(--line);
+  padding: 1.2em;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+.prose-co3 pre code {
+  background: none;
+  padding: 0;
+}
+.prose-co3 img {
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Circuit pulses travelling along traces */
+.circuit-pulse {
+  stroke-dashoffset: 60;
+  animation: circuit-run linear infinite;
+}
+@keyframes circuit-run {
+  to {
+    stroke-dashoffset: calc(var(--len) * -1);
+  }
+}
+
+/* First-visit intro: cover the page until the preloader mounts and finishes */
+html.preload body {
+  overflow: hidden;
+}
+html.preload body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--ink);
+}
+
+/* Above-the-fold CSS reveals (start at first paint, no JS) */
+.rise-word {
+  animation: rise-word 0.9s var(--ease-out-expo) both;
+}
+@keyframes rise-word {
+  from {
+    transform: translateY(110%) rotate(4deg);
+  }
+}
+.rise-in {
+  animation: rise-in 0.9s var(--ease-out-expo) both;
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+/* While the intro plays, hold hero reveals so they play after it */
+html.preload .rise-word,
+html.preload .rise-in {
+  animation-play-state: paused;
+}
