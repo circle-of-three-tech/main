@@ -34,7 +34,8 @@ Sign in at `/dashboard/login` with `ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`,
 | `NEXT_PUBLIC_SITE_URL` | yes | Canonical origin, e.g. `https://www.your-domain.com` (used for canonicals, sitemap, OG) |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | seed only | First admin account |
 | `BLOB_READ_WRITE_TOKEN` | production | Image uploads via Vercel Blob (locally, uploads go to `public/uploads`) |
-| `RESEND_API_KEY`, `CONTACT_NOTIFY_EMAIL` | optional | Email notification for contact-form enquiries |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | optional | SMTP for transactional email via nodemailer (contact notifications and auto-replies). Email is skipped when unset |
+| `CONTACT_NOTIFY_EMAIL` | optional | Where enquiries are emailed; defaults to the email in dashboard Settings |
 | `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` | optional | Search Console / Bing Webmaster verification meta tags |
 
 ## Deploying to Vercel
