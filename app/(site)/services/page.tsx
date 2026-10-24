@@ -7,6 +7,7 @@ import { PageHero } from "@/components/site/ui";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getServices } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "Software Development Services in Nigeria",
@@ -25,6 +26,7 @@ export default async function ServicesPage() {
         label="Services"
         title="Software development services, end to end."
         highlight={["end", "end."]}
+        image={photo("office")}
         intro="From strategy and design to engineering, AI and cloud operations, we're a single team accountable for the whole journey of your product."
       />
       <ServicesGrid services={services} heading={false} />

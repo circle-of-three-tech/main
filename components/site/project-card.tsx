@@ -4,6 +4,7 @@ import { ViewTransition } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { TiltCard } from "@/components/motion/tilt-card";
 import { cn } from "@/lib/utils";
+import { fallbackPhoto } from "@/lib/photos";
 
 export type ProjectCardData = {
   slug: string;
@@ -30,9 +31,12 @@ export function BrowserFrame({ project, priority, sizes = "(min-width: 1024px) 5
         {project.coverImage ? (
           <Image src={project.coverImage} alt={`${project.title}: ${project.summary}`} fill sizes={sizes} priority={priority} className="object-cover object-top transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.04]" />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center" style={{ background: `radial-gradient(circle at 30% 30%, ${project.accent}55, transparent 60%), linear-gradient(135deg, var(--indigo), var(--ink))` }}>
-            <span className="font-display text-4xl font-bold tracking-tight text-fg/90">{project.title}</span>
-          </div>
+          <>
+            <Image src={fallbackPhoto(project.slug).src} alt="" fill sizes={sizes} placeholder="blur" className="object-cover transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.04]" />
+            <div className="scrim absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-4xl font-bold tracking-tight text-fg">{project.title}</span>
+            </div>
+          </>
         )}
       </div>
     </div>
@@ -41,7 +45,7 @@ export function BrowserFrame({ project, priority, sizes = "(min-width: 1024px) 5
 
 export function ProjectCard({ project, index, className, priority }: { project: ProjectCardData; index?: number; className?: string; priority?: boolean }) {
   return (
-    <TiltCard className={cn("rounded-2xl", className)} max={6} glow="61 242 255">
+    <TiltCard className={cn("rounded-2xl", className)} max={6}>
       <Link href={`/portfolio/${project.slug}`} className="group block rounded-2xl border border-line bg-indigo/40 p-3 transition-colors duration-500 hover:border-cyan/40" data-cursor="View">
         <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
           <div>

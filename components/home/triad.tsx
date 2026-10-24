@@ -44,13 +44,7 @@ export function Triad() {
           <div className="relative mx-auto aspect-square w-full max-w-[460px]">
             <svg viewBox="0 0 100 100" className="h-full w-full overflow-visible" aria-hidden>
               <circle cx="50" cy="50" r="46" fill="none" stroke="var(--line)" strokeWidth="0.6" />
-              <motion.circle cx="50" cy="50" r="46" fill="none" stroke="url(#triad-grad)" strokeWidth="1.2" strokeLinecap="round" style={{ pathLength: ring, rotate: -90, originX: "50px", originY: "50px" }} />
-              <defs>
-                <linearGradient id="triad-grad">
-                  <stop offset="0" stopColor="var(--cyan)" />
-                  <stop offset="1" stopColor="var(--violet)" />
-                </linearGradient>
-              </defs>
+              <motion.circle cx="50" cy="50" r="46" fill="none" stroke="var(--cyan)" strokeWidth="1.2" strokeLinecap="round" style={{ pathLength: ring, rotate: -90, originX: "50px", originY: "50px" }} />
               <motion.g style={{ rotate, originX: "50px", originY: "50px" }}>
                 {Array.from({ length: 36 }).map((_, i) => (
                   <line key={i} x1="50" y1="1" x2="50" y2={i % 3 === 0 ? 4 : 2.5} stroke="var(--muted)" strokeWidth="0.3" transform={`rotate(${i * 10} 50 50)`} />
@@ -82,7 +76,7 @@ export function Triad() {
           <div>
             <SectionLabel index="01">The circle of three</SectionLabel>
             <h2 id="triad-heading" className="mt-6 font-display text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-              Three disciplines. <span className="text-gradient">One accountable team.</span>
+              Three disciplines. <span className="text-highlight">One accountable team.</span>
             </h2>
             <div className="relative mt-10 min-h-[300px]">
               {PILLARS.map((p, i) => (

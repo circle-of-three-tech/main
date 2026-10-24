@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { getJob, getSettings, getSlugs } from "@/lib/queries";
 import { breadcrumbJsonLd, jobJsonLd, pageMetadata } from "@/lib/seo";
 import { sanitize } from "@/lib/sanitize";
+import { photo } from "@/lib/photos";
 
 export async function generateStaticParams() {
   return getSlugs("jobs");
@@ -39,7 +40,7 @@ async function JobContent({ params }: { params: PageProps<"/careers/[slug]">["pa
   return (
     <>
       <JsonLd data={[jobJsonLd(job), breadcrumbJsonLd([{ name: "Careers", path: "/careers" }, { name: job.title, path: `/careers/${job.slug}` }])]} />
-      <PageHero label={`${job.department} · ${job.type}${job.remote ? " · Remote" : ""}`} title={job.title} intro={job.summary}>
+      <PageHero label={`${job.department} · ${job.type}${job.remote ? " · Remote" : ""}`} title={job.title} image={photo("workspace")} intro={job.summary}>
         <div className="mt-10 flex flex-wrap gap-4">
           <ButtonLink href={apply} cursor="Apply">Apply now</ButtonLink>
           <Link href="/careers" className="inline-flex items-center gap-2 px-4 font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-cyan">

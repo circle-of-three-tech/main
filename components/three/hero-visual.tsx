@@ -10,7 +10,6 @@ function StaticMark() {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="relative aspect-square w-[min(70%,420px)] text-fg/90">
-        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(61,242,255,0.22),transparent_65%)] blur-2xl" />
         <Co3Mark label={false} className="relative h-full w-full animate-spin-slow [animation-duration:60s]" />
       </div>
     </div>

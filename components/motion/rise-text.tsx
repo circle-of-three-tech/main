@@ -13,7 +13,7 @@ export function RiseText({ text, as: Tag = "h1", className, highlight = [], dela
         <Fragment key={`${word}-${i}`}>
           <span className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
             <span
-              className={cn("rise-word inline-block", highlight.some((h) => h.replace(/[.,!?]/g, "") === word.replace(/[.,!?]/g, "")) && "text-gradient")}
+              className={cn("rise-word inline-block", highlight.some((h) => h.replace(/[.,!?]/g, "") === word.replace(/[.,!?]/g, "")) && "text-highlight")}
               style={{ animationDelay: `${delay + i * stagger}s` } as CSSProperties}
             >
               {word}

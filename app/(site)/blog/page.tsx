@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { getPosts } from "@/lib/queries";
 import { absoluteUrl, site } from "@/lib/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "Insights: Software, AI & Tech in Nigeria",
@@ -32,7 +33,7 @@ export default async function BlogPage() {
           },
         ]}
       />
-      <PageHero label="Insights" title="Notes from the engine room." highlight={["engine", "room."]} intro="Practical writing on software engineering, AI, product design and building technology for African markets." />
+      <PageHero label="Insights" title="Notes from the engine room." highlight={["engine", "room."]} image={photo("laptopGlow")} intro="Practical writing on software engineering, AI, product design and building technology for African markets." />
       <section className="container-x pb-16">
         <BlogExplorer posts={posts.map((p) => ({ ...p, author: undefined }))} />
       </section>

@@ -3,14 +3,24 @@ import { SplitReveal } from "@/components/motion/split-reveal";
 import { Reveal } from "@/components/motion/reveal";
 import { BorderTrace } from "@/components/motion/border-trace";
 import { ButtonLink } from "./ui";
-import { CircuitField } from "./circuit-field";
+import { ParallaxImage } from "@/components/motion/parallax";
+import { photo, type Photo } from "@/lib/photos";
 
-export function CtaSection({ title = "Have an idea? Let's make it inevitable.", body = "Tell us what you're building. We'll reply within one business day with next steps, not a sales script." }: { title?: string; body?: string }) {
+export function CtaSection({
+  title = "Have an idea? Let's make it inevitable.",
+  body = "Tell us what you're building. We'll reply within one business day with next steps, not a sales script.",
+  image = photo("collab"),
+}: {
+  title?: string;
+  body?: string;
+  image?: Photo;
+}) {
   return (
     <section className="container-x py-24" aria-label="Start a project">
       <div className="relative overflow-hidden rounded-[2rem] border border-line bg-indigo/40 px-6 py-20 text-center md:px-16 md:py-28">
+        <ParallaxImage src={image.src} alt="" sizes="(min-width: 1280px) 1216px, 100vw" speed={0.2} />
+        <div className="scrim absolute inset-0" aria-hidden />
         <BorderTrace radius={32} />
-        <CircuitField seed={11} count={34} className="opacity-70" />
         <div aria-hidden className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 text-fg/[0.06]">
           <Co3Mark label={false} className="h-full w-full animate-spin-slow [animation-duration:90s]" />
         </div>

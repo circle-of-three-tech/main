@@ -18,7 +18,7 @@ export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { 
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "radial-gradient(circle at 80% 20%, #1E2A8C 0%, #0B0F3A 35%, #05061A 75%)",
+          background: "#05061A",
           color: "#F5F7FF",
           fontFamily: "sans-serif",
         }}

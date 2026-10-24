@@ -17,10 +17,9 @@
   --violet-soft: #b4a3ff;
   --glow: rgb(61 242 255 / 0.6);
   --shadow: rgb(0 0 0 / 0.6);
-  --halo: rgb(30 42 140 / 0.55);
   --trace: #1e2a8c;
-  --glass-from: rgb(30 42 140 / 0.22);
-  --glass-to: rgb(11 15 58 / 0.55);
+  --glass: rgb(11 15 58 / 0.55);
+  --scrim: rgb(5 6 26 / 0.74);
   --iris-flash: 1.6;
   --grain: 0.05;
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
@@ -46,10 +45,9 @@
   --violet-soft: #5a3fe0;
   --glow: rgb(0 119 163 / 0.28);
   --shadow: rgb(11 15 58 / 0.14);
-  --halo: rgb(61 242 255 / 0.18);
   --trace: #c3cbee;
-  --glass-from: rgb(255 255 255 / 0.82);
-  --glass-to: rgb(255 255 255 / 0.62);
+  --glass: rgb(255 255 255 / 0.78);
+  --scrim: rgb(244 246 252 / 0.8);
   --iris-flash: 1.08;
   --grain: 0.03;
   color-scheme: light;
@@ -137,16 +135,17 @@ html.lenis body {
 
 /* ---------- Utilities ---------- */
 @utility glass {
-  background: linear-gradient(160deg, var(--glass-from), var(--glass-to));
+  background: var(--glass);
   border: 1px solid var(--line);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
-@utility text-gradient {
-  background: linear-gradient(100deg, var(--fg) 10%, var(--cyan) 55%, var(--violet) 95%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+@utility text-highlight {
+  color: var(--cyan);
+}
+/* Flat tint laid over photography so text on top stays readable in both themes */
+@utility scrim {
+  background: var(--scrim);
 }
 @utility hud-label {
   font-family: var(--font-mono);
@@ -154,13 +153,6 @@ html.lenis body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--cyan);
-}
-@utility grid-bg {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
 }
 @utility container-x {
   width: 100%;

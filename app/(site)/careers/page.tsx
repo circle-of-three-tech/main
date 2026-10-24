@@ -8,6 +8,7 @@ import { PageHero, SectionLabel } from "@/components/site/ui";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getJobs, getSettings } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "Careers: Tech Jobs in Nigeria",
@@ -21,7 +22,7 @@ export default async function CareersPage() {
   return (
     <PageTransition>
       <JsonLd data={breadcrumbJsonLd([{ name: "Careers", path: "/careers" }])} />
-      <PageHero label="Careers" title="Build what's next for Africa, with us." highlight={["next"]} intro="We're a small, senior team that values craft, ownership and kindness. Remote-friendly, Nigeria-first." />
+      <PageHero label="Careers" title="Build what's next for Africa, with us." highlight={["next"]} image={photo("collab")} intro="We're a small, senior team that values craft, ownership and kindness. Remote-friendly, Nigeria-first." />
       <section className="container-x py-12" aria-labelledby="roles-heading">
         <SectionLabel>{jobs.length} open roles</SectionLabel>
         <h2 id="roles-heading" className="sr-only">Open roles</h2>

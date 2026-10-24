@@ -7,6 +7,7 @@ import { PageHero } from "@/components/site/ui";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getServices, getSettings } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact: Start Your Software Project",
@@ -26,7 +27,7 @@ export default async function ContactPage() {
   return (
     <PageTransition>
       <JsonLd data={breadcrumbJsonLd([{ name: "Contact", path: "/contact" }])} />
-      <PageHero label="Contact" title="Let's build something remarkable." highlight={["remarkable."]} intro="Tell us about your idea, challenge or product. A senior member of our team will reply within one business day." />
+      <PageHero label="Contact" title="Let's build something remarkable." highlight={["remarkable."]} image={photo("lagos")} intro="Tell us about your idea, challenge or product. A senior member of our team will reply within one business day." />
       <section className="container-x grid gap-12 pb-24 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <ContactForm services={services.map((s) => s.title)} />

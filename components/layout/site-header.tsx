@@ -72,7 +72,7 @@ export function SiteHeader() {
                   className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-fg px-5 py-2.5 text-sm font-semibold text-ink"
                   data-cursor="Talk"
                 >
-                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan to-violet transition-transform duration-500 ease-expo group-hover:translate-x-0" />
+                  <span className="absolute inset-0 -translate-x-full bg-cyan transition-transform duration-500 ease-expo group-hover:translate-x-0" />
                   <span className="relative">Start a project</span>
                   <ArrowUpRight className="relative h-4 w-4 transition-transform duration-500 group-hover:rotate-45" />
                 </Link>
@@ -105,7 +105,6 @@ export function SiteHeader() {
             exit={{ clipPath: "circle(0% at calc(100% - 3rem) 3rem)" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           >
-            <div className="grid-bg absolute inset-0 opacity-40" aria-hidden />
             <ul className="container-x relative mt-32 space-y-2">
               {[{ label: "Home", href: "/" }, ...site.nav, { label: "Contact", href: "/contact" }].map((item, i) => (
                 <li key={item.href} className="overflow-hidden">

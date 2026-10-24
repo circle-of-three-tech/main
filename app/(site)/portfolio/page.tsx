@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { getProjects } from "@/lib/queries";
 import { absoluteUrl } from "@/lib/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "Portfolio: Software, Web & AI Projects",
@@ -35,6 +36,7 @@ export default async function PortfolioPage() {
         label={`Portfolio · ${projects.length} live products`}
         title="Work that ships, scales and sticks."
         highlight={["ships,", "scales", "sticks."]}
+        image={photo("codeDesk")}
         intro="A selection of platforms, products and experiences we've designed and engineered for organisations across healthcare, education, commerce and consulting."
       />
       <section className="container-x pb-16">

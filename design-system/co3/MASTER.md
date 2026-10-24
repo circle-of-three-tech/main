@@ -9,7 +9,7 @@ The generated palette below (slate + red) is **superseded** by the brand palette
 | `--indigo` | `#0B0F3A` | Raised surfaces |
 | `--circuit` | `#1E2A8C` | Circuit lines, borders, secondary fills |
 | `--cyan` | `#3DF2FF` | Primary accent / CTA / focus ring |
-| `--violet` | `#7B5CFF` | Secondary accent, gradients |
+| `--violet` | `#7B5CFF` | Secondary accent (flat use only) |
 | `--fg` | `#F5F7FF` | Body text on dark |
 | `--muted` | `#8A93C9` | Secondary text (≥4.5:1 on ink) |
 
@@ -233,3 +233,10 @@ Before delivering any UI code, verify:
 
 ## Themes
 Light is the default; visitors and editors can switch with the sun/moon toggle (site header, dashboard sidebar), and the choice is saved in `localStorage` (`co3:theme`). Light overrides the same tokens under `:root[data-theme="light"]` in `app/globals.css`: off-white surfaces, navy text, and the accents deepened (cyan `#0077A3`, violet `#5A3FE0`) for AA text contrast on white. Never hardcode colours in components; use the tokens (`ink`, `indigo`, `surface`, `fg`, `muted`, `line`, `cyan`, `violet`, `danger`, `warn`, `ok`) so both themes work. To change the default, edit `DEFAULT_THEME` in `lib/theme-config.ts`.
+
+## Imagery & parallax
+- **No gradients.** Surfaces, buttons, text highlights and borders use flat brand colours (`text-highlight` = cyan). Do not reintroduce `bg-gradient-*`, `radial-gradient` or SVG gradient fills.
+- **Photography** lives in `public/images/` (Unsplash License, self-hosted) and is registered in `lib/photos.ts` with alt text. Use `photo(key)`, `servicePhoto(slug)` or `fallbackPhoto(slug)` (posts/projects without their own image).
+- **Readability:** text over a photo sits on a flat `scrim` layer (`--scrim`, tuned per theme).
+- **Parallax:** `ParallaxImage` (background that drifts as it scrolls through the viewport) and `Parallax` (foreground layer offset) in `components/motion/parallax.tsx`. Both are disabled under reduced motion.
+- `PageHero` and `CtaSection` take an `image` prop.

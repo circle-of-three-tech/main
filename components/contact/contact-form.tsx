@@ -20,7 +20,7 @@ function Field({ label, name, error, textarea, ...props }: { label: string; name
       <span className="pointer-events-none absolute left-0 top-7 text-lg text-muted transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-cyan peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs">
         {label}
       </span>
-      <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gradient-to-r from-cyan to-violet transition-transform duration-500 peer-focus:scale-x-100" />
+      <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-cyan transition-transform duration-500 peer-focus:scale-x-100" />
       {error && <span className="mt-2 block text-sm text-danger">{error}</span>}
     </label>
   );
@@ -81,7 +81,7 @@ export function ContactForm({ services }: { services: string[] }) {
           <Field label="Tell us about your project" name="body" textarea required error={state.errors?.body} />
 
           <button type="submit" disabled={pending} className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-fg px-8 py-5 font-semibold text-ink disabled:opacity-70 md:w-auto" data-cursor="Send">
-            <span aria-hidden className="absolute inset-0 -translate-x-[101%] bg-gradient-to-r from-cyan to-violet transition-transform duration-700 ease-expo group-hover:translate-x-0" />
+            <span aria-hidden className="absolute inset-0 -translate-x-[101%] bg-cyan transition-transform duration-700 ease-expo group-hover:translate-x-0" />
             <span className="relative">{pending ? "Transmitting…" : "Send message"}</span>
             {pending ? <Loader2 className="relative h-5 w-5 animate-spin" /> : <ArrowUpRight className="relative h-5 w-5 transition-transform group-hover:rotate-45" />}
           </button>

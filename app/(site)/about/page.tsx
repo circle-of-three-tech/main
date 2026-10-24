@@ -4,6 +4,7 @@ import { PageTransition } from "@/components/motion/page-transition";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { GlowCard } from "@/components/motion/glow-card";
+import { ParallaxImage } from "@/components/motion/parallax";
 import { Co3Mark } from "@/components/brand/co3-mark";
 import { Stats } from "@/components/home/stats";
 import { CtaSection } from "@/components/site/cta-section";
@@ -12,6 +13,7 @@ import { LinkedinIcon, XIcon } from "@/components/site/social-icons";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getSettings, getTeam } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { photo } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us: A Nigerian Technology Company",
@@ -37,14 +39,17 @@ export default async function AboutPage() {
         label="About Co3"
         title="Three forces. One circle. Infinite possibilities."
         highlight={["One", "circle."]}
+        image={photo("workspace")}
         intro="Circle of Three Technologies is a Nigerian technology company founded on a simple belief: great software happens where design, engineering and intelligence meet."
       />
 
       <section className="container-x grid items-center gap-16 py-16 lg:grid-cols-2">
         <Reveal>
-          <div className="relative mx-auto aspect-square w-full max-w-md">
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(61,242,255,0.18),transparent_65%)] blur-2xl" aria-hidden />
-            <Co3Mark className="relative h-full w-full text-fg" />
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] border border-line">
+            <ParallaxImage src={photo("team").src} alt={photo("team").alt} sizes="(min-width: 1024px) 448px, 100vw" speed={0.15} />
+            <div className="glass absolute bottom-5 left-5 flex h-20 w-20 items-center justify-center rounded-2xl p-3">
+              <Co3Mark label={false} className="h-full w-full text-fg" />
+            </div>
           </div>
         </Reveal>
         <div>
@@ -68,7 +73,7 @@ export default async function AboutPage() {
       <section className="container-x py-24" aria-labelledby="values-heading">
         <SectionLabel>Principles</SectionLabel>
         <h2 id="values-heading" className="mt-6 font-display text-4xl font-bold tracking-tight md:text-6xl">
-          What we <span className="text-gradient">stand for.</span>
+          What we <span className="text-highlight">stand for.</span>
         </h2>
         <ul className="mt-14 grid gap-4 md:grid-cols-2">
           {VALUES.map((v, i) => (

@@ -11,7 +11,7 @@ type Props = {
   wordClassName?: string;
   delay?: number;
   stagger?: number;
-  /** Words to highlight with the gradient. */
+  /** Words to highlight in the accent colour. */
   highlight?: string[];
 };
 
@@ -26,7 +26,7 @@ export function SplitReveal({ text, as: Tag = "h2", className, wordClassName, de
         {words.map((word, i) => (
           <span key={`${word}-${i}`} className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
             <motion.span
-              className={cn("inline-block will-change-transform", highlight.some((h) => h.replace(/[.,!?]/g, "") === word.replace(/[.,!?]/g, "")) && "text-gradient", wordClassName)}
+              className={cn("inline-block will-change-transform", highlight.some((h) => h.replace(/[.,!?]/g, "") === word.replace(/[.,!?]/g, "")) && "text-highlight", wordClassName)}
               initial={reduce ? false : { y: "110%", rotate: 4, opacity: 0 }}
               whileInView={{ y: "0%", rotate: 0, opacity: 1 }}
               viewport={{ once: true, margin: "-8% 0px" }}

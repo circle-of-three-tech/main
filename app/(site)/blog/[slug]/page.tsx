@@ -8,7 +8,9 @@ import { RiseText } from "@/components/motion/rise-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ArticleToc } from "@/components/blog/article-toc";
 import { ShareLinks } from "@/components/blog/share-links";
-import { PostCard, PostCover } from "@/components/site/post-card";
+import { PostCard } from "@/components/site/post-card";
+import { ParallaxImage } from "@/components/motion/parallax";
+import { fallbackPhoto } from "@/lib/photos";
 import { CtaSection } from "@/components/site/cta-section";
 import { SectionLabel } from "@/components/site/ui";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -85,7 +87,7 @@ async function PostContent({ params }: { params: PageProps<"/blog/[slug]">["para
       <div className="container-x">
         <ViewTransition name={`post-${post.slug}`} share="morph" default="none">
           <div className="relative aspect-[21/9] overflow-hidden rounded-3xl border border-line">
-            <PostCover post={post} />
+            <ParallaxImage src={post.coverImage ?? fallbackPhoto(post.slug).src} alt={post.title} sizes="(min-width: 1280px) 1280px, 100vw" priority speed={0.12} />
           </div>
         </ViewTransition>
       </div>

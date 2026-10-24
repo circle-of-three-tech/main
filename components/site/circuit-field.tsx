@@ -51,20 +51,7 @@ export function CircuitField({ className, seed = 3, count = 46, pulses = true }:
   const traces = buildTraces(seed, count, W, H);
   return (
     <svg aria-hidden viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}>
-      <defs>
-        <linearGradient id="pulse" x1="0" x2="1">
-          <stop offset="0" stopColor="var(--cyan)" stopOpacity="0" />
-          <stop offset="1" stopColor="var(--cyan)" />
-        </linearGradient>
-        <radialGradient id="fade" cx="50%" cy="45%" r="65%">
-          <stop offset="0" stopColor="white" />
-          <stop offset="1" stopColor="white" stopOpacity="0" />
-        </radialGradient>
-        <mask id="circuit-mask">
-          <rect width={W} height={H} fill="url(#fade)" />
-        </mask>
-      </defs>
-      <g mask="url(#circuit-mask)" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
         {traces.map((t, i) => (
           <g key={i}>
             <path d={t.d} stroke="var(--trace)" strokeWidth="1.2" opacity="0.75" />

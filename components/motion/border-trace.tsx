@@ -7,12 +7,6 @@ export function BorderTrace({ radius = 24, delay = 0 }: { radius?: number; delay
   const reduce = useReducedMotion();
   return (
     <svg aria-hidden className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
-      <defs>
-        <linearGradient id="trace-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--cyan)" />
-          <stop offset="100%" stopColor="var(--violet)" />
-        </linearGradient>
-      </defs>
       <motion.rect
         x="0.5"
         y="0.5"
@@ -20,7 +14,7 @@ export function BorderTrace({ radius = 24, delay = 0 }: { radius?: number; delay
         height="calc(100% - 1px)"
         rx={radius}
         fill="none"
-        stroke="url(#trace-grad)"
+        stroke="var(--cyan)"
         strokeWidth="1"
         initial={reduce ? false : { pathLength: 0, opacity: 0 }}
         whileInView={{ pathLength: 1, opacity: 0.8 }}

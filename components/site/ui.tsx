@@ -4,7 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { RiseIn, RiseText } from "@/components/motion/rise-text";
 import { Magnetic } from "@/components/motion/magnetic";
-import { CircuitField } from "./circuit-field";
+import { ParallaxImage } from "@/components/motion/parallax";
+import { photo, type Photo } from "@/lib/photos";
 
 export function SectionLabel({ index, children, className }: { index?: string; children: ReactNode; className?: string }) {
   return (
@@ -31,7 +32,7 @@ export function ButtonLink({ variant = "primary", className, children, cursor, .
         )}
       >
         {variant === "primary" && (
-          <span aria-hidden className="absolute inset-0 -translate-x-[101%] bg-gradient-to-r from-cyan to-violet transition-transform duration-700 ease-expo group-hover:translate-x-0" />
+          <span aria-hidden className="absolute inset-0 -translate-x-[101%] bg-cyan transition-transform duration-700 ease-expo group-hover:translate-x-0" />
         )}
         <span className="relative">{children}</span>
         <span className="relative flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-ink/10">
@@ -44,11 +45,25 @@ export function ButtonLink({ variant = "primary", className, children, cursor, .
 }
 
 /** Shared hero for inner pages. `title` is the page's single H1. */
-export function PageHero({ label, title, intro, highlight, children }: { label: string; title: string; intro?: string; highlight?: string[]; children?: ReactNode }) {
+export function PageHero({
+  label,
+  title,
+  intro,
+  highlight,
+  image = photo("cyber"),
+  children,
+}: {
+  label: string;
+  title: string;
+  intro?: string;
+  highlight?: string[];
+  image?: Photo;
+  children?: ReactNode;
+}) {
   return (
-    <section className="relative overflow-hidden pb-16 pt-40 md:pb-24 md:pt-48">
-      <CircuitField className="opacity-60" seed={title.length * 7} count={30} />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" aria-hidden />
+    <section className="relative overflow-hidden border-b border-line pb-16 pt-40 md:pb-24 md:pt-48">
+      <ParallaxImage src={image.src} alt="" priority speed={0.22} />
+      <div className="scrim absolute inset-0" aria-hidden />
       <div className="container-x relative">
         <SectionLabel>{label}</SectionLabel>
         <RiseText text={title} highlight={highlight} className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,7vw,6rem)] font-bold leading-[0.98] tracking-tight" />

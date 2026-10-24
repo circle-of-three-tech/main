@@ -14,6 +14,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { getProjects, getService, getServices, getSlugs } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 import { sanitize } from "@/lib/sanitize";
+import { servicePhoto } from "@/lib/photos";
 
 export async function generateStaticParams() {
   return getSlugs("services");
@@ -51,7 +52,7 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
   return (
     <>
       <JsonLd data={[...serviceJsonLd(service, service.faqs), breadcrumbJsonLd([{ name: "Services", path: "/services" }, { name: service.title, path: `/services/${service.slug}` }])]} />
-      <PageHero label={`Service · ${service.title}`} title={service.tagline} intro={service.summary}>
+      <PageHero label={`Service · ${service.title}`} title={service.tagline} image={servicePhoto(service.slug)} intro={service.summary}>
         <div className="mt-10 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan/40 bg-cyan/10 text-cyan shadow-[0_0_40px_-6px_var(--glow)]">
           <ServiceIcon name={service.icon} className="h-7 w-7" />
         </div>

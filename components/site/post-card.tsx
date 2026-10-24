@@ -4,6 +4,7 @@ import { ViewTransition } from "react";
 import { GlyphScramble } from "@/components/motion/glyph-scramble";
 import { formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { fallbackPhoto } from "@/lib/photos";
 
 export type PostCardData = {
   slug: string;
@@ -15,25 +16,13 @@ export type PostCardData = {
   publishedAt: Date | null;
 };
 
-/** Generative cover used when a post has no image: deterministic from the slug. */
-export function PostCover({ post, className }: { post: Pick<PostCardData, "slug" | "title" | "coverImage" | "category">; className?: string }) {
+/** Post cover image, falling back to a stable stock photo picked from the slug. */
+export function PostCover({ post, className, sizes = "(min-width: 1024px) 33vw, 100vw" }: { post: Pick<PostCardData, "slug" | "title" | "coverImage" | "category">; className?: string; sizes?: string }) {
   if (post.coverImage) {
-    return <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1024px) 33vw, 100vw" className={cn("object-cover", className)} />;
+    return <Image src={post.coverImage} alt={post.title} fill sizes={sizes} className={cn("object-cover", className)} />;
   }
-  const h = [...post.slug].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
-  const a = h % 360;
-  return (
-    <div
-      aria-hidden
-      className={cn("absolute inset-0", className)}
-      style={{
-        background: `radial-gradient(circle at ${20 + (h % 60)}% ${30 + (h % 40)}%, hsl(${(a + 190) % 360} 95% 60% / 0.55), transparent 55%), radial-gradient(circle at ${80 - (h % 50)}% 80%, hsl(${(a + 260) % 360} 90% 65% / 0.5), transparent 50%), linear-gradient(135deg, var(--indigo), var(--ink))`,
-      }}
-    >
-      <div className="grid-bg absolute inset-0 opacity-60" />
-      <span className="absolute bottom-4 left-5 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-fg/70">{post.category}</span>
-    </div>
-  );
+  const fallback = fallbackPhoto(post.slug);
+  return <Image src={fallback.src} alt={fallback.alt} fill sizes={sizes} placeholder="blur" className={cn("object-cover", className)} />;
 }
 
 export function PostCard({ post, large }: { post: PostCardData; large?: boolean }) {

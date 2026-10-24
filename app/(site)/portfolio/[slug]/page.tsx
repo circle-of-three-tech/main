@@ -10,7 +10,8 @@ import { Reveal } from "@/components/motion/reveal";
 import { BrowserFrame } from "@/components/site/project-card";
 import { CtaSection } from "@/components/site/cta-section";
 import { ButtonLink, SectionLabel } from "@/components/site/ui";
-import { CircuitField } from "@/components/site/circuit-field";
+import { Parallax, ParallaxImage } from "@/components/motion/parallax";
+import { fallbackPhoto } from "@/lib/photos";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getProject, getProjects, getSlugs } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata, projectJsonLd } from "@/lib/seo";
@@ -59,9 +60,9 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
   return (
     <article>
       <JsonLd data={[projectJsonLd(project), breadcrumbJsonLd([{ name: "Portfolio", path: "/portfolio" }, { name: project.title, path: `/portfolio/${project.slug}` }])]} />
-      <header className="relative overflow-hidden pb-12 pt-36 md:pt-44">
-        <CircuitField seed={project.title.length * 13} count={28} className="opacity-50" />
-        <div aria-hidden className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full blur-3xl" style={{ background: `radial-gradient(circle, ${project.accent}33, transparent 60%)` }} />
+      <header className="relative overflow-hidden pb-40 pt-36 md:pb-56 md:pt-44">
+        <ParallaxImage src={fallbackPhoto(project.slug).src} alt="" priority speed={0.2} />
+        <div className="scrim absolute inset-0" aria-hidden />
         <div className="container-x relative">
           <Link href="/portfolio" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-cyan">
             <ArrowLeft className="h-4 w-4" /> All work
@@ -83,13 +84,13 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
         </div>
       </header>
 
-      <div className="container-x">
+      <Parallax offset={40} className="container-x relative -mt-28 md:-mt-44">
         <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
           <div>
             <BrowserFrame project={project} priority sizes="(min-width: 1280px) 1216px, 100vw" />
           </div>
         </ViewTransition>
-      </div>
+      </Parallax>
 
       <section className="container-x grid gap-16 py-20 lg:grid-cols-12">
         <aside className="lg:col-span-4">
@@ -120,7 +121,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
               {project.metrics.map((m) => (
                 <div key={m.label} className="bg-ink p-6">
                   <dt className="hud-label text-muted">{m.label}</dt>
-                  <dd className="mt-2 font-display text-4xl font-bold text-gradient">{m.value}</dd>
+                  <dd className="mt-2 font-display text-4xl font-bold text-highlight">{m.value}</dd>
                 </div>
               ))}
             </dl>

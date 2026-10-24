@@ -30,7 +30,7 @@ export function Process() {
       </div>
       <ol ref={ref} className="relative space-y-14 pl-12 lg:col-span-7">
         <span className="absolute left-[11px] top-2 h-[calc(100%-1rem)] w-px bg-line" aria-hidden />
-        <motion.span className="absolute left-[11px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-cyan to-violet" style={{ scaleY }} aria-hidden />
+        <motion.span className="absolute left-[11px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-cyan" style={{ scaleY }} aria-hidden />
         {STEPS.map((s, i) => (
           <motion.li
             key={s.title}

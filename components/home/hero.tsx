@@ -1,5 +1,7 @@
 import { ArrowDown } from "lucide-react";
 import { CircuitField } from "@/components/site/circuit-field";
+import { ParallaxImage } from "@/components/motion/parallax";
+import { PHOTOS } from "@/lib/photos";
 import { HeroVisual } from "@/components/three/hero-visual";
 import { GlyphScramble } from "@/components/motion/glyph-scramble";
 import { RiseIn, RiseText } from "@/components/motion/rise-text";
@@ -8,9 +10,9 @@ import { ButtonLink } from "@/components/site/ui";
 export function Hero() {
   return (
     <section className="relative flex items-center overflow-hidden pb-16 pt-32 lg:min-h-[100svh] lg:pb-0 lg:pt-28">
-      <CircuitField className="opacity-90" />
-      <div aria-hidden className="absolute left-1/2 top-1/3 h-[60vmax] w-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,var(--halo),transparent_60%)]" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-ink" />
+      <ParallaxImage src={PHOTOS.earth} alt="" priority speed={0.25} />
+      <div aria-hidden className="scrim absolute inset-0" />
+      <CircuitField className="opacity-50" />
 
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-12">
         <div className="relative z-10 lg:col-span-7">

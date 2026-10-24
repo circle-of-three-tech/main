@@ -76,7 +76,7 @@ export function Sidebar({ user, unread }: { user: { name: string; email: string;
             <ThemeToggle className="hidden h-9 w-9 lg:flex" />
           </div>
           <div className="flex items-center gap-3 rounded-xl bg-indigo/60 p-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan to-violet font-display text-sm font-bold text-ink">{user.name.slice(0, 1)}</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan font-display text-sm font-bold text-ink">{user.name.slice(0, 1)}</span>
             <Link href="/dashboard/account" className="min-w-0 flex-1">
               <span className="block truncate text-sm font-medium">{user.name}</span>
               <span className="block font-mono text-[0.6rem] uppercase tracking-wider text-cyan">{user.role}</span>

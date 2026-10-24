@@ -5,6 +5,7 @@ import { ServicesGrid } from "@/components/home/services-grid";
 import { WorkRail } from "@/components/home/work-rail";
 import { Stats } from "@/components/home/stats";
 import { Process } from "@/components/home/process";
+import { ImageBand } from "@/components/home/image-band";
 import { Marquee } from "@/components/motion/marquee";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Reveal } from "@/components/motion/reveal";
@@ -66,6 +67,7 @@ export default async function HomePage() {
       </WorkRail>
 
       <Stats stats={settings.stats} />
+      <ImageBand />
       <Process />
 
       {testimonials.length > 0 && (
@@ -93,7 +95,7 @@ export default async function HomePage() {
             <div>
               <SectionLabel index="05">Insights</SectionLabel>
               <h2 id="insights-heading" className="mt-6 max-w-2xl font-display text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-                Notes from the <span className="text-gradient">engine room.</span>
+                Notes from the <span className="text-highlight">engine room.</span>
               </h2>
             </div>
             <ButtonLink href="/blog" variant="ghost">Read the blog</ButtonLink>
