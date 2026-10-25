@@ -19,7 +19,7 @@ Light theme only. Token names are legacy (kept stable for the dashboard); values
 | `--mark-*` / `--mark-accent-*` | teal / coral shades | Logo cube faces |
 
 ## Futuristic layer and motion
-- `.tech-grid`: faint 56px line grid drifting slowly (hero, inner page heroes, dark bands).
+- `.tech-grid`: faint 56px line grid drifting slowly (inner page heroes, dark bands; not the home hero).
 - `.beam-card`: a teal-to-coral light beam circles the card border on hover/focus (service grid, pillars, testimonials, contact cards, `GlowCard`).
 - `.btn-shine`: light sweep across primary/accent buttons on hover. `.glow-text`: soft teal glow on the hero's second line.
 - Reveals fade in from a soft blur (`Reveal`, `.hero-fade`, page transitions). `hud-label` is JetBrains Mono uppercase with a pulsing coral node.
