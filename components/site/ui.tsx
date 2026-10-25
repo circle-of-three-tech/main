@@ -80,7 +80,6 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-indigo pb-16 pt-32 md:pb-20 md:pt-40">
-      <div aria-hidden className="tech-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_20%_30%,#000_20%,transparent_70%)]" />
       <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-cyan-soft blur-3xl" />
       <div className={cn("container-x relative", image && "grid items-center gap-12 lg:grid-cols-12")}>
         <div className={cn(image && "lg:col-span-7")}>
