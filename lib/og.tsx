@@ -4,7 +4,7 @@ import { site } from "./site";
 
 export const ogSize = { width: 1200, height: 630 };
 
-const mark = `data:image/svg+xml;base64,${Buffer.from(markSvg({ fg: "#FFFFFF", bg: "#08325F" })).toString("base64")}`;
+const mark = `data:image/svg+xml;base64,${Buffer.from(markSvg({ fg: "#FFFFFF", bg: "#052A2C" })).toString("base64")}`;
 
 /** Branded Open Graph card shared by every route. */
 export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { eyebrow: string; title: string; footer?: string }) {
@@ -18,7 +18,7 @@ export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { 
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "linear-gradient(135deg, #08325F 0%, #0A5CB0 100%)",
+          background: "#052A2C",
           color: "#FFFFFF",
           fontFamily: "sans-serif",
         }}
@@ -32,13 +32,13 @@ export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { 
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: 22, letterSpacing: 3, color: "#8FD0FF", textTransform: "uppercase", fontWeight: 600 }}>{eyebrow}</span>
+          <span style={{ fontSize: 22, letterSpacing: 3, color: "#5EEAD4", textTransform: "uppercase", fontWeight: 600 }}>{eyebrow}</span>
           <span style={{ marginTop: 20, fontSize: title.length > 60 ? 54 : 68, fontWeight: 700, lineHeight: 1.08, letterSpacing: -2, maxWidth: 1000 }}>{title}</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 22, color: "#9AA3B5" }}>
           <span>Nigerian Technology & Software Company</span>
           <span style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ width: 10, height: 10, borderRadius: 999, background: "#FF9F1C" }} />
+            <span style={{ width: 10, height: 10, borderRadius: 999, background: "#FF6B4A" }} />
             {footer}
           </span>
         </div>

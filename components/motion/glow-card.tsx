@@ -6,7 +6,7 @@ export function GlowCard({ children, className }: { children: ReactNode; classNa
   return (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-xl border border-line bg-surface transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-[0_8px_24px_-12px_var(--shadow)]",
+        "beam-card group relative overflow-hidden rounded-xl border border-line bg-surface transition-[border-color,box-shadow,transform] duration-300 hover:border-line-strong hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-14px_var(--glow)]",
         className,
       )}
     >

@@ -49,7 +49,7 @@ export function Pillars() {
           {PILLARS.map(({ Icon, key, img, title, body, points }, i) => (
             <li key={key}>
               <Reveal delay={i * 0.1} className="h-full">
-                <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-cyan/30 hover:shadow-[0_22px_44px_-24px_var(--shadow)]">
+                <article className="beam-card group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-cyan/30 hover:shadow-[0_22px_44px_-22px_var(--glow)]">
                   <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
                     <ParallaxImage src={photo(img).src} alt={photo(img).alt} speed={0.1} sizes="(min-width: 768px) 33vw, 100vw" imageClassName="transition-transform duration-700 ease-out group-hover:scale-105" />
                     <span className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-lg bg-surface text-cyan shadow-[0_4px_12px_-4px_var(--shadow)] transition-colors duration-300 group-hover:bg-cyan group-hover:text-accent-ink">

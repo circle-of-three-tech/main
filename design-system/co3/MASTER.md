@@ -3,29 +3,32 @@
 **Positioning:** a calm, editorial, globally credible look, closer to an established consultancy or product company than a sci-fi studio. Content and real client work lead; decoration is minimal.
 
 ## Palette
-Token names are legacy (kept stable for the dashboard); values are what matter. **Light theme only:** the dark theme and theme toggle were removed, so the Dark column below is historical.
+Light theme only. Token names are legacy (kept stable for the dashboard); values are what matter.
 
-| Token | Light | Dark | Use |
-|---|---|---|---|
-| `--ink` | `#FFFFFF` | `#08111C` | Page background |
-| `--indigo` | `#F0F8FF` | `#0D1826` | Sky-tinted alternate section / subtle surface |
-| `--surface` | `#FFFFFF` | `#101D2D` | Cards |
-| `--fg` | `#09182C` | `#EDF2F8` | Text |
-| `--muted` | `#4F6178` | `#93A1B5` | Secondary text; second tone in headlines (`text-highlight`) |
-| `--cyan` | `#0A6FD0` | `#5CB6FF` | **Primary: clear summer-afternoon sky blue.** Buttons, links, eyebrows, icons (AA on white). Flips to pale sky `#8FD0FF` on photos (`.on-photo`) |
-| `--cyan-strong` | `#0858A8` | `#8CCBFF` | Primary hover |
-| `--sky` / `--sky-light` | `#2EA3F7` / `#8FD0FF` | `#3FA9FF` / `#A6DCFF` | Bright sky for decorative fills, gradients and the logo ring only (not for text on white) |
-| `--mark-top` / `--mark-mid` / `--mark-deep` | `#9BD6FF` / `#38A6F7` / `#0A6FD0` | `#B4E0FF` / `#4EAEFC` / `#1F7FE0` | Logo cube faces: lit top, mid left, deep right |
-| `--cyan-soft` | `#DEF0FF` | sky 13% | Icon chips, tints |
-| `--violet` | `#B45309` | `#FFB24D` | **Complementary accent: afternoon-sun amber** as text (pillar keys) |
-| `--spark` | `#FF9F1C` | `#FFB24D` | Sunlight amber for small decorative fills only (eyebrow dash, stat dots) |
-| `--accent-ink` | `#FFFFFF` | `#08111C` | Text on the primary |
-| `--band` | `#08325F` | `#0A2C52` | Deep late-sky blue overlay for photo bands and the CTA |
+| Token | Value | Use |
+|---|---|---|
+| `--ink` / `--surface` | `#FFFFFF` | Page background, cards |
+| `--indigo` | `#EFFBF9` | Teal-tinted alternate section |
+| `--fg` / `--muted` | `#061A1C` / `#4B6264` | Text / secondary text |
+| `--cyan` | `#0D7F74` | **Primary: deep teal.** Buttons, links, eyebrows, icons (4.9:1 on white). Flips to `#5EEAD4` on photos (`.on-photo`) |
+| `--cyan-strong` / `--cyan-soft` | `#0A655C` / `#D7F5EF` | Primary hover / tint |
+| `--sky` / `--sky-light` | `#14B8A6` / `#7EEEDB` | Electric teal for glows, beams, scan line, logo ring (not text) |
+| `--spark` / `--spark-ink` | `#FF6B4A` / `#1A0B06` | **Complementary accent: coral.** Accent buttons (dark text, 6.8:1), HUD nodes |
+| `--violet` | `#C43D1F` | Coral as text (AA) |
+| `--band` | `#052A2C` | Deep teal overlay for photo bands and CTA |
+| `--mark-*` / `--mark-accent-*` | teal / coral shades | Logo cube faces |
+
+## Futuristic layer and motion
+- `.tech-grid`: faint 56px line grid drifting slowly (hero, inner page heroes, dark bands). `.scan-line`: thin glowing line sweeping down the hero.
+- `.beam-card`: a teal-to-coral light beam circles the card border on hover/focus (service grid, pillars, testimonials, contact cards, `GlowCard`).
+- `.btn-shine`: light sweep across primary/accent buttons on hover. `.glow-text`: soft teal glow on the hero's second line.
+- Reveals fade in from a soft blur (`Reveal`, `.hero-fade`, page transitions). `hud-label` is JetBrains Mono uppercase with a pulsing coral node.
+- All motion is disabled under `prefers-reduced-motion`.
 
 ## Hero and logo
-- **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer, under a flat dark overlay (`#040B16` at 65%, no gradients). Copy sits on the left; the main call to action uses the sun-amber accent button (`buttonClass("accent")`, dark text); a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
+- **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer, under a flat dark overlay (`#040B16` at 65%, no gradients). Copy sits on the left; the main call to action uses the coral accent button (`buttonClass("accent")`, dark text); a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
 - **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
-- **Logo:** three isometric cubes: the top cube in sun-amber accent shades (`--mark-accent-*`), the two lower cubes in sky blues (`--mark-*`), inside a sky-gradient ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary blue. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
+- **Logo:** three isometric cubes: the top cube in coral accent shades (`--mark-accent-*`), the two lower cubes in teal shades (`--mark-*`), inside a teal ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary teal. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
 
 ## Typography
 - **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.

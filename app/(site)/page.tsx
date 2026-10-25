@@ -84,7 +84,7 @@ export default async function HomePage() {
             <div className="mt-12 grid gap-5 md:grid-cols-2">
               {testimonials.map((t, i) => (
                 <Reveal key={t.id} delay={i * 0.06} className="h-full">
-                  <figure className="flex h-full flex-col rounded-xl border border-line bg-surface p-8">
+                  <figure className="beam-card flex h-full flex-col rounded-xl border border-line bg-surface p-8">
                     <Quote className="h-6 w-6 text-cyan" aria-hidden />
                     <blockquote className="mt-5 flex-1 text-lg leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
                     <figcaption className="mt-6 border-t border-line pt-5 text-sm">
