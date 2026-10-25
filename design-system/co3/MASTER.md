@@ -12,14 +12,14 @@ Light theme only. Token names are legacy (kept stable for the dashboard); values
 | `--fg` / `--muted` | `#061A1C` / `#4B6264` | Text / secondary text |
 | `--cyan` | `#0D7F74` | **Primary: deep teal.** Buttons, links, eyebrows, icons (4.9:1 on white). Flips to `#5EEAD4` on photos (`.on-photo`) |
 | `--cyan-strong` / `--cyan-soft` | `#0A655C` / `#D7F5EF` | Primary hover / tint |
-| `--sky` / `--sky-light` | `#14B8A6` / `#7EEEDB` | Electric teal for glows, beams, scan line, logo ring (not text) |
+| `--sky` / `--sky-light` | `#14B8A6` / `#7EEEDB` | Electric teal for glows, beams, logo ring (not text) |
 | `--spark` / `--spark-ink` | `#FF6B4A` / `#1A0B06` | **Complementary accent: coral.** Accent buttons (dark text, 6.8:1), HUD nodes |
 | `--violet` | `#C43D1F` | Coral as text (AA) |
 | `--band` | `#052A2C` | Deep teal overlay for photo bands and CTA |
 | `--mark-*` / `--mark-accent-*` | teal / coral shades | Logo cube faces |
 
 ## Futuristic layer and motion
-- `.tech-grid`: faint 56px line grid drifting slowly (hero, inner page heroes, dark bands). `.scan-line`: thin glowing line sweeping down the hero.
+- `.tech-grid`: faint 56px line grid drifting slowly (hero, inner page heroes, dark bands).
 - `.beam-card`: a teal-to-coral light beam circles the card border on hover/focus (service grid, pillars, testimonials, contact cards, `GlowCard`).
 - `.btn-shine`: light sweep across primary/accent buttons on hover. `.glow-text`: soft teal glow on the hero's second line.
 - Reveals fade in from a soft blur (`Reveal`, `.hero-fade`, page transitions). `hud-label` is JetBrains Mono uppercase with a pulsing coral node.

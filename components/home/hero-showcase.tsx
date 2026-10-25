@@ -58,11 +58,8 @@ export function HeroShowcase({ slides, labelledBy, children }: { slides: HeroSli
 
       {/* Flat dark overlay for legible copy on any photo */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 bg-[#020c0e]/70" />
-      {/* Futuristic layer: drifting tech grid and a scanning line */}
+      {/* Futuristic layer: drifting tech grid */}
       <div aria-hidden className="tech-grid pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [--scan-distance:100svh]">
-        <div className="scan-line" />
-      </div>
 
       <motion.div className="container-x flex flex-1 items-center pb-12 pt-32 md:pt-36" style={{ y: reduce ? 0 : copyY, opacity: reduce ? 1 : fade }}>
         <div className="w-full [text-shadow:0_1px_24px_rgb(2_26_60/0.4)]">{children}</div>

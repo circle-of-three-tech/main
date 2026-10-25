@@ -431,32 +431,6 @@ p {
   }
 }
 
-/* Thin scanning line that sweeps down a section. */
-.scan-line {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 1px;
-  background: var(--sky);
-  box-shadow: 0 0 14px 2px color-mix(in srgb, var(--sky) 55%, transparent);
-  opacity: 0;
-  animation: scan 7s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
-  pointer-events: none;
-}
-@keyframes scan {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  8%,
-  80% {
-    opacity: 0.55;
-  }
-  100% {
-    transform: translateY(var(--scan-distance, 100vh));
-    opacity: 0;
-  }
-}
 
 /* Glowing text for highlight lines on dark backgrounds. */
 .glow-text {
