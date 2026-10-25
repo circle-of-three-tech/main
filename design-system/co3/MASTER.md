@@ -46,7 +46,7 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 - Parallax: `ParallaxImage` (photo drifts inside its frame, travel clamped so edges never show) and `Parallax` (foreground offset). Used in inner page heroes, pillar cards, the Lagos section, full-bleed `ParallaxBand`s and the CTA.
 - Hover: buttons lift 1px with a soft azure shadow; cards lift 4px; images zoom slightly; nav links get an azure underline that draws in.
 - Header: shadow and a thin azure scroll-progress bar once scrolled.
-- Hero carousel (`HeroCarousel`): services cross-fade every 5.5s with a slow Ken Burns zoom and staggered caption fades; pauses on hover/focus, has pause and prev/next controls, arrow-key support, and does not autoplay under reduced motion. All slides are server-rendered so every service and link is crawlable.
+- Hero service rail (`HeroShowcase`): services cross-fade every 6s as full-screen backgrounds with a slow Ken Burns zoom; the rail shows progress, pauses on hover/focus, has a pause control and arrow-key support, and does not autoplay under reduced motion. All slides are server-rendered so every service and link is crawlable.
 - No custom cursor, preloader, film grain, scroll-jacking, text scrambles or WebGL. Everything respects `prefers-reduced-motion`.
 
 ## Imagery
