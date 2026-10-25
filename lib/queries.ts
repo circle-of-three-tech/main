@@ -25,7 +25,7 @@ const fallbackSettings = {
   id: "site",
   tagline: "We engineer software that moves Africa forward.",
   description: "",
-  email: "circleofthreetechnologies@gmail.com",
+  email: "victor@circleofthreetech.com",
   phone: "+234 000 000 0000",
   address: "Lagos",
   city: "Lagos",
