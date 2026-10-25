@@ -68,7 +68,7 @@ export function SiteHeader() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className={cn(buttonClass("primary"), "hidden px-4 py-2.5 sm:inline-flex")}>
+          <Link href="/contact" className={cn(buttonClass("accent"), "hidden px-4 py-2.5 sm:inline-flex")}>
             Contact us
           </Link>
           <button
@@ -102,7 +102,7 @@ export function SiteHeader() {
             ))}
           </ul>
           <div className="container-x pb-10 pt-4">
-            <Link href="/contact" className={cn(buttonClass("primary"), "w-full py-3.5")}>
+            <Link href="/contact" className={cn(buttonClass("accent"), "w-full py-3.5")}>
               Start a project
             </Link>
           </div>
