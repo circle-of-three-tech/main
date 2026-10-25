@@ -55,9 +55,9 @@ export function Co3Mark({ className, assemble = false, label = true, title = "Ci
           transition={{ duration: 1.1, ease, delay: play ? i * 0.14 : 0 }}
           style={{ transformBox: "fill-box", transformOrigin: "center" }}
         >
-          <polygon points={c.top} fill={i === 0 ? "var(--mark-accent-top)" : "var(--mark-top)"} stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-          <polygon points={c.left} fill={i === 0 ? "var(--mark-accent-mid)" : "var(--mark-mid)"} stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-          <polygon points={c.right} fill={i === 0 ? "var(--mark-accent-deep)" : "var(--mark-deep)"} stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <polygon points={c.top} fill="var(--mark-top)" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <polygon points={c.left} fill="var(--mark-mid)" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <polygon points={c.right} fill="var(--mark-deep)" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
         </motion.g>
       ))}
       {label && (

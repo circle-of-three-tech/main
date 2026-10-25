@@ -16,7 +16,7 @@ Light theme only. Token names are legacy (kept stable for the dashboard); values
 | `--spark` / `--spark-ink` | `#FF6B4A` / `#1A0B06` | **Complementary accent: coral.** Accent buttons (dark text, 6.8:1), HUD nodes |
 | `--violet` | `#C43D1F` | Coral as text (AA) |
 | `--band` | `#052A2C` | Deep teal overlay for photo bands and CTA |
-| `--mark-*` / `--mark-accent-*` | teal / coral shades | Logo cube faces |
+| `--mark-*` | teal shades | Logo cube faces (all three cubes) |
 
 ## Futuristic layer and motion
 - `.tech-grid`: faint 56px line grid drifting slowly (inner page heroes, dark bands; not the home hero).
@@ -28,7 +28,7 @@ Light theme only. Token names are legacy (kept stable for the dashboard); values
 ## Hero and logo
 - **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer, under a flat dark overlay (`#040B16` at 65%, no gradients). Copy sits on the left; the main call to action uses the coral accent button (`buttonClass("accent")`, dark text); a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
 - **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
-- **Logo:** three isometric cubes: the top cube in coral accent shades (`--mark-accent-*`), the two lower cubes in teal shades (`--mark-*`), inside a teal ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary teal. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
+- **Logo:** three isometric cubes, all in the same teal shades (`--mark-*`), inside a teal ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary teal. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
 
 ## Typography
 - **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.
