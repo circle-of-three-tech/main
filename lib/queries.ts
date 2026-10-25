@@ -26,7 +26,7 @@ const fallbackSettings = {
   tagline: "We engineer software that moves Africa forward.",
   description: "",
   email: "victor@circleofthreetech.com",
-  phone: "+234 000 000 0000",
+  phone: "+234 903 170 6318",
   address: "Lagos",
   city: "Lagos",
   country: "Nigeria",
