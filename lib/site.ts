@@ -1,7 +1,8 @@
 export const site = {
   name: "Circle of Three Technologies",
   shortName: "Co3",
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, ""),
+  // Canonical origin for canonicals, sitemap, OG and JSON-LD. Production falls back to the live domain if the env var is missing.
+  url: (process.env.NEXT_PUBLIC_SITE_URL || (process.env.NODE_ENV === "production" ? "https://circleofthreetech.com" : "http://localhost:3000")).replace(/\/$/, ""),
   locale: "en_NG",
   description:
     "Circle of Three Technologies (Co3) is a Nigerian technology company and software development studio building custom software, web platforms, mobile apps and AI systems for ambitious businesses in Nigeria, Africa and worldwide.",
