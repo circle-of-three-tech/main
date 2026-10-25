@@ -60,7 +60,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       ref={root}
       aria-roledescription="carousel"
       aria-label="Our services"
-      className="relative"
+      className="on-photo relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocusCapture={() => setHovered(true)}
@@ -73,21 +73,21 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       }}
     >
       <h2 className="sr-only">Our services</h2>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-indigo shadow-[0_30px_60px_-30px_var(--shadow)] sm:aspect-[16/11] lg:aspect-[4/5]">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-band shadow-[0_30px_70px_-30px_var(--shadow)] sm:aspect-[16/10] lg:aspect-[5/4]">
         {/* Images: stacked and cross-faded with opacity. */}
         {slides.map((s, i) => {
           const on = i === index;
           return (
             <div key={s.slug} className={cn("absolute inset-0 transition-opacity duration-1000 ease-in-out", on ? "z-10 opacity-100" : "z-0 opacity-0")}>
               <div className={cn("absolute inset-0", on && !reduce && "ken-burns")} key={on ? `on-${index}` : "off"}>
-                <Image src={s.image} alt={s.alt} fill priority={i === 0} sizes="(min-width: 1024px) 42vw, 100vw" placeholder="blur" className="object-cover" />
+                <Image src={s.image} alt={s.alt} fill sizes="(min-width: 1024px) 42vw, 100vw" placeholder="blur" className="object-cover" />
               </div>
             </div>
           );
         })}
 
         {/* Captions: one static panel; every slide's text is in the HTML, stacked in the same grid cell. */}
-        <div className="absolute inset-x-3 bottom-3 z-20 grid rounded-xl border border-line bg-surface p-5 shadow-[0_12px_32px_-16px_var(--shadow)] sm:inset-x-4 sm:bottom-4 sm:p-6">
+        <div className="absolute inset-x-3 bottom-3 z-20 grid rounded-xl border border-line bg-surface p-5 shadow-[0_12px_32px_-16px_var(--shadow)] backdrop-blur-md sm:inset-x-4 sm:bottom-4 sm:p-6">
           {slides.map((s, i) => {
             const on = i === index;
             const step = (d: string) => cn("transition-opacity ease-out", on ? `opacity-100 duration-700 ${d}` : "opacity-0 delay-0 duration-200");
@@ -150,7 +150,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               type="button"
               onClick={() => go(index - 1)}
               aria-label="Previous service"
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-line bg-surface text-muted backdrop-blur-md transition-colors hover:border-cyan/60 hover:text-cyan"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -158,7 +158,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? "Pause carousel" : "Play carousel"}
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-line bg-surface text-muted backdrop-blur-md transition-colors hover:border-cyan/60 hover:text-cyan"
             >
               {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
             </button>
@@ -166,7 +166,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               type="button"
               onClick={() => go(index + 1)}
               aria-label="Next service"
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-line bg-surface text-muted backdrop-blur-md transition-colors hover:border-cyan/60 hover:text-cyan"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

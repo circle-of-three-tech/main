@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/site/ui";
-import { servicePhoto } from "@/lib/photos";
+import { photo, servicePhoto } from "@/lib/photos";
+import { HeroBackdrop } from "./hero-backdrop";
 import { HeroCarousel, type HeroSlide } from "./hero-carousel";
 
 type Service = { slug: string; title: string; tagline: string; icon: string };
@@ -14,15 +15,13 @@ export function Hero({ services }: { services: Service[] }) {
     return { slug: s.slug, title: s.title, tagline: s.tagline, icon: s.icon, image: p.src, alt: `${s.title}: ${p.alt}` };
   });
 
-  return (
-    <section className="relative overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40" aria-labelledby="hero-heading">
-      {/* Soft azure wash behind the hero (flat shapes, no gradients) */}
-      <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-cyan-soft opacity-70 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -left-32 top-1/2 h-72 w-72 rounded-full bg-spark/10 blur-3xl" />
+  const bg = photo("lagos");
 
+  return (
+    <HeroBackdrop image={bg.src} alt={bg.alt} labelledBy="hero-heading">
       <div className="container-x relative grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-6">
-          <h1 id="hero-heading" className="font-display text-[clamp(2.4rem,5vw,3.85rem)] font-semibold leading-[1.04] tracking-[-0.035em]">
+          <h1 id="hero-heading" className="font-display text-[clamp(2.4rem,5.2vw,4rem)] font-semibold leading-[1.04] tracking-[-0.035em]">
             <span className="hero-fade block" style={fade(0.05)}>
               Nigerian software,
             </span>
@@ -47,7 +46,7 @@ export function Hero({ services }: { services: Service[] }) {
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="inline-block rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium transition-[border-color,color,transform] duration-200 hover:-translate-y-px hover:border-cyan/50 hover:text-cyan"
+                    className="inline-block rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium backdrop-blur-md transition-[border-color,color,transform] duration-200 hover:-translate-y-px hover:border-cyan/50 hover:text-cyan"
                   >
                     {s.title}
                   </Link>
@@ -61,6 +60,6 @@ export function Hero({ services }: { services: Service[] }) {
           <HeroCarousel slides={slides} />
         </div>
       </div>
-    </section>
+    </HeroBackdrop>
   );
 }

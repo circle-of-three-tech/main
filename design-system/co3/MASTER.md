@@ -8,17 +8,24 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 | Token | Light | Dark | Use |
 |---|---|---|---|
 | `--ink` | `#FFFFFF` | `#08111C` | Page background |
-| `--indigo` | `#F4F8FC` | `#0D1826` | Azure-tinted alternate section / subtle surface |
+| `--indigo` | `#F0F8FF` | `#0D1826` | Sky-tinted alternate section / subtle surface |
 | `--surface` | `#FFFFFF` | `#101D2D` | Cards |
-| `--fg` | `#0A1628` | `#EDF2F8` | Text |
-| `--muted` | `#56627A` | `#93A1B5` | Secondary text; second tone in headlines (`text-highlight`) |
-| `--cyan` | `#0072CE` | `#4DA3FF` | **Primary: azure blue.** Buttons, links, eyebrows, icons (AA on white) |
-| `--cyan-strong` | `#005FAE` | `#7AB9FF` | Primary hover |
-| `--cyan-soft` | `#E6F1FB` | azure 12% | Icon chips, tints |
-| `--violet` | `#C2410C` | `#FF9F5A` | **Complementary accent: burnt orange** as text (pillar keys) |
-| `--spark` | `#F97316` | `#FF9F5A` | Bright orange for small decorative fills only (eyebrow dash, stat dots) |
+| `--fg` | `#09182C` | `#EDF2F8` | Text |
+| `--muted` | `#4F6178` | `#93A1B5` | Secondary text; second tone in headlines (`text-highlight`) |
+| `--cyan` | `#0A6FD0` | `#5CB6FF` | **Primary: clear summer-afternoon sky blue.** Buttons, links, eyebrows, icons (AA on white). Flips to pale sky `#8FD0FF` on photos (`.on-photo`) |
+| `--cyan-strong` | `#0858A8` | `#8CCBFF` | Primary hover |
+| `--sky` / `--sky-light` | `#2EA3F7` / `#8FD0FF` | `#3FA9FF` / `#A6DCFF` | Bright sky for decorative fills, gradients and the logo ring only (not for text on white) |
+| `--mark-top` / `--mark-mid` / `--mark-deep` | `#9BD6FF` / `#38A6F7` / `#0A6FD0` | `#B4E0FF` / `#4EAEFC` / `#1F7FE0` | Logo cube faces: lit top, mid left, deep right |
+| `--cyan-soft` | `#DEF0FF` | sky 13% | Icon chips, tints |
+| `--violet` | `#B45309` | `#FFB24D` | **Complementary accent: afternoon-sun amber** as text (pillar keys) |
+| `--spark` | `#FF9F1C` | `#FFB24D` | Sunlight amber for small decorative fills only (eyebrow dash, stat dots) |
 | `--accent-ink` | `#FFFFFF` | `#08111C` | Text on the primary |
-| `--band` | `#0A1E36` | `#0F2540` | Azure-navy overlay for photo bands and the CTA |
+| `--band` | `#08325F` | `#0A2C52` | Deep late-sky blue overlay for photo bands and the CTA |
+
+## Hero and logo
+- **Hero:** a clear-sky gradient (`#1676E0` → `#BDE3FF`) sits behind the Lagos skyline photo, which is anchored to the bottom, dissolves into the sky at its top edge and drifts down slower than the page (parallax). A warm sun-glow layer drifts the other way and the copy eases off as you scroll. Copy and services carousel are server-rendered; only transforms run in the browser and reduced-motion switches them off. Headline and carousel use `.on-photo`, which flips tokens to light-on-photo.
+- **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
+- **Logo:** three isometric cubes shaded in sky blues (`--mark-*`) inside a sky-gradient ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary blue. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
 
 ## Typography
 - **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.
