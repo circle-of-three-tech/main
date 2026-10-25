@@ -29,7 +29,7 @@ export function PostCard({ post, large }: { post: PostCardData; large?: boolean 
     <Link href={`/blog/${post.slug}`} className={cn("group block", large && "grid items-center gap-8 lg:grid-cols-2 lg:gap-12")}>
       <ViewTransition name={`post-${post.slug}`} share="morph" default="none">
         <div className={cn("relative overflow-hidden rounded-xl border border-line bg-indigo", large ? "aspect-[16/10]" : "aspect-[16/10]")}>
-          <PostCover post={post} className="transition-transform duration-500 ease-expo group-hover:scale-[1.02]" />
+          <PostCover post={post} className="transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
         </div>
       </ViewTransition>
       <div>

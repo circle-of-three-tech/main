@@ -24,7 +24,7 @@ export function HighlightText({ text, highlight = [] }: { text: string; highligh
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RiseText({ text, as: Tag = "h1", className, highlight = [], delay = 0, stagger }: { text: string; as?: ElementType; className?: string; highlight?: string[]; delay?: number; stagger?: number }) {
   return (
-    <Tag className={cn("rise-in [text-wrap:balance]", className)} style={{ animationDelay: `${delay}s` }}>
+    <Tag className={cn(!/\bhero-fade\b/.test(className ?? "") && "rise-in", "[text-wrap:balance]", className)} style={{ animationDelay: `${delay}s` }}>
       <HighlightText text={text} highlight={highlight} />
     </Tag>
   );

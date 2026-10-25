@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageTransition } from "@/components/motion/page-transition";
 import { ServicesGrid } from "@/components/home/services-grid";
 import { Process } from "@/components/home/process";
+import { ParallaxBand } from "@/components/home/parallax-band";
 import { CtaSection } from "@/components/site/cta-section";
 import { PageHero } from "@/components/site/ui";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -29,6 +30,14 @@ export default async function ServicesPage() {
         intro="From strategy and design to engineering, AI and cloud operations, we're a single team accountable for the whole journey of your product."
       />
       <ServicesGrid services={services} heading={false} />
+      <div className="mt-16 md:mt-24">
+        <ParallaxBand
+          image={photo("design")}
+          eyebrow="Design-led engineering"
+          title="Every build starts with the people who will use it."
+          body="We prototype and test with real users before writing production code, so what we ship is easy to adopt from day one."
+        />
+      </div>
       <Process />
       <CtaSection title="Not sure what you need yet? Let's figure it out." body="Book a free 30-minute discovery call. We'll help you scope the right solution, even if that means not building anything." />
     </PageTransition>

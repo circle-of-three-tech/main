@@ -5,6 +5,8 @@ import { ServicesGrid } from "@/components/home/services-grid";
 import { Stats } from "@/components/home/stats";
 import { Process } from "@/components/home/process";
 import { ImageBand } from "@/components/home/image-band";
+import { ParallaxBand } from "@/components/home/parallax-band";
+import { photo } from "@/lib/photos";
 import { Reveal } from "@/components/motion/reveal";
 import { PageTransition } from "@/components/motion/page-transition";
 import { ProjectCard } from "@/components/site/project-card";
@@ -29,29 +31,21 @@ export default async function HomePage() {
   const [services, projects, posts, settings, testimonials] = await Promise.all([getServices(), getProjects(), getPosts(), getSettings(), getTestimonials()]);
   const featured = projects.filter((p) => p.featured).slice(0, 4);
   const showcase = featured.length ? featured : projects.slice(0, 4);
-  const clients = Array.from(new Set(projects.map((p) => p.client))).slice(0, 8);
 
   return (
     <PageTransition>
-      <Hero />
-
-      {clients.length > 0 && (
-        <section aria-labelledby="clients-heading" className="container-x pb-16 pt-6 md:pb-20">
-          <h2 id="clients-heading" className="text-center text-sm text-muted">
-            Trusted by organisations in healthcare, education, commerce and professional services
-          </h2>
-          <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
-            {clients.map((c) => (
-              <li key={c} className="font-display text-lg font-semibold tracking-[-0.01em] text-muted/80 md:text-xl">
-                {c}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <Hero services={services} />
 
       <Pillars />
       <ServicesGrid services={services} />
+
+      <ParallaxBand
+        image={photo("servers")}
+        eyebrow="Built to scale"
+        title="Reliable infrastructure behind every product we ship."
+        body="Cloud architecture, automated testing, monitoring and security practices come standard, so your platform stays fast and available as your users grow."
+        cta={{ href: "/services/cloud-devops", label: "Cloud & DevOps" }}
+      />
 
       <section className="border-t border-line pb-4 pt-20 md:pt-28" aria-labelledby="work-heading">
         <div className="container-x">

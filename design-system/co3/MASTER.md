@@ -7,15 +7,18 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `--ink` | `#FFFFFF` | `#0A0C12` | Page background |
-| `--indigo` | `#F6F7F9` | `#10131B` | Alternate section / subtle surface |
-| `--surface` | `#FFFFFF` | `#12151E` | Cards |
-| `--fg` | `#0B1220` | `#EEF0F5` | Text |
-| `--muted` | `#5A6478` | `#9198A8` | Secondary text; second tone in headlines (`text-highlight`) |
-| `--cyan` | `#2B3FD6` | `#8A9BFF` | The single brand accent: primary buttons, links, eyebrows, icons |
-| `--accent-ink` | `#FFFFFF` | `#0A0C12` | Text on the accent |
-| `--line` / `--line-strong` | 9% / 16% of fg | 9% / 18% of fg | Borders and dividers |
-| `--band` | `#0B1220` | `#161B2B` | Dark CTA band |
+| `--ink` | `#FFFFFF` | `#08111C` | Page background |
+| `--indigo` | `#F4F8FC` | `#0D1826` | Azure-tinted alternate section / subtle surface |
+| `--surface` | `#FFFFFF` | `#101D2D` | Cards |
+| `--fg` | `#0A1628` | `#EDF2F8` | Text |
+| `--muted` | `#56627A` | `#93A1B5` | Secondary text; second tone in headlines (`text-highlight`) |
+| `--cyan` | `#0072CE` | `#4DA3FF` | **Primary: azure blue.** Buttons, links, eyebrows, icons (AA on white) |
+| `--cyan-strong` | `#005FAE` | `#7AB9FF` | Primary hover |
+| `--cyan-soft` | `#E6F1FB` | azure 12% | Icon chips, tints |
+| `--violet` | `#C2410C` | `#FF9F5A` | **Complementary accent: burnt orange** as text (pillar keys) |
+| `--spark` | `#F97316` | `#FF9F5A` | Bright orange for small decorative fills only (eyebrow dash, stat dots) |
+| `--accent-ink` | `#FFFFFF` | `#08111C` | Text on the primary |
+| `--band` | `#0A1E36` | `#0F2540` | Azure-navy overlay for photo bands and the CTA |
 
 ## Typography
 - **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.
@@ -31,10 +34,16 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 - Use `SectionHeading` for eyebrow + title + lead.
 
 ## Motion
-Only short fade-ups (≤0.6s, ≤16px) on scroll, a 260ms page cross-fade and 150–200ms hover transitions. No custom cursor, preloader, film grain, scroll-jacking, text scrambles, magnetic buttons, parallax or WebGL. Everything respects `prefers-reduced-motion`.
+- Hero copy: pure opacity fade (`hero-fade`), staggered with `animation-delay`. The text is in the HTML from first byte.
+- Scroll: fade-ups (`Reveal`, ≤0.6s, ≤16px) on section headings, cards and stats; counters on stats.
+- Parallax: `ParallaxImage` (photo drifts inside its frame, travel clamped so edges never show) and `Parallax` (foreground offset). Used in inner page heroes, pillar cards, the Lagos section, full-bleed `ParallaxBand`s and the CTA.
+- Hover: buttons lift 1px with a soft azure shadow; cards lift 4px; images zoom slightly; nav links get an azure underline that draws in.
+- Header: shadow and a thin azure scroll-progress bar once scrolled.
+- Hero carousel (`HeroCarousel`): services cross-fade every 5.5s with a slow Ken Burns zoom and staggered caption fades; pauses on hover/focus, has pause and prev/next controls, arrow-key support, and does not autoplay under reduced motion. All slides are server-rendered so every service and link is crawlable.
+- No custom cursor, preloader, film grain, scroll-jacking, text scrambles or WebGL. Everything respects `prefers-reduced-motion`.
 
 ## Imagery
-Real product screenshots first. Photography sits in plain rounded frames, never behind text scrims. No gradients.
+Real product screenshots first. Photography sits in rounded frames or full-bleed parallax bands; text on photos always sits on the flat `band` overlay. No gradient fills (soft blurred azure/orange shapes behind heroes are fine).
 
 ---
 
