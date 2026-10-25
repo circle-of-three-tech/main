@@ -40,18 +40,20 @@ export function SectionHeading({
   );
 }
 
-type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: "primary" | "ghost"; cursor?: string; arrow?: boolean };
+type ButtonVariant = "primary" | "accent" | "ghost";
+type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: ButtonVariant; cursor?: string; arrow?: boolean };
 
-export const buttonClass = (variant: "primary" | "ghost" = "primary") =>
+export const buttonClass = (variant: ButtonVariant = "primary") =>
   cn(
     "group inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-[background-color,border-color,box-shadow,transform,color] duration-200 ease-out hover:-translate-y-px active:translate-y-0",
-    variant === "primary"
-      ? "bg-cyan text-accent-ink shadow-[0_1px_2px_var(--shadow)] hover:bg-cyan-strong hover:shadow-[0_8px_20px_-8px_var(--glow)]"
-      : "border border-line-strong bg-surface text-fg hover:border-cyan/50 hover:text-cyan",
+    variant === "primary" && "bg-cyan text-accent-ink shadow-[0_1px_2px_var(--shadow)] hover:bg-cyan-strong hover:shadow-[0_8px_20px_-8px_var(--glow)]",
+    // Sun-amber accent with dark text (9:1 contrast); used for the hero call to action.
+    variant === "accent" && "bg-spark text-[#1a1206] shadow-[0_1px_2px_var(--shadow)] hover:bg-[#ffb347] hover:shadow-[0_10px_24px_-8px_rgb(255_159_28/0.55)]",
+    variant === "ghost" && "border border-line-strong bg-surface text-fg hover:border-cyan/50 hover:text-cyan",
   );
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function ButtonLink({ variant = "primary", className, children, cursor, arrow = variant === "primary", ...props }: ButtonLinkProps) {
+export function ButtonLink({ variant = "primary", className, children, cursor, arrow = variant !== "ghost", ...props }: ButtonLinkProps) {
   return (
     <Link {...props} className={cn(buttonClass(variant), className)}>
       {children}

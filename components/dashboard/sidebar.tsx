@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useOnChange } from "@/lib/hooks";
 import { Co3Mark } from "@/components/brand/co3-mark";
 import { logout } from "@/lib/actions/auth";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -41,7 +40,6 @@ export function Sidebar({ user, unread }: { user: { name: string; email: string;
           <span className="font-display font-semibold">Co3 Studio</span>
         </Link>
         <div className="flex items-center gap-2">
-          <ThemeToggle className="h-10 w-10" />
           <button type="button" onClick={() => setOpen(!open)} aria-label="Toggle navigation" className="rounded-lg border border-line p-2">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -73,7 +71,6 @@ export function Sidebar({ user, unread }: { user: { name: string; email: string;
             <Link href="/" target="_blank" className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-muted hover:text-fg">
               <ExternalLink className="h-4 w-4" /> View live site
             </Link>
-            <ThemeToggle className="hidden h-9 w-9 lg:flex" />
           </div>
           <div className="flex items-center gap-3 rounded-xl bg-indigo/60 p-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan font-display text-sm font-bold text-ink">{user.name.slice(0, 1)}</span>

@@ -3,7 +3,6 @@ import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
-import { DEFAULT_THEME, THEME_COLORS, themeScript } from "@/lib/theme-config";
 import "./globals.css";
 
 const display = Inter_Tight({ variable: "--font-display-face", subsets: ["latin"], weight: ["500", "600", "700"], display: "swap" });
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: THEME_COLORS[DEFAULT_THEME],
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -50,10 +49,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-NG" data-theme={DEFAULT_THEME} className={`${display.variable} ${inter.variable} ${code.variable} antialiased`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="en-NG" className={`${display.variable} ${inter.variable} ${code.variable} antialiased`}>
       <body className="min-h-dvh">
         {children}
         <Analytics />
