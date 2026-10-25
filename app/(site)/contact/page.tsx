@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { PageTransition } from "@/components/motion/page-transition";
@@ -20,7 +21,7 @@ export default async function ContactPage() {
   const [settings, services] = await Promise.all([getSettings(), getServices()]);
   const channels = [
     { Icon: Mail, label: "Email", value: settings.email, href: `mailto:${settings.email}` },
-    { Icon: Phone, label: "Phone", value: settings.phone, href: `tel:${settings.phone.replace(/\s/g, "")}` },
+    { Icon: Phone, label: "WhatsApp only", value: settings.phone, href: whatsappUrl(settings.phone) },
     { Icon: MapPin, label: "Studio", value: `${settings.address}, ${settings.country}` },
     { Icon: Clock, label: "Hours", value: "Mon–Fri · 9:00–18:00 WAT" },
   ];

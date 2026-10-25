@@ -379,7 +379,7 @@ async function main() {
       description:
         "Circle of Three Technologies is a Nigerian technology company building custom software, web platforms, mobile apps and AI systems.",
       email: "victor@circleofthreetech.com",
-      phone: "+234 800 000 0000",
+      phone: "+234 903 170 6318",
       address: "Lagos",
       city: "Lagos",
       country: "Nigeria",

@@ -21,7 +21,7 @@ export default async function SettingsPage() {
         <Panel title="Contact & location" description="Keep these identical to your Google Business Profile (NAP consistency).">
           <div className="grid gap-5 md:grid-cols-2">
             <TextField label="Email" name="email" type="email" defaultValue={s?.email} required />
-            <TextField label="Phone" name="phone" defaultValue={s?.phone} required />
+            <TextField label="Phone (WhatsApp)" name="phone" defaultValue={s?.phone} required />
             <TextField label="Street address" name="address" defaultValue={s?.address} required className="md:col-span-2" />
             <TextField label="City" name="city" defaultValue={s?.city} required />
             <TextField label="Country" name="country" defaultValue={s?.country ?? "Nigeria"} required />

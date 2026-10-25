@@ -34,3 +34,9 @@ export function formatDate(date: Date | string | null | undefined) {
 export function truncate(text: string, max: number) {
   return text.length <= max ? text : `${text.slice(0, max - 1).trimEnd()}…`;
 }
+
+/** wa.me link for a phone number in local (0903…) or international (+234 903…) form; Nigerian numbers are assumed when it starts with 0. */
+export function whatsappUrl(phone: string) {
+  const digits = phone.replace(/\D/g, "");
+  return `https://wa.me/${digits.startsWith("0") ? `234${digits.slice(1)}` : digits}`;
+}

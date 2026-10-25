@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/lib/utils";
 import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { Mail, MapPin, Phone } from "lucide-react";
@@ -89,7 +90,7 @@ export async function SiteFooter() {
             </li>
             <li className="flex gap-2.5">
               <Phone className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-              <a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-fg">{settings.phone}</a>
+              <a href={whatsappUrl(settings.phone)} target="_blank" rel="noopener" className="transition-colors hover:text-fg">{settings.phone} <span className="text-xs">(WhatsApp only)</span></a>
             </li>
             <li className="flex gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
