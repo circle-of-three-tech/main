@@ -23,7 +23,7 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 | `--band` | `#08325F` | `#0A2C52` | Deep late-sky blue overlay for photo bands and the CTA |
 
 ## Hero and logo
-- **Hero:** a clear-sky gradient (`#1676E0` → `#BDE3FF`) sits behind the Lagos skyline photo, which is anchored to the bottom, dissolves into the sky at its top edge and drifts down slower than the page (parallax). A warm sun-glow layer drifts the other way and the copy eases off as you scroll. Copy and services carousel are server-rendered; only transforms run in the browser and reduced-motion switches them off. Headline and carousel use `.on-photo`, which flips tokens to light-on-photo.
+- **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer that drifts slower than the page, under a clear-sky blue wash and a sunlit corner. Copy sits on the left; a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
 - **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
 - **Logo:** three isometric cubes shaded in sky blues (`--mark-*`) inside a sky-gradient ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary blue. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
 
