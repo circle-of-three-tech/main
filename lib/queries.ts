@@ -44,7 +44,13 @@ export async function getSettings() {
   cacheTag(TAGS.settings);
   const row = await db.siteSettings.findUnique({ where: { id: "site" } });
   if (!row) return fallbackSettings;
-  return { ...row, stats: (row.stats ?? []) as Stat[] };
+  // Never publish blank contact details: fall back to the defaults if a field was cleared in the dashboard.
+  return {
+    ...row,
+    email: row.email.trim() || fallbackSettings.email,
+    phone: row.phone.trim() || fallbackSettings.phone,
+    stats: (row.stats ?? []) as Stat[],
+  };
 }
 
 export async function getServices() {

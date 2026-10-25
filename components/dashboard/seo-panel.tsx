@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { inputClass } from "./form";
 import { cn } from "@/lib/utils";
+import { site } from "@/lib/site";
 
 function Counter({ value, ideal }: { value: number; ideal: [number, number] }) {
   const tone = value === 0 ? "text-muted" : value < ideal[0] ? "text-warn" : value > ideal[1] ? "text-danger" : "text-ok";
@@ -15,7 +16,7 @@ export function SeoPanel({ path, fallbackTitle, fallbackDescription, defaultTitl
   const [desc, setDesc] = useState(defaultDescription ?? "");
   const shownTitle = `${title || fallbackTitle} | Circle of Three Technologies`;
   const shownDesc = desc || fallbackDescription;
-  const host = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://circleofthree.tech").replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const host = site.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
   return (
     <div className="space-y-4">

@@ -31,7 +31,7 @@ Sign in at `/dashboard/login` with `ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`,
 |---|---|---|
 | `DATABASE_URL` | yes | PostgreSQL connection string |
 | `AUTH_SECRET` | yes | 32+ char secret for dashboard sessions (`openssl rand -base64 48`) |
-| `NEXT_PUBLIC_SITE_URL` | yes | Canonical origin, e.g. `https://www.your-domain.com` (used for canonicals, sitemap, OG) |
+| `NEXT_PUBLIC_SITE_URL` | yes | Canonical origin, e.g. `https://circleofthreetech.com` (used for canonicals, sitemap, OG) |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | seed only | First admin account |
 | `BLOB_READ_WRITE_TOKEN` | production | Image uploads via Vercel Blob (locally, uploads go to `public/uploads`) |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | optional | SMTP for transactional email via nodemailer (contact notifications and auto-replies). Email is skipped when unset |

@@ -428,3 +428,7 @@ p {
     transform: translateY(12px);
   }
 }
+/* Slower zoom for the full-screen hero photos */
+.ken-burns-slow {
+  animation: ken-burns 9s ease-out both;
+}

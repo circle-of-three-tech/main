@@ -1,7 +1,7 @@
 import { whatsappUrl } from "@/lib/utils";
 import Link from "next/link";
 import { cacheLife } from "next/cache";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { GithubIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/components/site/social-icons";
 import { getServices, getSettings } from "@/lib/queries";
 import { site } from "@/lib/site";
@@ -85,15 +85,18 @@ export async function SiteFooter() {
           <p className="text-sm font-semibold text-fg">Get in touch</p>
           <ul className="mt-4 space-y-3 text-sm text-muted">
             <li className="flex gap-2.5">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-              <a href={`mailto:${settings.email}`} className="break-words transition-colors [overflow-wrap:anywhere] hover:text-fg">{settings.email}</a>
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-cyan" aria-hidden />
+              <a href={`mailto:${settings.email}`} className="break-words font-medium text-fg transition-colors [overflow-wrap:anywhere] hover:text-cyan">{settings.email}</a>
             </li>
             <li className="flex gap-2.5">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-              <a href={whatsappUrl(settings.phone)} target="_blank" rel="noopener" className="transition-colors hover:text-fg">{settings.phone} <span className="text-xs">(WhatsApp only)</span></a>
+              <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-cyan" aria-hidden />
+              <a href={whatsappUrl(settings.phone)} target="_blank" rel="noopener" className="transition-colors hover:text-cyan">
+                <span className="font-medium text-fg">{settings.phone}</span>
+                <span className="block text-xs">WhatsApp messages only</span>
+              </a>
             </li>
             <li className="flex gap-2.5">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan" aria-hidden />
               <span>{settings.address}, {settings.country}</span>
             </li>
           </ul>
