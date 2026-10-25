@@ -9,7 +9,7 @@ export function LogoLink() {
       </span>
       <span className="leading-none">
         <span className="block font-display text-[0.95rem] font-semibold tracking-[-0.01em] text-fg">Circle of Three</span>
-        <span className="mt-1 block text-[0.6rem] font-medium uppercase tracking-[0.2em] text-muted">Technologies</span>
+        <span className="mt-1 block text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-cyan">Technologies</span>
       </span>
     </Link>
   );

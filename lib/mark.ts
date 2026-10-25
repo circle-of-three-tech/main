@@ -14,15 +14,20 @@ function cube(cx: number, cy: number, s: number): Cube {
 
 export const CUBES: Cube[] = [cube(50, 33, 12), cube(38.6, 55, 12), cube(61.4, 55, 12)];
 
-export function markSvg({ fg = "#F5F7FF", bg = "none", accent = "#05061A", text = true } = {}) {
-  const cubes = CUBES.map(
-    (c) =>
-      `<polygon points="${c.top}" fill="${bg === "none" ? "none" : bg}" stroke="${fg}" stroke-width="1.4" stroke-linejoin="round"/>` +
-      `<polygon points="${c.left}" fill="${bg === "none" ? "none" : bg}" stroke="${fg}" stroke-width="1.4" stroke-linejoin="round"/>` +
-      `<polygon points="${c.right}" fill="${fg}" stroke="${fg}" stroke-width="1.4" stroke-linejoin="round"/>`,
-  ).join("");
+/** Blue shades for the three cube faces: lit top, mid left, deep right (matches --mark-* tokens). */
+export const MARK_BLUES = { top: "#9BD6FF", left: "#38A6F7", right: "#1F86EC", ringFrom: "#8FD0FF", ringTo: "#2EA3F7" };
+
+/** Standalone SVG of the mark for icons, OG images and structured data. `bg` fills the ring (and the whole tile when `tile` is set). */
+export function markSvg({ fg = "#FFFFFF", bg = "#08325F", text = true, tile = false } = {}) {
+  const b = MARK_BLUES;
+  const face = (pts: string, fill: string) => `<polygon points="${pts}" fill="${fill}" stroke="${fg}" stroke-width="1.4" stroke-linejoin="round"/>`;
+  const cubes = CUBES.map((c) => face(c.top, b.top) + face(c.left, b.left) + face(c.right, b.right)).join("");
   const label = text
-    ? `<text x="50" y="84" text-anchor="middle" font-family="Exo, Arial, sans-serif" font-weight="700" font-size="11" letter-spacing="1" fill="${fg}">Co3</text>`
+    ? `<text x="50" y="84" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="11" letter-spacing="1" fill="${fg}">Co3</text>`
     : "";
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="${bg === "none" ? accent : bg}" stroke="${fg}" stroke-width="2.2"/>${cubes}${label}</svg>`;
+  const back = tile ? `<rect width="100" height="100" fill="${bg}"/>` : "";
+  return (
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${b.ringFrom}"/><stop offset="1" stop-color="${b.ringTo}"/></linearGradient></defs>` +
+    `${back}<circle cx="50" cy="50" r="46" fill="${bg}" stroke="url(#r)" stroke-width="2.6"/>${cubes}${label}</svg>`
+  );
 }

@@ -29,6 +29,8 @@ export function SiteHeader() {
     document.documentElement.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  // Over the photographic home hero the header reads light-on-photo until the page scrolls (or the menu opens).
+  const onPhoto = pathname === "/" && !scrolled && !open;
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
@@ -36,6 +38,7 @@ export function SiteHeader() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
         scrolled || open ? "border-line bg-ink/85 shadow-[0_6px_24px_-16px_var(--shadow)] backdrop-blur-md" : "border-transparent bg-transparent",
+        onPhoto && "on-photo",
       )}
     >
       <nav aria-label="Primary" className="container-x flex h-[72px] items-center justify-between gap-6">

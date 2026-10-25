@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useId } from "react";
 import { CUBES } from "@/lib/mark";
 import { cn } from "@/lib/utils";
 
@@ -23,16 +24,23 @@ type Props = {
 export function Co3Mark({ className, assemble = false, label = true, title = "Circle of Three Technologies" }: Props) {
   const reduce = useReducedMotion();
   const play = assemble && !reduce;
+  const gid = useId().replace(/:/g, "");
 
   return (
     <svg viewBox="0 0 100 100" className={cn("overflow-visible", className)} role="img" aria-label={title}>
+      <defs>
+        <linearGradient id={`ring-${gid}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="var(--mark-top)" />
+          <stop offset="1" stopColor="var(--sky)" />
+        </linearGradient>
+      </defs>
       <motion.circle
         cx="50"
         cy="50"
         r="46"
         fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
+        stroke={`url(#ring-${gid})`}
+        strokeWidth="2.6"
         initial={play ? { pathLength: 0, rotate: -90, opacity: 0 } : false}
         animate={{ pathLength: 1, rotate: 0, opacity: 1 }}
         transition={{ duration: 1.4, ease, delay: play ? 0.7 : 0 }}
@@ -47,9 +55,9 @@ export function Co3Mark({ className, assemble = false, label = true, title = "Ci
           transition={{ duration: 1.1, ease, delay: play ? i * 0.14 : 0 }}
           style={{ transformBox: "fill-box", transformOrigin: "center" }}
         >
-          <polygon points={c.top} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-          <polygon points={c.left} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-          <polygon points={c.right} fill="currentColor" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <polygon points={c.top} fill="var(--mark-top)" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <polygon points={c.left} fill="var(--mark-mid)" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <polygon points={c.right} fill="var(--mark-deep)" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
         </motion.g>
       ))}
       {label && (
