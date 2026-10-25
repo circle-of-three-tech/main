@@ -16,12 +16,17 @@ export const CUBES: Cube[] = [cube(50, 33, 12), cube(38.6, 55, 12), cube(61.4, 5
 
 /** Blue shades for the three cube faces: lit top, mid left, deep right (matches --mark-* tokens). */
 export const MARK_BLUES = { top: "#9BD6FF", left: "#38A6F7", right: "#1F86EC", ringFrom: "#8FD0FF", ringTo: "#2EA3F7" };
+/** Sun-amber accent shades for the top cube. */
+export const MARK_ACCENT = { top: "#FFD28F", left: "#FFAD33", right: "#F08C00" };
 
 /** Standalone SVG of the mark for icons, OG images and structured data. `bg` fills the ring (and the whole tile when `tile` is set). */
 export function markSvg({ fg = "#FFFFFF", bg = "#08325F", text = true, tile = false } = {}) {
   const b = MARK_BLUES;
   const face = (pts: string, fill: string) => `<polygon points="${pts}" fill="${fill}" stroke="${fg}" stroke-width="1.4" stroke-linejoin="round"/>`;
-  const cubes = CUBES.map((c) => face(c.top, b.top) + face(c.left, b.left) + face(c.right, b.right)).join("");
+  const cubes = CUBES.map((c, i) => {
+    const f = i === 0 ? MARK_ACCENT : b;
+    return face(c.top, f.top) + face(c.left, f.left) + face(c.right, f.right);
+  }).join("");
   const label = text
     ? `<text x="50" y="84" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="11" letter-spacing="1" fill="${fg}">Co3</text>`
     : "";

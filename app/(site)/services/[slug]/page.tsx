@@ -54,7 +54,7 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
       <JsonLd data={[...serviceJsonLd(service, service.faqs), breadcrumbJsonLd([{ name: "Services", path: "/services" }, { name: service.title, path: `/services/${service.slug}` }])]} />
       <PageHero label={`Service · ${service.title}`} title={service.tagline} image={servicePhoto(service.slug)} intro={service.summary}>
         <div className="mt-9 flex flex-wrap gap-3">
-          <ButtonLink href="/contact">Discuss your project</ButtonLink>
+          <ButtonLink href="/contact" variant="accent">Discuss your project</ButtonLink>
           <ButtonLink href="/portfolio" variant="ghost">
             See related work
           </ButtonLink>

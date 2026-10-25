@@ -42,7 +42,7 @@ async function JobContent({ params }: { params: PageProps<"/careers/[slug]">["pa
       <JsonLd data={[jobJsonLd(job), breadcrumbJsonLd([{ name: "Careers", path: "/careers" }, { name: job.title, path: `/careers/${job.slug}` }])]} />
       <PageHero label={`${job.department} · ${job.type}${job.remote ? " · Remote" : ""}`} title={job.title} image={photo("workspace")} intro={job.summary}>
         <div className="mt-9 flex flex-wrap items-center gap-3">
-          <ButtonLink href={apply}>Apply now</ButtonLink>
+          <ButtonLink href={apply} variant="accent">Apply now</ButtonLink>
           <Link href="/careers" className="inline-flex items-center gap-1.5 px-3 text-sm font-medium text-muted transition-colors hover:text-fg">
             <ArrowLeft className="h-4 w-4" /> All roles
           </Link>

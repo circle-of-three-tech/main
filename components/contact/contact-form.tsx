@@ -93,7 +93,7 @@ export function ContactForm({ services }: { services: string[] }) {
 
           <Field label="Project details *" name="body" textarea required error={state.errors?.body} />
 
-          <button type="submit" disabled={pending} className={cn(buttonClass("primary"), "w-full cursor-pointer py-3.5 disabled:cursor-wait disabled:opacity-70 md:w-auto")}>
+          <button type="submit" disabled={pending} className={cn(buttonClass("accent"), "w-full cursor-pointer py-3.5 disabled:cursor-wait disabled:opacity-70 md:w-auto")}>
             {pending ? "Sending…" : "Send message"}
             {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />}
           </button>

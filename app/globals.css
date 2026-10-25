@@ -19,6 +19,9 @@
   --mark-top: #9bd6ff; /* logo faces: lit top, mid left, deep right */
   --mark-mid: #38a6f7;
   --mark-deep: #0a6fd0;
+  --mark-accent-top: #ffd28f; /* top cube in the sun-amber accent */
+  --mark-accent-mid: #ffad33;
+  --mark-accent-deep: #f08c00;
   --accent-ink: #ffffff; /* text on primary */
   --violet: #b45309; /* complementary accent: afternoon-sun amber (AA as text) */
   --violet-soft: #b45309;

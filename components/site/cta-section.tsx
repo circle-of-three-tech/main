@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { ParallaxImage } from "@/components/motion/parallax";
 import { photo, type Photo } from "@/lib/photos";
+import { buttonClass } from "@/components/site/ui";
 
 /** Closing call to action on a parallax photo with a flat azure-navy overlay. */
 export function CtaSection({
@@ -27,7 +28,7 @@ export function CtaSection({
           <div className="flex shrink-0 flex-wrap gap-3">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-lg bg-cyan px-5 py-3 text-sm font-semibold text-accent-ink transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-cyan-strong"
+              className={buttonClass("accent")}
             >
               Start a project <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
             </Link>
