@@ -25,7 +25,6 @@ export default async function ServicesPage() {
       <PageHero
         label="Services"
         title="Software development services, end to end."
-        highlight={["end", "end."]}
         image={photo("office")}
         intro="From strategy and design to engineering, AI and cloud operations, we're a single team accountable for the whole journey of your product."
       />

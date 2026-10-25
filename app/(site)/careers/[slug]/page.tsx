@@ -41,17 +41,17 @@ async function JobContent({ params }: { params: PageProps<"/careers/[slug]">["pa
     <>
       <JsonLd data={[jobJsonLd(job), breadcrumbJsonLd([{ name: "Careers", path: "/careers" }, { name: job.title, path: `/careers/${job.slug}` }])]} />
       <PageHero label={`${job.department} · ${job.type}${job.remote ? " · Remote" : ""}`} title={job.title} image={photo("workspace")} intro={job.summary}>
-        <div className="mt-10 flex flex-wrap gap-4">
-          <ButtonLink href={apply} cursor="Apply">Apply now</ButtonLink>
-          <Link href="/careers" className="inline-flex items-center gap-2 px-4 font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-cyan">
+        <div className="mt-9 flex flex-wrap items-center gap-3">
+          <ButtonLink href={apply}>Apply now</ButtonLink>
+          <Link href="/careers" className="inline-flex items-center gap-1.5 px-3 text-sm font-medium text-muted transition-colors hover:text-fg">
             <ArrowLeft className="h-4 w-4" /> All roles
           </Link>
         </div>
       </PageHero>
-      <section className="container-x pb-24">
+      <section className="container-x section-y">
         <div className="prose-co3 max-w-3xl" dangerouslySetInnerHTML={{ __html: sanitize(job.description) }} />
         <div className="mt-12">
-          <ButtonLink href={apply} cursor="Apply">Apply for this role</ButtonLink>
+          <ButtonLink href={apply}>Apply for this role</ButtonLink>
         </div>
       </section>
     </>

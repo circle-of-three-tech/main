@@ -28,16 +28,8 @@ function apply(theme: Theme) {
   } catch {}
 }
 
-/** Switches theme with an iris wipe expanding from (x, y), falling back to an instant swap. */
+/** Switches theme instantly; colours ease via CSS. `origin` is accepted for API compatibility. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function setTheme(theme: Theme, origin?: { x: number; y: number }) {
-  const root = document.documentElement;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce || !document.startViewTransition) return apply(theme);
-  if (origin) {
-    root.style.setProperty("--iris-x", `${origin.x}px`);
-    root.style.setProperty("--iris-y", `${origin.y}px`);
-  }
-  root.classList.add("theme-swap");
-  const transition = document.startViewTransition(() => apply(theme));
-  transition.finished.finally(() => root.classList.remove("theme-swap"));
+  apply(theme);
 }

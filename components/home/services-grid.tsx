@@ -1,60 +1,52 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { GlowCard } from "@/components/motion/glow-card";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { SplitReveal } from "@/components/motion/split-reveal";
-import { SectionLabel, ButtonLink } from "@/components/site/ui";
+import { ButtonLink, SectionHeading } from "@/components/site/ui";
 import { ServiceIcon } from "@/components/site/service-icon";
-import { servicePhoto } from "@/lib/photos";
 
 type Service = { slug: string; title: string; tagline: string; icon: string; summary: string };
 
-export function ServicesGrid({ services, index = "02", heading = true }: { services: Service[]; index?: string; heading?: boolean }) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function ServicesGrid({ services, index, heading = true }: { services: Service[]; index?: string; heading?: boolean }) {
   return (
-    <section className="container-x relative py-24 md:py-32" aria-labelledby="services-heading">
-      {heading && (
-        <div className="mb-14 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div>
-            <SectionLabel index={index}>What we do</SectionLabel>
-            <SplitReveal
-              text="Full-spectrum software development, from first sketch to scale."
-              highlight={["software", "scale."]}
-              className="mt-6 max-w-3xl font-display text-4xl font-bold leading-tight tracking-tight md:text-6xl"
+    <section className={heading ? "section-y" : "pt-14 md:pt-16"} aria-labelledby="services-heading">
+      <div className="container-x">
+        {heading ? (
+          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <SectionHeading
+              id="services-heading"
+              label="What we do"
+              title="End-to-end software development, from first sketch to scale."
+              lead="Strategy, design, engineering and operations delivered by one senior team."
             />
-            <span id="services-heading" className="sr-only">Software development services</span>
+            <ButtonLink href="/services" variant="ghost" arrow className="shrink-0 self-start md:self-auto">
+              All services
+            </ButtonLink>
           </div>
-          <ButtonLink href="/services" variant="ghost">All services</ButtonLink>
-        </div>
-      )}
-      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((s, i) => (
-          <li key={s.slug}>
-            <Reveal delay={(i % 3) * 0.08} className="h-full">
-              <GlowCard className="h-full">
-                <Link href={`/services/${s.slug}`} className="flex h-full flex-col" data-cursor="Explore">
-                  <div className="relative aspect-[16/9] overflow-hidden border-b border-line">
-                    <Image src={servicePhoto(s.slug).src} alt={servicePhoto(s.slug).alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" placeholder="blur" className="object-cover transition-transform duration-[1.2s] ease-expo group-hover:scale-105" />
-                  </div>
-                  <div className="flex flex-1 flex-col p-7 md:p-8">
-                  <div className="flex items-start justify-between">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-xl border border-line bg-ink/60 text-cyan transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_-4px_var(--glow)]">
-                      <ServiceIcon name={s.icon} className="h-6 w-6" />
-                    </span>
-                    <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h3 className="mt-8 font-display text-2xl font-semibold tracking-tight">{s.title}</h3>
-                  <p className="mt-3 flex-1 leading-relaxed text-muted">{s.tagline}</p>
-                  <span className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg/70 transition-colors group-hover:text-cyan">
-                    Learn more <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" />
+        ) : (
+          <h2 id="services-heading" className="sr-only">
+            Our services
+          </h2>
+        )}
+        <ul className="grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => (
+            <li key={s.slug} className="bg-surface">
+              <Reveal delay={(i % 3) * 0.05} className="h-full">
+                <Link href={`/services/${s.slug}`} className="group flex h-full flex-col p-7 transition-colors duration-200 hover:bg-indigo md:p-8">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface text-cyan">
+                    <ServiceIcon name={s.icon} className="h-5 w-5" />
                   </span>
-                  </div>
+                  <h3 className="mt-6 font-display text-lg font-semibold tracking-[-0.01em]">{s.title}</h3>
+                  <p className="mt-2 flex-1 leading-relaxed text-muted">{s.tagline}</p>
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan">
+                    Learn more <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+                  </span>
                 </Link>
-              </GlowCard>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

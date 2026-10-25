@@ -1,56 +1,66 @@
 @import "tailwindcss";
 
-/* ---------- Brand tokens (see design-system/co3/MASTER.md) ---------- */
+/*
+ * Co3 design tokens (see design-system/co3/MASTER.md).
+ * Token names are kept stable for the dashboard; values define a calm, editorial palette:
+ * neutral surfaces, near-black navy text and one confident brand blue ("cyan" is the legacy name for the accent).
+ */
 :root {
-  --ink: #05061a;
-  --indigo: #0b0f3a;
-  --circuit: #1e2a8c;
-  --cyan: #3df2ff;
-  --violet: #7b5cff;
-  --fg: #f5f7ff;
-  --muted: #8a93c9;
-  --line: rgb(138 147 201 / 0.16);
-  --surface: #070926;
-  --danger: #ff7a90;
-  --warn: #ffb547;
-  --ok: #19d3a2;
-  --violet-soft: #b4a3ff;
-  --glow: rgb(61 242 255 / 0.6);
-  --shadow: rgb(0 0 0 / 0.6);
-  --trace: #1e2a8c;
-  --glass: rgb(11 15 58 / 0.55);
-  --scrim: rgb(5 6 26 / 0.74);
-  --iris-flash: 1.6;
-  --grain: 0.05;
+  --ink: #ffffff; /* page background */
+  --indigo: #f6f7f9; /* subtle raised / alternate section background */
+  --surface: #ffffff; /* cards */
+  --circuit: #e6e8ee; /* secondary fills */
+  --cyan: #2b3fd6; /* brand accent */
+  --accent-ink: #ffffff; /* text on accent */
+  --violet: #4a3fc9;
+  --violet-soft: #4a3fc9;
+  --fg: #0b1220;
+  --muted: #5a6478;
+  --line: rgb(11 18 32 / 0.09);
+  --line-strong: rgb(11 18 32 / 0.16);
+  --danger: #c22a3a;
+  --warn: #9a5b00;
+  --ok: #0a7d5c;
+  --glow: rgb(43 63 214 / 0.18);
+  --shadow: rgb(11 18 32 / 0.08);
+  --trace: #d7dbe5;
+  --glass: rgb(255 255 255 / 0.86);
+  --scrim: rgb(255 255 255 / 0.86);
+  --grain: 0;
+  --band: #0b1220; /* dark feature band (CTA) */
+  --band-fg: #ffffff;
+  --band-muted: rgb(255 255 255 / 0.68);
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --iris-x: 50%;
   --iris-y: 50%;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-/* Light theme: same brand, inverted surfaces. Accents are deepened to keep text contrast at AA on white. */
-:root[data-theme="light"] {
-  --ink: #f4f6fc;
-  --indigo: #ffffff;
-  --circuit: #dfe4f7;
-  --cyan: #0077a3;
-  --violet: #5a3fe0;
-  --fg: #0b0f3a;
-  --muted: #535b8a;
-  --line: rgb(11 15 58 / 0.11);
-  --surface: #ffffff;
-  --danger: #c8264a;
-  --warn: #a05f00;
-  --ok: #0a8a68;
-  --violet-soft: #5a3fe0;
-  --glow: rgb(0 119 163 / 0.28);
-  --shadow: rgb(11 15 58 / 0.14);
-  --trace: #c3cbee;
-  --glass: rgb(255 255 255 / 0.78);
-  --scrim: rgb(244 246 252 / 0.8);
-  --iris-flash: 1.08;
-  --grain: 0.03;
-  color-scheme: light;
+:root[data-theme="dark"] {
+  --ink: #0a0c12;
+  --indigo: #10131b;
+  --surface: #12151e;
+  --circuit: #1c2030;
+  --cyan: #8a9bff;
+  --accent-ink: #0a0c12;
+  --violet: #a99dff;
+  --violet-soft: #a99dff;
+  --fg: #eef0f5;
+  --muted: #9198a8;
+  --line: rgb(238 240 245 / 0.09);
+  --line-strong: rgb(238 240 245 / 0.18);
+  --danger: #ff7a8a;
+  --warn: #f2b45a;
+  --ok: #4fd1a5;
+  --glow: rgb(138 155 255 / 0.2);
+  --shadow: rgb(0 0 0 / 0.45);
+  --trace: #262b3b;
+  --glass: rgb(16 19 27 / 0.86);
+  --scrim: rgb(10 12 18 / 0.8);
+  --band: #161b2b;
+  --band-fg: #eef0f5;
+  --band-muted: rgb(238 240 245 / 0.66);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -58,18 +68,25 @@
   --color-indigo: var(--indigo);
   --color-circuit: var(--circuit);
   --color-cyan: var(--cyan);
+  --color-accent-ink: var(--accent-ink);
   --color-violet: var(--violet);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-surface: var(--surface);
+  --color-band: var(--band);
+  --color-band-fg: var(--band-fg);
+  --color-band-muted: var(--band-muted);
   --color-danger: var(--danger);
   --color-warn: var(--warn);
   --color-ok: var(--ok);
   --color-violet-soft: var(--violet-soft);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-exo), var(--font-inter), sans-serif;
-  --font-mono: var(--font-roboto-mono), ui-monospace, monospace;
+  --font-display: var(--font-display-face), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* `font-mono` was used for decorative HUD labels; it now resolves to the UI sans. Real code uses --font-code. */
+  --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-code: var(--font-code-face), ui-monospace, SFMono-Regular, Menlo, monospace;
   --ease-expo: var(--ease-out-expo);
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
   --animate-spin-slow: spin 24s linear infinite;
@@ -98,271 +115,196 @@
 /* ---------- Base ---------- */
 html {
   background: var(--ink);
-  transition: background-color 0.4s var(--ease-out-expo);
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 6rem;
 }
 body {
   background: var(--ink);
   color: var(--fg);
   font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 ::selection {
-  background: var(--cyan);
-  color: var(--ink);
+  background: color-mix(in srgb, var(--cyan) 22%, transparent);
+  color: var(--fg);
 }
 :focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 3px;
   border-radius: 6px;
 }
-html.lenis,
-html.lenis body {
-  height: auto;
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-/* Hide native cursor only when the custom cursor is active (fine pointers). */
-@media (hover: hover) and (pointer: fine) {
-  html.has-cursor,
-  html.has-cursor * {
-    cursor: none !important;
-  }
+p {
+  text-wrap: pretty;
 }
 
 /* ---------- Utilities ---------- */
+/* Quiet bordered surface (formerly frosted glass). */
 @utility glass {
-  background: var(--glass);
+  background: var(--surface);
   border: 1px solid var(--line);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 1px 2px var(--shadow);
 }
+/* Second, quieter tone inside a headline ("Three disciplines. One accountable team."). */
 @utility text-highlight {
-  color: var(--cyan);
+  color: var(--muted);
 }
-/* Flat tint laid over photography so text on top stays readable in both themes */
 @utility scrim {
   background: var(--scrim);
 }
+/* Eyebrow / small label. */
 @utility hud-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cyan);
 }
 @utility container-x {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1240px;
   margin-inline: auto;
   padding-inline: 1.25rem;
   @media (width >= 768px) {
     padding-inline: 2rem;
   }
 }
+@utility section-y {
+  padding-block: 5rem;
+  @media (width >= 768px) {
+    padding-block: 7rem;
+  }
+}
 
-/* Per-project accent as text: deepened on light backgrounds so bright brand colours stay readable */
+/* Per-project accent as text, toned towards the foreground so any brand colour stays readable. */
 .accent-text {
-  color: var(--accent);
-}
-:root[data-theme="light"] .accent-text {
-  color: color-mix(in oklab, var(--accent) 55%, var(--fg));
+  color: color-mix(in oklab, var(--accent) 60%, var(--fg));
 }
 
-/* HUD corner brackets: add class="hud" to any relatively positioned box. */
+/* Legacy HUD corner brackets: retired, kept as a no-op so existing markup is harmless. */
 .hud::before,
 .hud::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: var(--cyan);
-  opacity: 0.7;
-  pointer-events: none;
-  transition: all 0.4s var(--ease-out-expo);
-}
-.hud::before {
-  top: -1px;
-  left: -1px;
-  border-top: 1px solid;
-  border-left: 1px solid;
-}
-.hud::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 1px solid;
-  border-right: 1px solid;
-}
-.hud:hover::before,
-.hud:hover::after {
-  width: 28px;
-  height: 28px;
-  opacity: 1;
+  content: none;
 }
 
-/* Film grain overlay */
-.grain {
-  pointer-events: none;
-  position: fixed;
-  inset: -50%;
-  z-index: 60;
-  opacity: var(--grain);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-/* ---------- Page transitions: iris wipe from the click point ---------- */
+/* ---------- Page transitions: a short, quiet cross-fade ---------- */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-/* Theme switch: the new theme irises in from the toggle */
-html.theme-swap::view-transition-old(root) {
-  animation: none;
-}
-html.theme-swap::view-transition-new(root) {
-  animation: theme-iris 800ms var(--ease-out-expo) both;
-}
-@keyframes theme-iris {
-  from {
-    clip-path: circle(0% at var(--iris-x) var(--iris-y));
-  }
-  to {
-    clip-path: circle(150% at var(--iris-x) var(--iris-y));
-  }
-}
-::view-transition-group(.iris) {
-  animation-duration: 900ms;
+  animation-duration: 180ms;
 }
 ::view-transition-old(.iris) {
-  animation: iris-recede 700ms var(--ease-out-expo) both;
+  animation: page-out 160ms ease-out both;
 }
 ::view-transition-new(.iris) {
-  animation: iris-open 900ms var(--ease-out-expo) both;
+  animation: page-in 260ms var(--ease-out-expo) both;
 }
-@keyframes iris-open {
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes page-in {
   from {
-    clip-path: circle(0% at var(--iris-x) var(--iris-y));
-    filter: brightness(var(--iris-flash)) saturate(1.4);
-  }
-  to {
-    clip-path: circle(150% at var(--iris-x) var(--iris-y));
-    filter: none;
-  }
-}
-@keyframes iris-recede {
-  to {
-    transform: scale(0.94);
-    opacity: 0.25;
-    filter: blur(6px);
+    opacity: 0;
+    transform: translateY(6px);
   }
 }
 ::view-transition-group(.morph) {
-  animation-duration: 650ms;
+  animation-duration: 420ms;
   animation-timing-function: var(--ease-out-expo);
-}
-::view-transition-image-pair(.morph) {
-  animation-name: via-blur;
-}
-@keyframes via-blur {
-  40% {
-    filter: blur(4px);
-  }
 }
 
 /* ---------- Long-form article typography ---------- */
 .prose-co3 {
-  color: color-mix(in srgb, var(--fg) 86%, transparent);
-  font-size: 1.075rem;
-  line-height: 1.8;
+  color: color-mix(in srgb, var(--fg) 82%, var(--ink));
+  font-size: 1.0625rem;
+  line-height: 1.75;
 }
 .prose-co3 > * + * {
-  margin-top: 1.25em;
+  margin-top: 1.2em;
 }
 .prose-co3 h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  font-weight: 700;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--fg);
-  margin-top: 2.2em;
-  line-height: 1.2;
+  margin-top: 2em;
+  line-height: 1.25;
   scroll-margin-top: 7rem;
 }
 .prose-co3 h3 {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--fg);
-  margin-top: 1.8em;
+  margin-top: 1.7em;
   scroll-margin-top: 7rem;
 }
 .prose-co3 a {
   color: var(--cyan);
   text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: color-mix(in srgb, var(--cyan) 40%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--cyan) 35%, transparent);
 }
 .prose-co3 a:hover {
   text-decoration-color: var(--cyan);
 }
 .prose-co3 strong {
   color: var(--fg);
+  font-weight: 600;
 }
 .prose-co3 ul,
 .prose-co3 ol {
-  padding-left: 1.4em;
+  padding-left: 1.3em;
 }
 .prose-co3 ul {
-  list-style: none;
+  list-style: disc;
 }
-.prose-co3 ul > li {
-  position: relative;
-}
-.prose-co3 ul > li::before {
-  content: "";
-  position: absolute;
-  left: -1.1em;
-  top: 0.75em;
-  width: 6px;
-  height: 6px;
-  background: var(--cyan);
-  transform: rotate(45deg);
+.prose-co3 ul > li::marker {
+  color: var(--muted);
 }
 .prose-co3 ol {
   list-style: decimal;
 }
 .prose-co3 li + li {
-  margin-top: 0.5em;
+  margin-top: 0.45em;
 }
 .prose-co3 blockquote {
-  border-left: 2px solid var(--violet);
+  border-left: 2px solid var(--line-strong);
   padding-left: 1.2em;
-  font-style: italic;
   color: var(--fg);
 }
 .prose-co3 code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: color-mix(in srgb, var(--circuit) 40%, transparent);
-  padding: 0.15em 0.4em;
+  font-family: var(--font-code);
+  font-size: 0.88em;
+  background: var(--indigo);
+  border: 1px solid var(--line);
+  padding: 0.1em 0.35em;
   border-radius: 4px;
 }
 .prose-co3 pre {
   background: var(--indigo);
   border: 1px solid var(--line);
-  padding: 1.2em;
-  border-radius: 12px;
+  padding: 1.1em 1.2em;
+  border-radius: 10px;
   overflow-x: auto;
 }
 .prose-co3 pre code {
   background: none;
+  border: 0;
   padding: 0;
 }
 .prose-co3 img {
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--line);
 }
 
@@ -383,49 +325,14 @@ html.theme-swap::view-transition-new(root) {
   }
 }
 
-/* Circuit pulses travelling along traces */
-.circuit-pulse {
-  stroke-dashoffset: 60;
-  animation: circuit-run linear infinite;
-}
-@keyframes circuit-run {
-  to {
-    stroke-dashoffset: calc(var(--len) * -1);
-  }
-}
-
-/* First-visit intro: cover the page until the preloader mounts and finishes */
-html.preload body {
-  overflow: hidden;
-}
-html.preload body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 99;
-  background: var(--ink);
-}
-
-/* Above-the-fold CSS reveals (start at first paint, no JS) */
-.rise-word {
-  animation: rise-word 0.9s var(--ease-out-expo) both;
-}
-@keyframes rise-word {
-  from {
-    transform: translateY(110%) rotate(4deg);
-  }
-}
+/* Above-the-fold CSS fade-up (starts at first paint, no JS). */
+.rise-word,
 .rise-in {
-  animation: rise-in 0.9s var(--ease-out-expo) both;
+  animation: rise-in 0.7s var(--ease-out-expo) both;
 }
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(12px);
   }
-}
-/* While the intro plays, hold hero reveals so they play after it */
-html.preload .rise-word,
-html.preload .rise-in {
-  animation-play-state: paused;
 }

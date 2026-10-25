@@ -1,11 +1,16 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Glass surface with HUD corners whose border lights up on hover. */
+/** Bordered card surface that lifts its border on hover. */
 export function GlowCard({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("group glass hud relative overflow-hidden rounded-2xl transition-[border-color,box-shadow] duration-500 hover:border-cyan/50 hover:shadow-[0_0_0_1px_var(--glow)]", className)}>
-      <div className="relative z-10 h-full">{children}</div>
+    <div
+      className={cn(
+        "group relative overflow-hidden rounded-xl border border-line bg-surface transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-[0_8px_24px_-12px_var(--shadow)]",
+        className,
+      )}
+    >
+      <div className="relative h-full">{children}</div>
     </div>
   );
 }

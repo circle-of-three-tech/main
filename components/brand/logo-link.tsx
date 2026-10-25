@@ -3,13 +3,13 @@ import { Co3Mark } from "./co3-mark";
 
 export function LogoLink() {
   return (
-    <Link href="/" className="group flex items-center gap-3" aria-label="Circle of Three Technologies home" data-cursor="Home">
-      <span className="relative block h-10 w-10 text-fg transition-transform duration-700 ease-expo group-hover:rotate-[120deg]">
+    <Link href="/" className="flex items-center gap-2.5" aria-label="Circle of Three Technologies home">
+      <span className="block h-8 w-8 text-fg">
         <Co3Mark label={false} className="h-full w-full" />
       </span>
-      <span className="hidden leading-none sm:block">
-        <span className="block font-display text-[0.8rem] font-semibold tracking-[0.28em] text-fg">CIRCLE OF THREE</span>
-        <span className="mt-1 block font-display text-[0.62rem] tracking-[0.5em] text-muted">TECHNOLOGIES</span>
+      <span className="leading-none">
+        <span className="block font-display text-[0.95rem] font-semibold tracking-[-0.01em] text-fg">Circle of Three</span>
+        <span className="mt-1 block text-[0.6rem] font-medium uppercase tracking-[0.2em] text-muted">Technologies</span>
       </span>
     </Link>
   );

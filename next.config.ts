@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "*.public.blob.vercel-storage.com" }],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "@react-three/drei"],
+    optimizePackageImports: ["lucide-react"],
   },
   turbopack: {
     rules: {

@@ -1,40 +1,41 @@
-import { Co3Mark } from "@/components/brand/co3-mark";
-import { SplitReveal } from "@/components/motion/split-reveal";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { BorderTrace } from "@/components/motion/border-trace";
-import { ButtonLink } from "./ui";
-import { ParallaxImage } from "@/components/motion/parallax";
-import { photo, type Photo } from "@/lib/photos";
+import type { Photo } from "@/lib/photos";
 
+/** Closing call to action. `image` is accepted for compatibility. */
 export function CtaSection({
-  title = "Have an idea? Let's make it inevitable.",
-  body = "Tell us what you're building. We'll reply within one business day with next steps, not a sales script.",
-  image = photo("collab"),
+  title = "Have a project in mind? Let's talk.",
+  body = "Tell us what you're building. A senior member of our team will reply within one business day with clear next steps.",
 }: {
   title?: string;
   body?: string;
   image?: Photo;
 }) {
   return (
-    <section className="container-x py-24" aria-label="Start a project">
-      <div className="relative overflow-hidden rounded-[2rem] border border-line bg-indigo/40 px-6 py-20 text-center md:px-16 md:py-28">
-        <ParallaxImage src={image.src} alt="" sizes="(min-width: 1280px) 1216px, 100vw" speed={0.2} />
-        <div className="scrim absolute inset-0" aria-hidden />
-        <BorderTrace radius={32} />
-        <div aria-hidden className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 text-fg/[0.06]">
-          <Co3Mark label={false} className="h-full w-full animate-spin-slow [animation-duration:90s]" />
+    <section className="container-x py-20 md:py-24" aria-label="Start a project">
+      <Reveal>
+        <div className="flex flex-col gap-10 rounded-2xl bg-band px-7 py-12 text-band-fg md:px-14 md:py-16 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.025em] md:text-[2.6rem]">{title}</h2>
+            <p className="mt-4 text-lg leading-relaxed text-band-muted">{body}</p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-lg bg-band-fg px-5 py-3 text-sm font-semibold text-band transition-opacity hover:opacity-90"
+            >
+              Start a project <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+            </Link>
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center rounded-lg border border-band-fg/25 px-5 py-3 text-sm font-semibold text-band-fg transition-colors hover:border-band-fg/60"
+            >
+              See our work
+            </Link>
+          </div>
         </div>
-        <div className="relative">
-          <SplitReveal text={title} highlight={["inevitable."]} className="mx-auto max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-7xl" />
-          <Reveal delay={0.3}>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-muted">{body}</p>
-          </Reveal>
-          <Reveal delay={0.45} className="mt-10 flex flex-wrap justify-center gap-4">
-            <ButtonLink href="/contact" cursor="Go">Start a project</ButtonLink>
-            <ButtonLink href="/portfolio" variant="ghost">Explore our work</ButtonLink>
-          </Reveal>
-        </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

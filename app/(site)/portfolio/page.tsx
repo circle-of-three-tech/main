@@ -33,16 +33,15 @@ export default async function PortfolioPage() {
         ]}
       />
       <PageHero
-        label={`Portfolio · ${projects.length} live products`}
-        title="Work that ships, scales and sticks."
-        highlight={["ships,", "scales", "sticks."]}
+        label="Our work"
+        title="Products we've designed, built and launched."
         image={photo("codeDesk")}
         intro="A selection of platforms, products and experiences we've designed and engineered for organisations across healthcare, education, commerce and consulting."
       />
-      <section className="container-x pb-16">
+      <section className="container-x section-y">
         <PortfolioGrid items={projects.map((p, i) => ({ slug: p.slug, category: p.category, node: <ProjectCard project={p} index={i} priority={i < 2} /> }))} />
       </section>
-      <CtaSection title="Your product could be next." />
+      <CtaSection title="Have a product in mind? Let's talk." />
     </PageTransition>
   );
 }

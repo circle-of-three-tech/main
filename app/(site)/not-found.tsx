@@ -1,19 +1,17 @@
-import { Co3Mark } from "@/components/brand/co3-mark";
 import { ButtonLink } from "@/components/site/ui";
-import { CircuitField } from "@/components/site/circuit-field";
 
 export default function NotFound() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden">
-      <CircuitField seed={404} />
-      <div className="container-x relative text-center">
-        <Co3Mark label={false} className="mx-auto h-28 w-28 animate-spin-slow text-fg/80" />
-        <p className="hud-label mt-10">Error 404 · Signal lost</p>
-        <h1 className="mt-4 font-display text-5xl font-bold tracking-tight md:text-7xl">This circuit leads nowhere.</h1>
-        <p className="mx-auto mt-6 max-w-md text-muted">The page you&apos;re looking for has moved or never existed. Let&apos;s reroute you.</p>
-        <div className="mt-10 flex justify-center gap-4">
-          <ButtonLink href="/">Back home</ButtonLink>
-          <ButtonLink href="/portfolio" variant="ghost">See our work</ButtonLink>
+    <section className="flex min-h-[80vh] items-center pb-20 pt-36">
+      <div className="container-x max-w-2xl text-center">
+        <p className="hud-label">Error 404</p>
+        <h1 className="mt-4 font-display text-4xl font-semibold tracking-[-0.03em] md:text-5xl">We couldn&apos;t find that page.</h1>
+        <p className="mx-auto mt-5 max-w-md text-lg text-muted">The page you&apos;re looking for may have moved or no longer exists.</p>
+        <div className="mt-9 flex justify-center gap-3">
+          <ButtonLink href="/">Back to home</ButtonLink>
+          <ButtonLink href="/contact" variant="ghost">
+            Contact us
+          </ButtonLink>
         </div>
       </div>
     </section>

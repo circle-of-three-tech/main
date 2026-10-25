@@ -13,7 +13,7 @@ export function Counter({ value, suffix = "", decimals }: { value: number; suffi
   useEffect(() => {
     if (!inView || reduce) return;
     const controls = animate(0, value, {
-      duration: 2.2,
+      duration: 1.4,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => setDisplay(v.toFixed(places)),
     });

@@ -1,33 +1,37 @@
-import { Fragment, type CSSProperties, type ElementType } from "react";
+import { Fragment, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * Above-the-fold masked word reveal driven purely by CSS, so it starts on first paint
- * (no hydration wait) and keeps Largest Contentful Paint fast.
- */
-export function RiseText({ text, as: Tag = "h1", className, highlight = [], delay = 0, stagger = 0.06 }: { text: string; as?: ElementType; className?: string; highlight?: string[]; delay?: number; stagger?: number }) {
+const clean = (w: string) => w.replace(/[.,!?:;]/g, "");
+
+/** Renders text with the listed words in the quieter second tone (`text-highlight`). */
+export function HighlightText({ text, highlight = [] }: { text: string; highlight?: string[] }) {
+  if (!highlight.length) return <>{text}</>;
+  const marks = new Set(highlight.map(clean));
   const words = text.split(" ");
   return (
-    <Tag className={cn("[text-wrap:balance]", className)}>
+    <>
       {words.map((word, i) => (
         <Fragment key={`${word}-${i}`}>
-          <span className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
-            <span
-              className={cn("rise-word inline-block", highlight.some((h) => h.replace(/[.,!?]/g, "") === word.replace(/[.,!?]/g, "")) && "text-highlight")}
-              style={{ animationDelay: `${delay + i * stagger}s` } as CSSProperties}
-            >
-              {word}
-            </span>
-          </span>
+          {marks.has(clean(word)) ? <span className="text-highlight">{word}</span> : word}
           {i < words.length - 1 && " "}
         </Fragment>
       ))}
+    </>
+  );
+}
+
+/** Above-the-fold heading with a CSS fade-up that starts on first paint (fast LCP). */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function RiseText({ text, as: Tag = "h1", className, highlight = [], delay = 0, stagger }: { text: string; as?: ElementType; className?: string; highlight?: string[]; delay?: number; stagger?: number }) {
+  return (
+    <Tag className={cn("rise-in [text-wrap:balance]", className)} style={{ animationDelay: `${delay}s` }}>
+      <HighlightText text={text} highlight={highlight} />
     </Tag>
   );
 }
 
 /** CSS fade-up for above-the-fold blocks. */
-export function RiseIn({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+export function RiseIn({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
   return (
     <div className={cn("rise-in", className)} style={{ animationDelay: `${delay}s` }}>
       {children}

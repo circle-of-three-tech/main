@@ -4,7 +4,7 @@ import { site } from "./site";
 
 export const ogSize = { width: 1200, height: 630 };
 
-const mark = `data:image/svg+xml;base64,${Buffer.from(markSvg({ fg: "#F5F7FF", bg: "#05061A" })).toString("base64")}`;
+const mark = `data:image/svg+xml;base64,${Buffer.from(markSvg({ fg: "#FFFFFF", bg: "#0B1220" })).toString("base64")}`;
 
 /** Branded Open Graph card shared by every route. */
 export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { eyebrow: string; title: string; footer?: string }) {
@@ -18,8 +18,8 @@ export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { 
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "#05061A",
-          color: "#F5F7FF",
+          background: "#0B1220",
+          color: "#FFFFFF",
           fontFamily: "sans-serif",
         }}
       >
@@ -27,18 +27,18 @@ export function renderOg({ eyebrow, title, footer = new URL(site.url).host }: { 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={mark} width={84} height={84} alt="" />
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontSize: 26, letterSpacing: 8, fontWeight: 700 }}>CIRCLE OF THREE</span>
-            <span style={{ fontSize: 16, letterSpacing: 14, color: "#8A93C9" }}>TECHNOLOGIES</span>
+            <span style={{ fontSize: 30, fontWeight: 600, letterSpacing: -0.5 }}>Circle of Three</span>
+            <span style={{ fontSize: 15, letterSpacing: 5, color: "#9AA3B5" }}>TECHNOLOGIES</span>
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: 24, letterSpacing: 6, color: "#3DF2FF", textTransform: "uppercase" }}>{eyebrow}</span>
-          <span style={{ marginTop: 20, fontSize: title.length > 60 ? 54 : 68, fontWeight: 800, lineHeight: 1.05, letterSpacing: -1.5, maxWidth: 1000 }}>{title}</span>
+          <span style={{ fontSize: 22, letterSpacing: 3, color: "#9AABFF", textTransform: "uppercase", fontWeight: 600 }}>{eyebrow}</span>
+          <span style={{ marginTop: 20, fontSize: title.length > 60 ? 54 : 68, fontWeight: 700, lineHeight: 1.08, letterSpacing: -2, maxWidth: 1000 }}>{title}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 22, color: "#8A93C9" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 22, color: "#9AA3B5" }}>
           <span>Nigerian Technology & Software Company</span>
           <span style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ width: 12, height: 12, background: "#3DF2FF", transform: "rotate(45deg)" }} />
+            <span style={{ width: 10, height: 10, borderRadius: 999, background: "#5B6CFF" }} />
             {footer}
           </span>
         </div>

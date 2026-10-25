@@ -14,31 +14,32 @@ export function PortfolioGrid({ items }: { items: Item[] }) {
 
   return (
     <LayoutGroup>
-      <div role="tablist" aria-label="Filter projects by category" className="mb-12 flex flex-wrap gap-2">
+      <div role="tablist" aria-label="Filter projects by category" className="mb-10 flex flex-wrap gap-2">
         {categories.map((c) => (
           <button
             key={c}
             role="tab"
             aria-selected={active === c}
             onClick={() => setActive(c)}
-            className={cn("relative rounded-full border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-[0.18em] transition-colors", active === c ? "text-ink" : "text-muted hover:text-fg")}
+            className={cn(
+              "cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors duration-200",
+              active === c ? "border-fg bg-fg text-ink" : "border-line text-muted hover:border-line-strong hover:text-fg",
+            )}
           >
-            {active === c && <motion.span layoutId="filter-pill" className="absolute inset-0 rounded-full bg-cyan" transition={{ type: "spring", stiffness: 400, damping: 34 }} />}
-            <span className="relative">{c}</span>
+            {c}
           </button>
         ))}
       </div>
-      <motion.ul layout className="grid gap-8 md:grid-cols-2">
+      <motion.ul layout className="grid gap-x-8 gap-y-14 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {visible.map((item, i) => (
             <motion.li
               key={item.slug}
               layout
-              initial={{ opacity: 0, scale: 0.92, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, filter: "blur(8px)" }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.06 }}
-              className={cn(i % 2 === 1 && "md:mt-24")}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.04 }}
             >
               {item.node}
             </motion.li>

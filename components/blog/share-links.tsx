@@ -11,9 +11,9 @@ export function ShareLinks({ url, title }: { url: string; title: string }) {
   ];
   return (
     <div className="flex items-center gap-3">
-      <span className="hud-label text-muted">Share</span>
+      <span className="text-sm text-muted">Share</span>
       {links.map(({ href, label, Icon }) => (
-        <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition hover:border-cyan hover:text-cyan">
+        <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-line-strong hover:text-fg">
           <Icon className="h-4 w-4" />
         </a>
       ))}

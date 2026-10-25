@@ -61,7 +61,7 @@ export function Co3Mark({ className, assemble = false, label = true, title = "Ci
           fontSize="11"
           fontWeight="700"
           letterSpacing="1"
-          style={{ fontFamily: "var(--font-exo)" }}
+          style={{ fontFamily: "var(--font-display-face)" }}
           initial={play ? { opacity: 0, y: 6 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: play ? 1.3 : 0 }}
