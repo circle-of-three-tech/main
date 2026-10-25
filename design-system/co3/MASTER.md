@@ -25,7 +25,7 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 ## Hero and logo
 - **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer, under a flat dark overlay (`#040B16` at 65%, no gradients). Copy sits on the left; the main call to action uses the sun-amber accent button (`buttonClass("accent")`, dark text); a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
 - **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
-- **Logo:** three isometric cubes shaded in sky blues (`--mark-*`) inside a sky-gradient ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary blue. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
+- **Logo:** three isometric cubes: the top cube in sun-amber accent shades (`--mark-accent-*`), the two lower cubes in sky blues (`--mark-*`), inside a sky-gradient ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary blue. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
 
 ## Typography
 - **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.
