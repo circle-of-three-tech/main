@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useOnChange } from "@/lib/hooks";
 import { LogoLink } from "@/components/brand/logo-link";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { buttonClass } from "@/components/site/ui";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { site } from "@/lib/site";
@@ -69,7 +68,6 @@ export function SiteHeader() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <Link href="/contact" className={cn(buttonClass("primary"), "hidden px-4 py-2.5 sm:inline-flex")}>
             Contact us
           </Link>

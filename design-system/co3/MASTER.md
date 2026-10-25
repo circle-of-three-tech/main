@@ -3,7 +3,7 @@
 **Positioning:** a calm, editorial, globally credible look, closer to an established consultancy or product company than a sci-fi studio. Content and real client work lead; decoration is minimal.
 
 ## Palette
-Token names are legacy (kept stable for the dashboard); values are what matter. Light is the default.
+Token names are legacy (kept stable for the dashboard); values are what matter. **Light theme only:** the dark theme and theme toggle were removed, so the Dark column below is historical.
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Token names are legacy (kept stable for the dashboard); values are what matter. 
 | `--band` | `#08325F` | `#0A2C52` | Deep late-sky blue overlay for photo bands and the CTA |
 
 ## Hero and logo
-- **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer that drifts slower than the page, under a clear-sky blue wash and a sunlit corner. Copy sits on the left; a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
+- **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer, under a flat dark overlay (`#040B16` at 65%, no gradients). Copy sits on the left; the main call to action uses the sun-amber accent button (`buttonClass("accent")`, dark text); a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
 - **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
 - **Logo:** three isometric cubes shaded in sky blues (`--mark-*`) inside a sky-gradient ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary blue. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
 

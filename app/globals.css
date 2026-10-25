@@ -45,40 +45,6 @@
   color-scheme: light;
 }
 
-:root[data-theme="dark"] {
-  --ink: #08111c;
-  --indigo: #0d1826;
-  --surface: #101d2d;
-  --circuit: #16263a;
-  --cyan: #5cb6ff;
-  --cyan-strong: #8ccbff;
-  --cyan-soft: rgb(92 182 255 / 0.13);
-  --sky: #3fa9ff;
-  --sky-light: #a6dcff;
-  --mark-top: #b4e0ff;
-  --mark-mid: #4eaefc;
-  --mark-deep: #1f7fe0;
-  --accent-ink: #08111c;
-  --violet: #ffb24d;
-  --violet-soft: #ffb24d;
-  --spark: #ffb24d;
-  --fg: #edf2f8;
-  --muted: #93a1b5;
-  --line: rgb(237 242 248 / 0.09);
-  --line-strong: rgb(237 242 248 / 0.18);
-  --danger: #ff7a8a;
-  --warn: #f2b45a;
-  --ok: #4fd1a5;
-  --glow: rgb(92 182 255 / 0.24);
-  --shadow: rgb(0 0 0 / 0.45);
-  --trace: #262b3b;
-  --glass: rgb(16 19 27 / 0.86);
-  --scrim: rgb(10 12 18 / 0.8);
-  --band: #0a2c52;
-  --band-fg: #eef0f5;
-  --band-muted: rgb(238 240 245 / 0.66);
-  color-scheme: dark;
-}
 
 @theme inline {
   --color-ink: var(--ink);

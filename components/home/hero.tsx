@@ -30,7 +30,9 @@ export function Hero({ services }: { services: Service[] }) {
           Africa and beyond.
         </p>
         <div className="hero-fade mt-10 flex flex-wrap items-center gap-3" style={fade(0.95)}>
-          <ButtonLink href="/contact">Start a project</ButtonLink>
+          <ButtonLink href="/contact" variant="accent">
+            Start a project
+          </ButtonLink>
           <ButtonLink href="/portfolio" variant="ghost">
             View our work
           </ButtonLink>
