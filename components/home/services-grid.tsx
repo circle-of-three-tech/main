@@ -32,14 +32,15 @@ export function ServicesGrid({ services, index, heading = true }: { services: Se
           {services.map((s, i) => (
             <li key={s.slug} className="bg-surface">
               <Reveal delay={(i % 3) * 0.05} className="h-full">
-                <Link href={`/services/${s.slug}`} className="group flex h-full flex-col p-7 transition-colors duration-200 hover:bg-indigo md:p-8">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface text-cyan">
+                <Link href={`/services/${s.slug}`} className="group relative flex h-full flex-col p-7 transition-colors duration-300 hover:bg-indigo md:p-8">
+                  <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-cyan transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-soft text-cyan transition-[background-color,color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-cyan group-hover:text-accent-ink">
                     <ServiceIcon name={s.icon} className="h-5 w-5" />
                   </span>
                   <h3 className="mt-6 font-display text-lg font-semibold tracking-[-0.01em]">{s.title}</h3>
                   <p className="mt-2 flex-1 leading-relaxed text-muted">{s.tagline}</p>
                   <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan">
-                    Learn more <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+                    Learn more <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
                   </span>
                 </Link>
               </Reveal>

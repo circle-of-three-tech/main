@@ -6,6 +6,7 @@ import { SplitReveal } from "@/components/motion/split-reveal";
 import { GlowCard } from "@/components/motion/glow-card";
 import { ParallaxImage } from "@/components/motion/parallax";
 import { Stats } from "@/components/home/stats";
+import { ParallaxBand } from "@/components/home/parallax-band";
 import { CtaSection } from "@/components/site/cta-section";
 import { PageHero, SectionHeading, SectionLabel } from "@/components/site/ui";
 import { LinkedinIcon, XIcon } from "@/components/site/social-icons";
@@ -81,6 +82,14 @@ export default async function AboutPage() {
           ))}
         </ul>
       </section>
+
+      <ParallaxBand
+        image={photo("office")}
+        eyebrow="How we work"
+        title="Small senior teams. Clear ownership. No handovers lost in translation."
+        body="Every engagement is led by the people who design and build it, from the first workshop to long-term support."
+        cta={{ href: "/careers", label: "Work with us" }}
+      />
 
       {team.length > 0 && (
         <section className="container-x section-y border-t border-line" aria-labelledby="team-heading">

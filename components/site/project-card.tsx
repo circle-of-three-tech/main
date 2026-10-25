@@ -31,7 +31,7 @@ export function BrowserFrame({ project, priority, sizes = "(min-width: 1024px) 5
       </div>
       <div className="relative aspect-[16/10] overflow-hidden">
         {project.coverImage ? (
-          <Image src={project.coverImage} alt={`${project.title}: ${project.summary}`} fill sizes={sizes} priority={priority} className="object-cover object-top transition-transform duration-500 ease-expo group-hover:scale-[1.02]" />
+          <Image src={project.coverImage} alt={`${project.title}: ${project.summary}`} fill sizes={sizes} priority={priority} className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
         ) : (
           <>
             <Image src={fallbackPhoto(project.slug).src} alt="" fill sizes={sizes} placeholder="blur" className="object-cover" />
@@ -50,7 +50,7 @@ export function ProjectCard({ project, index, className, priority }: { project: 
   return (
     <Link href={`/portfolio/${project.slug}`} className={cn("group block", className)}>
       <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
-        <div className="transition-shadow duration-300 group-hover:shadow-[0_18px_40px_-20px_var(--shadow)]">
+        <div className="rounded-xl transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_24px_48px_-24px_var(--shadow)]">
           <BrowserFrame project={project} priority={priority} />
         </div>
       </ViewTransition>
@@ -59,7 +59,7 @@ export function ProjectCard({ project, index, className, priority }: { project: 
           <p className="text-sm text-muted">
             {project.category} · {project.year}
           </p>
-          <h3 className="mt-1 font-display text-xl font-semibold tracking-[-0.015em]">{project.title}</h3>
+          <h3 className="mt-1 font-display text-xl font-semibold tracking-[-0.015em] transition-colors duration-200 group-hover:text-cyan">{project.title}</h3>
           <p className="mt-2 line-clamp-2 leading-relaxed text-muted">{project.summary}</p>
         </div>
         <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted transition-[color,transform] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" aria-hidden />

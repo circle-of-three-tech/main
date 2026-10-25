@@ -8,6 +8,7 @@ import { useOnChange } from "@/lib/hooks";
 import { LogoLink } from "@/components/brand/logo-link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { buttonClass } from "@/components/site/ui";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -33,8 +34,8 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-200",
-        scrolled || open ? "border-line bg-ink/90 backdrop-blur-md" : "border-transparent bg-transparent",
+        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
+        scrolled || open ? "border-line bg-ink/85 shadow-[0_6px_24px_-16px_var(--shadow)] backdrop-blur-md" : "border-transparent bg-transparent",
       )}
     >
       <nav aria-label="Primary" className="container-x flex h-[72px] items-center justify-between gap-6">
@@ -47,11 +48,18 @@ export function SiteHeader() {
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "rounded-md px-3.5 py-2 text-[0.9rem] font-medium transition-colors",
+                  "group relative rounded-md px-3.5 py-2 text-[0.9rem] font-medium transition-colors duration-200",
                   isActive(item.href) ? "text-fg" : "text-muted hover:text-fg",
                 )}
               >
                 {item.label}
+                <span
+                  aria-hidden
+                  className={cn(
+                    "absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left rounded-full bg-cyan transition-transform duration-300 ease-out",
+                    isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                  )}
+                />
               </Link>
             </li>
           ))}
@@ -75,8 +83,10 @@ export function SiteHeader() {
         </div>
       </nav>
 
+      {scrolled && <ScrollProgress />}
+
       {open && (
-        <div id="mobile-menu" className="h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-ink lg:hidden">
+        <div id="mobile-menu" className="hero-fade h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-ink [animation-duration:300ms] lg:hidden">
           <ul className="container-x divide-y divide-line py-2">
             {[{ label: "Home", href: "/" }, ...site.nav, { label: "Contact", href: "/contact" }].map((item) => (
               <li key={item.href}>
