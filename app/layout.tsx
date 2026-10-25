@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Exo, Inter, Roboto_Mono } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
 import { DEFAULT_THEME, THEME_COLORS, themeScript } from "@/lib/theme-config";
 import "./globals.css";
 
-const exo = Exo({ variable: "--font-exo", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], display: "swap" });
+const display = Inter_Tight({ variable: "--font-display-face", subsets: ["latin"], weight: ["500", "600", "700"], display: "swap" });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
-const mono = Roboto_Mono({ variable: "--font-roboto-mono", subsets: ["latin"], weight: ["400", "500", "700"], display: "swap" });
+const code = JetBrains_Mono({ variable: "--font-code-face", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -47,14 +47,12 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Runs before first paint: decides whether the first-visit intro plays, so there is never a flash.
-const introScript = `try{var d=document.documentElement;if(location.pathname.indexOf('/dashboard')!==0&&!sessionStorage.getItem('co3:intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|lighthouse/i.test(navigator.userAgent))d.classList.add('preload')}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-NG" data-theme={DEFAULT_THEME} className={`${exo.variable} ${inter.variable} ${mono.variable} antialiased`} suppressHydrationWarning>
+    <html lang="en-NG" data-theme={DEFAULT_THEME} className={`${display.variable} ${inter.variable} ${code.variable} antialiased`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript + introScript }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-dvh">
         {children}

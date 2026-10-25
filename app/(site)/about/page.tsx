@@ -5,10 +5,9 @@ import { Reveal } from "@/components/motion/reveal";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { GlowCard } from "@/components/motion/glow-card";
 import { ParallaxImage } from "@/components/motion/parallax";
-import { Co3Mark } from "@/components/brand/co3-mark";
 import { Stats } from "@/components/home/stats";
 import { CtaSection } from "@/components/site/cta-section";
-import { PageHero, SectionLabel } from "@/components/site/ui";
+import { PageHero, SectionHeading, SectionLabel } from "@/components/site/ui";
 import { LinkedinIcon, XIcon } from "@/components/site/social-icons";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getSettings, getTeam } from "@/lib/queries";
@@ -37,25 +36,22 @@ export default async function AboutPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "About", path: "/about" }])} />
       <PageHero
         label="About Co3"
-        title="Three forces. One circle. Infinite possibilities."
-        highlight={["One", "circle."]}
+        title="Design, engineering and intelligence. One team."
+        highlight={["One", "team."]}
         image={photo("workspace")}
         intro="Circle of Three Technologies is a Nigerian technology company founded on a simple belief: great software happens where design, engineering and intelligence meet."
       />
 
-      <section className="container-x grid items-center gap-16 py-16 lg:grid-cols-2">
+      <section className="container-x section-y grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] border border-line">
-            <ParallaxImage src={photo("team").src} alt={photo("team").alt} sizes="(min-width: 1024px) 448px, 100vw" speed={0.15} />
-            <div className="glass absolute bottom-5 left-5 flex h-20 w-20 items-center justify-center rounded-2xl p-3">
-              <Co3Mark label={false} className="h-full w-full text-fg" />
-            </div>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-line">
+            <ParallaxImage src={photo("team").src} alt={photo("team").alt} sizes="(min-width: 1024px) 50vw, 100vw" />
           </div>
         </Reveal>
         <div>
           <SectionLabel>Our story</SectionLabel>
-          <SplitReveal text="Why the circle of three?" className="mt-6 font-display text-4xl font-bold tracking-tight md:text-5xl" />
-          <div className="prose-co3 mt-8">
+          <SplitReveal text="Why the circle of three?" className="mt-3 font-display text-3xl font-semibold tracking-[-0.025em] md:text-[2.6rem]" />
+          <div className="prose-co3 mt-6">
             <p>
               Our mark is three cubes held inside a circle. Each cube is a discipline: <strong>design</strong> that makes software human, <strong>engineering</strong> that makes it
               reliable, and <strong>intelligence</strong> that makes it adaptive. The circle is the team that holds them together.
@@ -70,18 +66,14 @@ export default async function AboutPage() {
 
       <Stats stats={settings.stats} />
 
-      <section className="container-x py-24" aria-labelledby="values-heading">
-        <SectionLabel>Principles</SectionLabel>
-        <h2 id="values-heading" className="mt-6 font-display text-4xl font-bold tracking-tight md:text-6xl">
-          What we <span className="text-highlight">stand for.</span>
-        </h2>
-        <ul className="mt-14 grid gap-4 md:grid-cols-2">
+      <section className="container-x section-y" aria-labelledby="values-heading">
+        <SectionHeading id="values-heading" label="Principles" title="What we stand for" lead="The working principles behind every engagement, from the first call to long-term support." />
+        <ul className="mt-12 grid gap-5 md:grid-cols-2">
           {VALUES.map((v, i) => (
             <li key={v.title}>
               <Reveal delay={i * 0.08} className="h-full">
-                <GlowCard className="h-full p-8">
-                  <span className="font-mono text-xs text-cyan">0{i + 1}</span>
-                  <h3 className="mt-6 font-display text-2xl font-semibold">{v.title}</h3>
+                <GlowCard className="h-full p-7">
+                  <h3 className="font-display text-xl font-semibold tracking-[-0.015em]">{v.title}</h3>
                   <p className="mt-3 leading-relaxed text-muted">{v.body}</p>
                 </GlowCard>
               </Reveal>
@@ -91,31 +83,30 @@ export default async function AboutPage() {
       </section>
 
       {team.length > 0 && (
-        <section className="container-x py-24" aria-labelledby="team-heading">
-          <SectionLabel>The team</SectionLabel>
-          <h2 id="team-heading" className="mt-6 font-display text-4xl font-bold tracking-tight md:text-6xl">The people in the circle.</h2>
-          <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="container-x section-y border-t border-line" aria-labelledby="team-heading">
+          <SectionHeading id="team-heading" label="Leadership" title="The people behind Co3" />
+          <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m, i) => (
               <li key={m.id}>
                 <Reveal delay={(i % 4) * 0.08}>
-                  <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-indigo">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line bg-indigo">
                     {m.photo ? (
-                      <Image src={m.photo} alt={m.name} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                      <Image src={m.photo} alt={m.name} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                     ) : (
-                      <div className="flex h-full items-center justify-center font-display text-6xl font-bold text-fg/20">{m.name.split(" ").map((n) => n[0]).join("")}</div>
+                      <div className="flex h-full items-center justify-center font-display text-5xl font-semibold text-muted/50">{m.name.split(" ").map((n) => n[0]).join("")}</div>
                     )}
                   </div>
-                  <h3 className="mt-4 font-display text-xl font-semibold">{m.name}</h3>
+                  <h3 className="mt-4 font-display text-lg font-semibold">{m.name}</h3>
                   <p className="text-sm text-muted">{m.role}</p>
                   {(m.linkedin || m.twitter) && (
                     <div className="mt-3 flex gap-2">
                       {m.linkedin && (
-                        <a href={m.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`} className="text-muted hover:text-cyan">
+                        <a href={m.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`} className="text-muted hover:text-fg">
                           <LinkedinIcon className="h-4 w-4" />
                         </a>
                       )}
                       {m.twitter && (
-                        <a href={m.twitter} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on X`} className="text-muted hover:text-cyan">
+                        <a href={m.twitter} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on X`} className="text-muted hover:text-fg">
                           <XIcon className="h-4 w-4" />
                         </a>
                       )}
@@ -127,7 +118,7 @@ export default async function AboutPage() {
           </ul>
         </section>
       )}
-      <CtaSection title="Join the circle." body="Whether you're hiring us or want to work with us, we'd love to hear from you." />
+      <CtaSection title="Let's build something together." body="Whether you're looking for a delivery partner or want to join the team, we'd love to hear from you." />
     </PageTransition>
   );
 }

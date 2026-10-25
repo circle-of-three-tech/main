@@ -28,11 +28,11 @@ export function ArticleToc({ headings }: { headings: Heading[] }) {
   if (headings.length < 2) return null;
   return (
     <nav aria-label="Table of contents" className="text-sm">
-      <p className="hud-label mb-5">On this page</p>
+      <p className="mb-4 text-sm font-semibold">On this page</p>
       <ul className="relative space-y-1 border-l border-line">
         {headings.map((h) => (
           <li key={h.id} className="relative">
-            {active === h.id && <motion.span layoutId="toc-active" className="absolute -left-px top-0 h-full w-0.5 bg-cyan shadow-[0_0_12px_var(--cyan)]" />}
+            {active === h.id && <motion.span layoutId="toc-active" className="absolute -left-px top-0 h-full w-0.5 bg-cyan" />}
             <a href={`#${h.id}`} className={cn("block py-1.5 leading-snug transition-colors", h.level === 3 ? "pl-8" : "pl-5", active === h.id ? "text-fg" : "text-muted hover:text-fg")}>
               {h.text}
             </a>

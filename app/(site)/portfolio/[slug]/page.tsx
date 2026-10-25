@@ -10,8 +10,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { BrowserFrame } from "@/components/site/project-card";
 import { CtaSection } from "@/components/site/cta-section";
 import { ButtonLink, SectionLabel } from "@/components/site/ui";
-import { Parallax, ParallaxImage } from "@/components/motion/parallax";
-import { fallbackPhoto } from "@/lib/photos";
+import { Parallax } from "@/components/motion/parallax";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getProject, getProjects, getSlugs } from "@/lib/queries";
 import { breadcrumbJsonLd, pageMetadata, projectJsonLd } from "@/lib/seo";
@@ -60,23 +59,21 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
   return (
     <article>
       <JsonLd data={[projectJsonLd(project), breadcrumbJsonLd([{ name: "Portfolio", path: "/portfolio" }, { name: project.title, path: `/portfolio/${project.slug}` }])]} />
-      <header className="relative overflow-hidden pb-40 pt-36 md:pb-56 md:pt-44">
-        <ParallaxImage src={fallbackPhoto(project.slug).src} alt="" priority speed={0.2} />
-        <div className="scrim absolute inset-0" aria-hidden />
-        <div className="container-x relative">
-          <Link href="/portfolio" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-cyan">
+      <header className="border-b border-line bg-indigo pb-36 pt-32 md:pb-52 md:pt-40">
+        <div className="container-x">
+          <Link href="/portfolio" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-fg">
             <ArrowLeft className="h-4 w-4" /> All work
           </Link>
-          <p className="hud-label accent-text mt-10" style={{ "--accent": project.accent } as React.CSSProperties}>
+          <p className="hud-label mt-8">
             {project.category} · {project.year}
           </p>
-          <RiseText text={project.title} className="mt-4 font-display text-[clamp(3rem,9vw,8rem)] font-bold leading-[0.95] tracking-tight" />
-          <Reveal delay={0.25}>
-            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-muted">{project.summary}</p>
+          <RiseText text={project.title} className="mt-3 font-display text-[clamp(2.4rem,5.4vw,4.2rem)] font-semibold leading-[1.04] tracking-[-0.035em]" />
+          <Reveal delay={0.08}>
+            <p className="mt-5 max-w-3xl text-xl leading-relaxed text-muted">{project.summary}</p>
           </Reveal>
           {project.url && (
-            <Reveal delay={0.4} className="mt-8">
-              <ButtonLink href={project.url} target="_blank" rel="noopener" cursor="Visit">
+            <Reveal delay={0.12} className="mt-8">
+              <ButtonLink href={project.url} target="_blank" rel="noopener">
                 Visit live site
               </ButtonLink>
             </Reveal>
@@ -84,7 +81,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
         </div>
       </header>
 
-      <Parallax offset={40} className="container-x relative -mt-28 md:-mt-44">
+      <Parallax className="container-x relative -mt-24 md:-mt-40">
         <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
           <div>
             <BrowserFrame project={project} priority sizes="(min-width: 1280px) 1216px, 100vw" />
@@ -94,19 +91,19 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
 
       <section className="container-x grid gap-16 py-20 lg:grid-cols-12">
         <aside className="lg:col-span-4">
-          <dl className="glass hud relative divide-y divide-line rounded-2xl lg:sticky lg:top-32">
+          <dl className="divide-y divide-line rounded-xl border border-line bg-surface lg:sticky lg:top-28">
             {facts.map((f) => (
-              <div key={f.k} className="p-6">
-                <dt className="hud-label text-muted">{f.k}</dt>
-                <dd className="mt-2 font-display text-lg">{f.v}</dd>
+              <div key={f.k} className="px-6 py-5">
+                <dt className="text-sm text-muted">{f.k}</dt>
+                <dd className="mt-1 font-medium">{f.v}</dd>
               </div>
             ))}
             {project.techStack.length > 0 && (
-              <div className="p-6">
-                <dt className="hud-label text-muted">Stack</dt>
+              <div className="px-6 py-5">
+                <dt className="text-sm text-muted">Technology</dt>
                 <dd className="mt-3 flex flex-wrap gap-2">
                   {project.techStack.map((t) => (
-                    <span key={t} className="rounded-full border border-line px-3 py-1 font-mono text-xs text-fg/80">{t}</span>
+                    <span key={t} className="rounded-md bg-indigo px-2.5 py-1 text-xs font-medium">{t}</span>
                   ))}
                 </dd>
               </div>
@@ -115,13 +112,13 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
         </aside>
         <div className="lg:col-span-8">
           <SectionLabel>Case study</SectionLabel>
-          <div className="prose-co3 mt-8" dangerouslySetInnerHTML={{ __html: sanitize(project.content) }} />
+          <div className="prose-co3 mt-5" dangerouslySetInnerHTML={{ __html: sanitize(project.content) }} />
           {project.metrics.length > 0 && (
-            <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+            <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line">
               {project.metrics.map((m) => (
-                <div key={m.label} className="bg-ink p-6">
-                  <dt className="hud-label text-muted">{m.label}</dt>
-                  <dd className="mt-2 font-display text-4xl font-bold text-highlight">{m.value}</dd>
+                <div key={m.label} className="flex flex-col-reverse bg-surface p-6">
+                  <dt className="mt-1 text-sm text-muted">{m.label}</dt>
+                  <dd className="font-display text-3xl font-semibold tracking-[-0.03em] text-cyan">{m.value}</dd>
                 </div>
               ))}
             </dl>
@@ -129,7 +126,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
           {project.gallery.length > 0 && (
             <div className="mt-12 grid gap-6">
               {project.gallery.map((src, i) => (
-                <div key={src} className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line">
+                <div key={src} className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line">
                   <Image src={src} alt={`${project.title} screen ${i + 1}`} fill sizes="(min-width: 1024px) 800px, 100vw" className="object-cover" />
                 </div>
               ))}
@@ -139,14 +136,14 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
       </section>
 
       {next && next.slug !== project.slug && (
-        <section className="container-x py-16" aria-label="Next project">
-          <Link href={`/portfolio/${next.slug}`} className="group flex flex-col items-start justify-between gap-6 border-y border-line py-12 md:flex-row md:items-center" data-cursor="Next">
+        <section className="container-x pb-4 pt-8" aria-label="Next project">
+          <Link href={`/portfolio/${next.slug}`} className="group flex items-center justify-between gap-6 border-y border-line py-10">
             <div>
-              <p className="hud-label text-muted">Next project</p>
-              <p className="mt-3 font-display text-5xl font-bold tracking-tight transition-colors group-hover:text-cyan md:text-7xl">{next.title}</p>
+              <p className="text-sm text-muted">Next project</p>
+              <p className="mt-1 font-display text-2xl font-semibold tracking-[-0.02em] transition-colors group-hover:text-cyan md:text-4xl">{next.title}</p>
             </div>
-            <span className="flex h-20 w-20 items-center justify-center rounded-full border border-line transition-all duration-700 group-hover:rotate-45 group-hover:border-cyan group-hover:bg-cyan group-hover:text-ink">
-              <ArrowUpRight className="h-8 w-8" />
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line transition-colors group-hover:border-cyan group-hover:bg-cyan group-hover:text-accent-ink">
+              <ArrowUpRight className="h-5 w-5" />
             </span>
           </Link>
         </section>

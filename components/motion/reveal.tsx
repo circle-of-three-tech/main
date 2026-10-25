@@ -4,15 +4,16 @@ import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
 
 type Props = HTMLMotionProps<"div"> & { delay?: number; y?: number; blur?: boolean };
 
-/** Fades and lifts content in when it enters the viewport. */
-export function Reveal({ delay = 0, y = 32, blur = true, children, ...rest }: Props) {
+/** Fades content in with a small lift when it enters the viewport. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function Reveal({ delay = 0, y = 14, blur, children, ...rest }: Props) {
   const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={reduce ? false : { opacity: 0, y, filter: blur ? "blur(8px)" : "none" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }}
+      initial={{ opacity: 0, y: Math.min(y, 16) }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-8% 0px" }}
+      transition={reduce ? { duration: 0 } : { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: Math.min(delay, 0.24) }}
       {...rest}
     >
       {children}

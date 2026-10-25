@@ -5,8 +5,6 @@ import { GithubIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/components/sit
 import { getServices, getSettings } from "@/lib/queries";
 import { site } from "@/lib/site";
 import { Co3Mark } from "@/components/brand/co3-mark";
-import { Marquee } from "@/components/motion/marquee";
-import { ButtonLink } from "@/components/site/ui";
 
 async function year() {
   "use cache";
@@ -24,36 +22,41 @@ export async function SiteFooter() {
   ].filter((s) => s.href);
 
   return (
-    <footer className="relative mt-32 overflow-hidden border-t border-line">
-      <div className="py-10">
-        <Marquee duration={50}>
-          {["Build", "Scale", "Transform"].map((w) => (
-            <span key={w} className="flex items-center gap-10 pr-10 font-display text-[clamp(3rem,9vw,8rem)] font-bold uppercase leading-none tracking-tight text-transparent [-webkit-text-stroke:1px_rgb(138_147_201/0.4)]">
-              {w}
-              <span className="h-4 w-4 rotate-45 bg-cyan" aria-hidden />
+    <footer className="border-t border-line bg-indigo">
+      <div className="container-x grid gap-12 py-16 md:grid-cols-12 md:py-20">
+        <div className="md:col-span-4 lg:col-span-3">
+          <div className="flex items-center gap-2.5">
+            <Co3Mark label={false} className="h-8 w-8 text-fg" />
+            <span className="leading-none">
+              <span className="block font-display text-[0.95rem] font-semibold tracking-[-0.01em]">Circle of Three</span>
+              <span className="mt-1 block text-[0.6rem] font-medium uppercase tracking-[0.2em] text-muted">Technologies</span>
             </span>
-          ))}
-        </Marquee>
-      </div>
-
-      <div className="container-x grid gap-14 border-t border-line py-16 md:grid-cols-12">
-        <div className="md:col-span-5">
-          <div className="flex items-center gap-4">
-            <Co3Mark className="h-14 w-14 text-fg" />
-            <div>
-              <p className="font-display text-lg font-semibold tracking-[0.2em]">CIRCLE OF THREE</p>
-              <p className="font-display text-xs tracking-[0.5em] text-muted">TECHNOLOGIES</p>
-            </div>
           </div>
-          <p className="mt-6 max-w-sm text-muted">{settings.tagline} A Nigerian technology company engineering software for Africa and the world.</p>
-          <div className="mt-8">
-            <ButtonLink href="/contact" cursor="Talk">Start a project</ButtonLink>
-          </div>
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
+            {settings.tagline} A software and technology company based in Nigeria, building for clients at home and around the world.
+          </p>
+          {socials.length > 0 && (
+            <ul className="mt-6 flex gap-2">
+              {socials.map(({ href, label, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-line-strong hover:text-fg"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <nav aria-label="Services" className="md:col-span-3">
-          <p className="hud-label">Services</p>
-          <ul className="mt-5 space-y-3">
+          <p className="text-sm font-semibold text-fg">Services</p>
+          <ul className="mt-4 space-y-2.5 text-sm">
             {services.map((s) => (
               <li key={s.slug}>
                 <Link href={`/services/${s.slug}`} className="text-muted transition-colors hover:text-fg">
@@ -65,8 +68,8 @@ export async function SiteFooter() {
         </nav>
 
         <nav aria-label="Company" className="md:col-span-2">
-          <p className="hud-label">Company</p>
-          <ul className="mt-5 space-y-3">
+          <p className="text-sm font-semibold text-fg">Company</p>
+          <ul className="mt-4 space-y-2.5 text-sm">
             {[...site.nav, { label: "Contact", href: "/contact" }].map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="text-muted transition-colors hover:text-fg">
@@ -77,39 +80,30 @@ export async function SiteFooter() {
           </ul>
         </nav>
 
-        <address className="not-italic md:col-span-2">
-          <p className="hud-label">Contact</p>
-          <ul className="mt-5 space-y-3 text-sm text-muted">
-            <li className="flex gap-2">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
-              <a href={`mailto:${settings.email}`} className="break-all hover:text-fg">{settings.email}</a>
+        <address className="not-italic md:col-span-3 lg:col-span-4">
+          <p className="text-sm font-semibold text-fg">Get in touch</p>
+          <ul className="mt-4 space-y-3 text-sm text-muted">
+            <li className="flex gap-2.5">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+              <a href={`mailto:${settings.email}`} className="break-words transition-colors [overflow-wrap:anywhere] hover:text-fg">{settings.email}</a>
             </li>
-            <li className="flex gap-2">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
-              <a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="hover:text-fg">{settings.phone}</a>
+            <li className="flex gap-2.5">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+              <a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-fg">{settings.phone}</a>
             </li>
-            <li className="flex gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
+            <li className="flex gap-2.5">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
               <span>{settings.address}, {settings.country}</span>
             </li>
           </ul>
-          {socials.length > 0 && (
-            <ul className="mt-6 flex gap-3">
-              {socials.map(({ href, label, Icon }) => (
-                <li key={label}>
-                  <a href={href!} target="_blank" rel="noopener noreferrer" aria-label={label} className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition hover:border-cyan hover:text-cyan">
-                    <Icon className="h-4 w-4" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
         </address>
       </div>
 
-      <div className="container-x flex flex-col items-start justify-between gap-4 border-t border-line py-8 text-xs text-muted md:flex-row md:items-center">
-        <p>© {currentYear} {site.name}. All rights reserved.</p>
-        <p className="font-mono uppercase tracking-[0.2em]">Engineered in Nigeria · Shipped worldwide</p>
+      <div className="border-t border-line">
+        <div className="container-x flex flex-col items-start justify-between gap-3 py-6 text-xs text-muted md:flex-row md:items-center">
+          <p>© {currentYear} {site.name}. All rights reserved.</p>
+          <p>Lagos, Nigeria · Working with teams worldwide</p>
+        </div>
       </div>
     </footer>
   );

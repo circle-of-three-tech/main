@@ -4,7 +4,7 @@ Marketing site and content dashboard for **Circle of Three Technologies (Co3)**.
 
 - **Public site:** Home, Services (+ an SEO landing page per service), Portfolio (+ case studies), Blog (+ articles, RSS), About, Careers (+ Google Jobs markup), Contact.
 - **Dashboard** (`/dashboard`): manage posts, projects, services, jobs, team, testimonials, the contact inbox, site settings and users (Admin / Editor roles).
-- **Stack:** Next.js 16 (App Router, Cache Components, Turbopack), React 19, Tailwind CSS v4, Motion, React Three Fiber, Lenis, Prisma 7 + PostgreSQL, Tiptap, Vercel Blob.
+- **Stack:** Next.js 16 (App Router, Cache Components, Turbopack), React 19, Tailwind CSS v4, Motion, Prisma 7 + PostgreSQL, Tiptap, Vercel Blob.
 
 ## Local development
 
@@ -57,16 +57,15 @@ Public pages are prerendered and cached (`'use cache'` + `cacheTag` in `lib/quer
 - Generated branded OG images for every page, post, project and service.
 - JSON-LD: Organization + ProfessionalService, WebSite + SearchAction, BreadcrumbList, BlogPosting, CreativeWork, Service + FAQPage, JobPosting, ItemList.
 - DB-driven `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, `/blog/rss.xml`.
-- Server-rendered content, CSS-driven above-the-fold animation (fast LCP), AVIF/WebP images, lazy-loaded WebGL.
+- Server-rendered content, CSS-driven above-the-fold animation (fast LCP), AVIF/WebP images.
 - Editable SEO title/description with a live Google snippet preview in the dashboard.
 
 ## Project map
 
 ```
-app/(site)/          public pages (layout has header, footer, cursor, smooth scroll, preloader)
+app/(site)/          public pages (layout has header and footer)
 app/dashboard/       login + dashboard (request-time, role-checked)
-components/motion/   animation primitives (glyph scramble, reveals, tilt, magnetic, cursor, iris transition)
-components/three/    WebGL hero (glass cube triad)
+components/motion/   restrained animation primitives (fade-up reveals, counters, page cross-fade)
 components/dashboard form kit, rich editor, uploads, SEO panel
 lib/                 db, auth, cached queries, server actions, SEO + JSON-LD builders
 prisma/              schema, migrations, seed

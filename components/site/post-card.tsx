@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { GlyphScramble } from "@/components/motion/glyph-scramble";
 import { formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { fallbackPhoto } from "@/lib/photos";
@@ -27,23 +26,25 @@ export function PostCover({ post, className, sizes = "(min-width: 1024px) 33vw, 
 
 export function PostCard({ post, large }: { post: PostCardData; large?: boolean }) {
   return (
-    <Link href={`/blog/${post.slug}`} className="group block" data-cursor="Read">
+    <Link href={`/blog/${post.slug}`} className={cn("group block", large && "grid items-center gap-8 lg:grid-cols-2 lg:gap-12")}>
       <ViewTransition name={`post-${post.slug}`} share="morph" default="none">
-        <div className={cn("relative overflow-hidden rounded-2xl border border-line", large ? "aspect-[16/9]" : "aspect-[4/3]")}>
-          <PostCover post={post} className="transition-transform duration-[1.2s] ease-expo group-hover:scale-105" />
+        <div className={cn("relative overflow-hidden rounded-xl border border-line bg-indigo", large ? "aspect-[16/10]" : "aspect-[16/10]")}>
+          <PostCover post={post} className="transition-transform duration-500 ease-expo group-hover:scale-[1.02]" />
         </div>
       </ViewTransition>
-      <div className="mt-5 flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">
-        <span className="text-cyan">{post.category}</span>
-        <span className="h-px w-4 bg-line" />
-        <time dateTime={post.publishedAt?.toISOString()}>{formatDate(post.publishedAt)}</time>
-        <span className="h-px w-4 bg-line" />
-        <span>{post.readingTime} min read</span>
+      <div>
+        <div className={cn("flex flex-wrap items-center gap-x-2 text-sm text-muted", large ? "" : "mt-5")}>
+          <span className="font-medium text-cyan">{post.category}</span>
+          <span aria-hidden>·</span>
+          <time dateTime={post.publishedAt?.toISOString()}>{formatDate(post.publishedAt)}</time>
+          <span aria-hidden>·</span>
+          <span>{post.readingTime} min read</span>
+        </div>
+        <h3 className={cn("mt-2 font-display font-semibold leading-snug tracking-[-0.015em] transition-colors group-hover:text-cyan", large ? "text-2xl md:text-[2rem] md:leading-tight" : "text-lg md:text-xl")}>
+          {post.title}
+        </h3>
+        <p className={cn("mt-2 leading-relaxed text-muted", large ? "line-clamp-3 text-lg" : "line-clamp-2")}>{post.excerpt}</p>
       </div>
-      <h3 className={cn("mt-3 font-display font-semibold leading-snug tracking-tight transition-colors group-hover:text-cyan", large ? "text-3xl md:text-4xl" : "text-xl md:text-2xl")}>
-        <GlyphScramble text={post.title} trigger="hover" speed={14} />
-      </h3>
-      <p className="mt-3 line-clamp-2 leading-relaxed text-muted">{post.excerpt}</p>
     </Link>
   );
 }

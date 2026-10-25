@@ -1,25 +1,40 @@
-# Co3 Brand Overrides (take precedence over everything below)
+# Co3 Design Direction (takes precedence over everything below)
 
-The generated palette below (slate + red) is **superseded** by the brand palette derived from the Co3 logo
-(white isometric cube mark on a deep-indigo circuit board).
+**Positioning:** a calm, editorial, globally credible look, closer to an established consultancy or product company than a sci-fi studio. Content and real client work lead; decoration is minimal.
 
-| Token | Value | Use |
-|---|---|---|
-| `--ink` | `#05061A` | Page background |
-| `--indigo` | `#0B0F3A` | Raised surfaces |
-| `--circuit` | `#1E2A8C` | Circuit lines, borders, secondary fills |
-| `--cyan` | `#3DF2FF` | Primary accent / CTA / focus ring |
-| `--violet` | `#7B5CFF` | Secondary accent (flat use only) |
-| `--fg` | `#F5F7FF` | Body text on dark |
-| `--muted` | `#8A93C9` | Secondary text (≥4.5:1 on ink) |
+## Palette
+Token names are legacy (kept stable for the dashboard); values are what matter. Light is the default.
 
-**Typography:** Exo (display, 600–800, tight tracking), Inter (body), Roboto Mono (HUD labels, uppercase, 0.2em tracking).
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `--ink` | `#FFFFFF` | `#0A0C12` | Page background |
+| `--indigo` | `#F6F7F9` | `#10131B` | Alternate section / subtle surface |
+| `--surface` | `#FFFFFF` | `#12151E` | Cards |
+| `--fg` | `#0B1220` | `#EEF0F5` | Text |
+| `--muted` | `#5A6478` | `#9198A8` | Secondary text; second tone in headlines (`text-highlight`) |
+| `--cyan` | `#2B3FD6` | `#8A9BFF` | The single brand accent: primary buttons, links, eyebrows, icons |
+| `--accent-ink` | `#FFFFFF` | `#0A0C12` | Text on the accent |
+| `--line` / `--line-strong` | 9% / 16% of fg | 9% / 18% of fg | Borders and dividers |
+| `--band` | `#0B1220` | `#161B2B` | Dark CTA band |
 
-**Motif:** "Circle of Three". Three isometric cubes inside a ring. Sections are organised as triads (Build / Scale / Transform).
-Surfaces are liquid-glass panels (backdrop blur + 1px luminous border) with HUD corner brackets.
+## Typography
+- **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.
+- **Body/UI:** Inter. `font-mono` now maps to Inter so legacy HUD labels read as normal UI text.
+- **Code:** JetBrains Mono via `font-code` / `--font-code` (article `code`/`pre`).
+- **Eyebrow:** `hud-label` / `SectionLabel`: 12px, 600, uppercase, 0.08em tracking, accent colour.
+- **Headline second tone:** muted colour for the second clause ("Three disciplines. *One accountable team.*"), not a bright highlight.
 
-**Motion rules:** transform/opacity only, 150–300ms for micro-interactions and 500–900ms for reveals, using the ease `cubic-bezier(0.22, 1, 0.36, 1)`.
-Every continuous animation stops under `prefers-reduced-motion`. WebGL runs only in the home hero, lazy-loaded, and is skipped on reduced motion or low-power devices.
+## Components
+- Buttons: `rounded-lg`, `px-5 py-3`, 14px semibold. Primary = accent fill; ghost = 1px border on surface. Use `ButtonLink` / `buttonClass()`.
+- Cards: 1px `line` border, `rounded-xl`, flat surface; hover only strengthens the border or adds a soft shadow. No glow, no tilt, no HUD brackets.
+- Sections: `section-y` vertical rhythm, `container-x` (1240px). Alternate white and `bg-indigo` bands separated by 1px borders.
+- Use `SectionHeading` for eyebrow + title + lead.
+
+## Motion
+Only short fade-ups (≤0.6s, ≤16px) on scroll, a 260ms page cross-fade and 150–200ms hover transitions. No custom cursor, preloader, film grain, scroll-jacking, text scrambles, magnetic buttons, parallax or WebGL. Everything respects `prefers-reduced-motion`.
+
+## Imagery
+Real product screenshots first. Photography sits in plain rounded frames, never behind text scrims. No gradients.
 
 ---
 
@@ -230,13 +245,3 @@ Before delivering any UI code, verify:
 - [ ] Responsive: 375px, 768px, 1024px, 1440px
 - [ ] No content hidden behind fixed navbars
 - [ ] No horizontal scroll on mobile
-
-## Themes
-Light is the default; visitors and editors can switch with the sun/moon toggle (site header, dashboard sidebar), and the choice is saved in `localStorage` (`co3:theme`). Light overrides the same tokens under `:root[data-theme="light"]` in `app/globals.css`: off-white surfaces, navy text, and the accents deepened (cyan `#0077A3`, violet `#5A3FE0`) for AA text contrast on white. Never hardcode colours in components; use the tokens (`ink`, `indigo`, `surface`, `fg`, `muted`, `line`, `cyan`, `violet`, `danger`, `warn`, `ok`) so both themes work. To change the default, edit `DEFAULT_THEME` in `lib/theme-config.ts`.
-
-## Imagery & parallax
-- **No gradients.** Surfaces, buttons, text highlights and borders use flat brand colours (`text-highlight` = cyan). Do not reintroduce `bg-gradient-*`, `radial-gradient` or SVG gradient fills.
-- **Photography** lives in `public/images/` (Unsplash License, self-hosted) and is registered in `lib/photos.ts` with alt text. Use `photo(key)`, `servicePhoto(slug)` or `fallbackPhoto(slug)` (posts/projects without their own image).
-- **Readability:** text over a photo sits on a flat `scrim` layer (`--scrim`, tuned per theme).
-- **Parallax:** `ParallaxImage` (background that drifts as it scrolls through the viewport) and `Parallax` (foreground layer offset) in `components/motion/parallax.tsx`. Both are disabled under reduced motion.
-- `PageHero` and `CtaSection` take an `image` prop.

@@ -1,57 +1,64 @@
-import { ArrowDown } from "lucide-react";
-import { CircuitField } from "@/components/site/circuit-field";
-import { ParallaxImage } from "@/components/motion/parallax";
-import { PHOTOS } from "@/lib/photos";
-import { HeroVisual } from "@/components/three/hero-visual";
-import { GlyphScramble } from "@/components/motion/glyph-scramble";
-import { RiseIn, RiseText } from "@/components/motion/rise-text";
+import Image from "next/image";
+import { BrainCircuit, Code2, PenTool } from "lucide-react";
+import { photo } from "@/lib/photos";
+import { RiseIn } from "@/components/motion/rise-text";
 import { ButtonLink } from "@/components/site/ui";
 
-export function Hero() {
-  return (
-    <section className="relative flex items-center overflow-hidden pb-16 pt-32 lg:min-h-[100svh] lg:pb-0 lg:pt-28">
-      <ParallaxImage src={PHOTOS.earth} alt="" priority speed={0.25} />
-      <div aria-hidden className="scrim absolute inset-0" />
-      <CircuitField className="opacity-50" />
+const DISCIPLINES = [
+  { Icon: PenTool, label: "Product design" },
+  { Icon: Code2, label: "Software engineering" },
+  { Icon: BrainCircuit, label: "Data & AI" },
+];
 
-      <div className="container-x relative grid items-center gap-8 lg:grid-cols-12">
-        <div className="relative z-10 lg:col-span-7">
-          <p className="hud-label flex items-center gap-3">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
-            </span>
-            <GlyphScramble text="Circle of Three Technologies · Nigerian Tech Company" trigger="mount" delay={300} />
-          </p>
-          <RiseText
-            text="Nigerian software, engineered for the world."
-            highlight={["engineered", "world"]}
-            delay={0.15}
-            className="mt-8 font-display text-[clamp(2.8rem,6.6vw,6.2rem)] font-bold leading-[0.92] tracking-[-0.03em]"
-          />
-          <RiseIn delay={0.6}>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-              We are a technology company building custom software, web platforms, mobile apps and AI systems for ambitious
-              businesses in Nigeria, across Africa and beyond. Three disciplines, one circle: <span className="text-fg">design, engineering and intelligence</span>.
+export function Hero() {
+  const img = photo("team");
+  return (
+    <section className="relative overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40">
+      <div className="container-x grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-7">
+          <RiseIn>
+            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-ok" aria-hidden />
+              Software &amp; technology partner · Lagos, Nigeria
             </p>
           </RiseIn>
-          <RiseIn delay={0.8} className="mt-10 flex flex-wrap items-center gap-4">
-            <ButtonLink href="/contact" cursor="Go">Start your project</ButtonLink>
-            <ButtonLink href="/portfolio" variant="ghost" cursor="View">See our work</ButtonLink>
+          <h1 className="rise-in mt-6 font-display text-[clamp(2.4rem,5vw,3.85rem)] font-semibold leading-[1.04] tracking-[-0.035em]" style={{ animationDelay: "0.04s" }}>
+            Nigerian software,
+            <span className="block text-highlight">engineered for the world.</span>
+          </h1>
+          <RiseIn delay={0.1}>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
+              Circle of Three Technologies designs and builds custom software, web platforms, mobile apps and AI systems for organisations in Nigeria, across
+              Africa and beyond.
+            </p>
+          </RiseIn>
+          <RiseIn delay={0.16} className="mt-9 flex flex-wrap items-center gap-3">
+            <ButtonLink href="/contact">Start a project</ButtonLink>
+            <ButtonLink href="/portfolio" variant="ghost">
+              View our work
+            </ButtonLink>
           </RiseIn>
         </div>
-        <div className="relative h-[38vh] min-h-[280px] lg:col-span-5 lg:h-[72vh]">
-          <HeroVisual />
-        </div>
-      </div>
 
-      <a href="#triad" className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-muted md:flex" aria-label="Scroll to learn more">
-        <span className="hud-label text-muted">Scroll</span>
-        <span className="relative h-12 w-px overflow-hidden bg-line">
-          <span className="absolute inset-x-0 top-0 h-1/2 animate-[pulse-line_2s_ease-in-out_infinite] bg-cyan [transform:translateY(-100%)]" />
-        </span>
-        <ArrowDown className="h-3 w-3" />
-      </a>
+        <RiseIn delay={0.12} className="relative lg:col-span-5">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-indigo sm:aspect-[5/4] lg:aspect-[4/5]">
+            <Image src={img.src} alt={img.alt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" placeholder="blur" className="object-cover" />
+          </div>
+          <div className="glass absolute -bottom-6 left-4 right-4 rounded-xl p-5 sm:left-auto sm:right-6 sm:w-72 lg:-left-10 lg:right-auto">
+            <p className="text-xs font-semibold uppercase tracking-[0.08em] text-muted">One team, three disciplines</p>
+            <ul className="mt-3 space-y-2.5">
+              {DISCIPLINES.map(({ Icon, label }) => (
+                <li key={label} className="flex items-center gap-3 text-sm font-medium">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo text-cyan">
+                    <Icon className="h-4 w-4" aria-hidden />
+                  </span>
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </RiseIn>
+      </div>
     </section>
   );
 }

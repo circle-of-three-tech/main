@@ -31,7 +31,7 @@ export function BlogExplorer({ posts }: { posts: Post[] }) {
 
   return (
     <div>
-      <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <div role="tablist" aria-label="Filter by category" className="flex flex-wrap gap-2">
           {categories.map((c) => (
             <button
@@ -39,15 +39,17 @@ export function BlogExplorer({ posts }: { posts: Post[] }) {
               role="tab"
               aria-selected={category === c}
               onClick={() => setCategory(c)}
-              className={cn("relative rounded-full border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-[0.18em] transition-colors", category === c ? "text-ink" : "text-muted hover:text-fg")}
+              className={cn(
+                "cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors duration-200",
+                category === c ? "border-fg bg-fg text-ink" : "border-line text-muted hover:border-line-strong hover:text-fg",
+              )}
             >
-              {category === c && <motion.span layoutId="blog-pill" className="absolute inset-0 rounded-full bg-cyan" transition={{ type: "spring", stiffness: 400, damping: 34 }} />}
-              <span className="relative">{c}</span>
+              {c}
             </button>
           ))}
         </div>
-        <label className="glass flex w-full items-center gap-3 rounded-full px-5 py-3 md:w-80">
-          <Search className="h-4 w-4 text-cyan" aria-hidden />
+        <label className="flex w-full items-center gap-2.5 rounded-lg border border-line bg-surface px-3.5 py-2.5 transition-colors focus-within:border-cyan md:w-80">
+          <Search className="h-4 w-4 text-muted" aria-hidden />
           <span className="sr-only">Search articles</span>
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search insights…" className="w-full bg-transparent text-sm outline-none placeholder:text-muted" type="search" />
         </label>
@@ -58,13 +60,13 @@ export function BlogExplorer({ posts }: { posts: Post[] }) {
       ) : (
         <AnimatePresence mode="popLayout">
           {lead && (
-            <motion.div key={`lead-${lead.slug}`} layout initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="mb-20">
+            <motion.div key={`lead-${lead.slug}`} layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }} className="mb-16 border-b border-line pb-16">
               <PostCard post={lead} large />
             </motion.div>
           )}
-          <motion.ul layout className="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+          <motion.ul layout className="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
             {rest.map((p, i) => (
-              <motion.li key={p.slug} layout initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}>
+              <motion.li key={p.slug} layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1], delay: Math.min(i, 5) * 0.03 }}>
                 <PostCard post={p} />
               </motion.li>
             ))}

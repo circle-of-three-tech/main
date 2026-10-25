@@ -33,8 +33,8 @@ export default async function BlogPage() {
           },
         ]}
       />
-      <PageHero label="Insights" title="Notes from the engine room." highlight={["engine", "room."]} image={photo("laptopGlow")} intro="Practical writing on software engineering, AI, product design and building technology for African markets." />
-      <section className="container-x pb-16">
+      <PageHero label="Insights" title="Insights on software, AI and building for Africa." image={photo("laptopGlow")} intro="Practical writing on software engineering, AI, product design and building technology for African markets." />
+      <section className="container-x section-y">
         <BlogExplorer posts={posts.map((p) => ({ ...p, author: undefined }))} />
       </section>
       <CtaSection title="Want ideas like these applied to your product?" />

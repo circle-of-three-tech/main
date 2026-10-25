@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import type { ElementType } from "react";
 import { cn } from "@/lib/utils";
+import { HighlightText } from "./rise-text";
 
 type Props = {
   text: string;
@@ -11,33 +12,24 @@ type Props = {
   wordClassName?: string;
   delay?: number;
   stagger?: number;
-  /** Words to highlight in the accent colour. */
+  /** Words shown in the quieter second tone. */
   highlight?: string[];
 };
 
-/** Masked stagger reveal: every word slides up from behind its own clipping mask. */
-export function SplitReveal({ text, as: Tag = "h2", className, wordClassName, delay = 0, stagger = 0.06, highlight = [] }: Props) {
+/** Heading that fades up once as it enters the viewport. */
+export function SplitReveal({ text, as: Tag = "h2", className, delay = 0, highlight = [] }: Props) {
   const reduce = useReducedMotion();
-  const words = text.split(" ");
   return (
     <Tag className={cn("[text-wrap:balance]", className)}>
-      <span className="sr-only">{text}</span>
-      <span aria-hidden>
-        {words.map((word, i) => (
-          <span key={`${word}-${i}`} className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
-            <motion.span
-              className={cn("inline-block will-change-transform", highlight.some((h) => h.replace(/[.,!?]/g, "") === word.replace(/[.,!?]/g, "")) && "text-highlight", wordClassName)}
-              initial={reduce ? false : { y: "110%", rotate: 4, opacity: 0 }}
-              whileInView={{ y: "0%", rotate: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "-8% 0px" }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: delay + i * stagger }}
-            >
-              {word}
-            </motion.span>
-            {i < words.length - 1 && " "}
-          </span>
-        ))}
-      </span>
+      <motion.span
+        className="block"
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-8% 0px" }}
+        transition={reduce ? { duration: 0 } : { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+      >
+        <HighlightText text={text} highlight={highlight} />
+      </motion.span>
     </Tag>
   );
 }
