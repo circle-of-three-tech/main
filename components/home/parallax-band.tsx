@@ -21,6 +21,7 @@ export function ParallaxBand({
     <section className="relative isolate overflow-hidden py-28 md:py-40" aria-label={eyebrow}>
       <ParallaxImage src={image.src} alt={image.alt} speed={0.22} sizes="100vw" />
       <div aria-hidden className="absolute inset-0 bg-band/75" />
+      <div aria-hidden className="on-photo tech-grid absolute inset-0" />
       <div className="container-x relative">
         <Reveal className="max-w-2xl text-band-fg">
           <p className="hud-label !text-band-fg/80">{eyebrow}</p>

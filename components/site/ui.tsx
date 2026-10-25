@@ -46,9 +46,9 @@ type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: ButtonVariant; 
 export const buttonClass = (variant: ButtonVariant = "primary") =>
   cn(
     "group inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-[background-color,border-color,box-shadow,transform,color] duration-200 ease-out hover:-translate-y-px active:translate-y-0",
-    variant === "primary" && "bg-cyan text-accent-ink shadow-[0_1px_2px_var(--shadow)] hover:bg-cyan-strong hover:shadow-[0_8px_20px_-8px_var(--glow)]",
-    // Sun-amber accent with dark text (9:1 contrast); used for the hero call to action.
-    variant === "accent" && "bg-spark text-[#1a1206] shadow-[0_1px_2px_var(--shadow)] hover:bg-[#ffb347] hover:shadow-[0_10px_24px_-8px_rgb(255_159_28/0.55)]",
+    variant === "primary" && "btn-shine bg-cyan text-accent-ink shadow-[0_1px_2px_var(--shadow)] hover:bg-cyan-strong hover:shadow-[0_8px_24px_-8px_var(--glow)]",
+    // Coral accent with dark text (6.8:1 contrast); used for the main calls to action.
+    variant === "accent" && "btn-shine bg-spark text-spark-ink shadow-[0_1px_2px_var(--shadow)] hover:bg-[#ff8566] hover:shadow-[0_10px_28px_-8px_rgb(255_107_74/0.6)]",
     variant === "ghost" && "border border-line-strong bg-surface text-fg hover:border-cyan/50 hover:text-cyan",
   );
 
@@ -80,6 +80,7 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-indigo pb-16 pt-32 md:pb-20 md:pt-40">
+      <div aria-hidden className="tech-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_20%_30%,#000_20%,transparent_70%)]" />
       <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-cyan-soft blur-3xl" />
       <div className={cn("container-x relative", image && "grid items-center gap-12 lg:grid-cols-12")}>
         <div className={cn(image && "lg:col-span-7")}>

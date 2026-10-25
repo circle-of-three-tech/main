@@ -47,7 +47,7 @@ export default async function ContactPage() {
         <aside aria-label="Contact details" className="order-first space-y-3 lg:order-none lg:col-span-4 lg:col-start-9 xl:col-span-5 xl:col-start-8">
           {channels.map(({ Icon, label, value, href }, i) => (
             <Reveal key={label} delay={i * 0.08}>
-              <div className="flex items-start gap-4 rounded-xl border border-line bg-surface p-5">
+              <div className="beam-card flex items-start gap-4 rounded-xl border border-line bg-surface p-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo text-cyan">
                   <Icon className="h-5 w-5" />
                 </span>

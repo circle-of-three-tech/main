@@ -57,7 +57,12 @@ export function HeroShowcase({ slides, labelledBy, children }: { slides: HeroSli
       </motion.div>
 
       {/* Flat dark overlay for legible copy on any photo */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 bg-[#040b16]/65" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 bg-[#020c0e]/70" />
+      {/* Futuristic layer: drifting tech grid and a scanning line */}
+      <div aria-hidden className="tech-grid pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [--scan-distance:100svh]">
+        <div className="scan-line" />
+      </div>
 
       <motion.div className="container-x flex flex-1 items-center pb-12 pt-32 md:pt-36" style={{ y: reduce ? 0 : copyY, opacity: reduce ? 1 : fade }}>
         <div className="w-full [text-shadow:0_1px_24px_rgb(2_26_60/0.4)]">{children}</div>
@@ -68,7 +73,7 @@ export function HeroShowcase({ slides, labelledBy, children }: { slides: HeroSli
         role="region"
         aria-roledescription="carousel"
         aria-label="Our services"
-        className="relative border-t border-line bg-black/30 backdrop-blur-md"
+        className="relative border-t border-line bg-black/35 backdrop-blur-md"
         onMouseEnter={() => setHeld(true)}
         onMouseLeave={() => setHeld(false)}
         onFocusCapture={() => setHeld(true)}
@@ -120,11 +125,11 @@ export function HeroShowcase({ slides, labelledBy, children }: { slides: HeroSli
                     className="group cursor-pointer text-left"
                   >
                     <span className="block h-[3px] overflow-hidden rounded-full bg-line-strong">
-                      {i < index && <span className="block h-full w-full bg-cyan" />}
+                      {i < index && <span className="block h-full w-full bg-cyan shadow-[0_0_10px_var(--cyan)]" />}
                       {on && (
                         <span
                           key={`${index}-${active}`}
-                          className={cn("block h-full w-full bg-cyan", active ? "slide-progress" : "")}
+                          className={cn("block h-full w-full bg-cyan shadow-[0_0_10px_var(--cyan)]", active ? "slide-progress" : "")}
                           style={{ ["--slide-ms" as string]: `${INTERVAL}ms` }}
                         />
                       )}

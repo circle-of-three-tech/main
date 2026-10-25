@@ -14,13 +14,13 @@ function cube(cx: number, cy: number, s: number): Cube {
 
 export const CUBES: Cube[] = [cube(50, 33, 12), cube(38.6, 55, 12), cube(61.4, 55, 12)];
 
-/** Blue shades for the three cube faces: lit top, mid left, deep right (matches --mark-* tokens). */
-export const MARK_BLUES = { top: "#9BD6FF", left: "#38A6F7", right: "#1F86EC", ringFrom: "#8FD0FF", ringTo: "#2EA3F7" };
-/** Sun-amber accent shades for the top cube. */
-export const MARK_ACCENT = { top: "#FFD28F", left: "#FFAD33", right: "#F08C00" };
+/** Teal shades for the three cube faces: lit top, mid left, deep right (matches --mark-* tokens). */
+export const MARK_BLUES = { top: "#9FF3E4", left: "#2CC9B2", right: "#0D8F82", ringFrom: "#7EEEDB", ringTo: "#14B8A6" };
+/** Coral accent shades for the top cube. */
+export const MARK_ACCENT = { top: "#FFC4B2", left: "#FF8A6A", right: "#F0522E" };
 
 /** Standalone SVG of the mark for icons, OG images and structured data. `bg` fills the ring (and the whole tile when `tile` is set). */
-export function markSvg({ fg = "#FFFFFF", bg = "#08325F", text = true, tile = false } = {}) {
+export function markSvg({ fg = "#FFFFFF", bg = "#052A2C", text = true, tile = false } = {}) {
   const b = MARK_BLUES;
   const face = (pts: string, fill: string) => `<polygon points="${pts}" fill="${fill}" stroke="${fg}" stroke-width="1.4" stroke-linejoin="round"/>`;
   const cubes = CUBES.map((c, i) => {

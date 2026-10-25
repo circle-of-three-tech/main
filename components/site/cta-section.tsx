@@ -21,6 +21,7 @@ export function CtaSection({
         <div className="relative isolate flex flex-col gap-10 overflow-hidden rounded-2xl bg-band px-7 py-12 text-band-fg md:px-14 md:py-20 lg:flex-row lg:items-end lg:justify-between">
           <ParallaxImage src={image.src} alt="" speed={0.18} sizes="(min-width: 1280px) 1240px, 100vw" className="-z-10" />
           <div aria-hidden className="absolute inset-0 -z-10 bg-band/80" />
+          <div aria-hidden className="on-photo tech-grid absolute inset-0 -z-10" />
           <div className="max-w-2xl">
             <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.025em] md:text-[2.6rem]">{title}</h2>
             <p className="mt-4 text-lg leading-relaxed text-band-muted">{body}</p>

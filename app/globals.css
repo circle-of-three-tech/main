@@ -2,52 +2,53 @@
 
 /*
  * Co3 design tokens (see design-system/co3/MASTER.md).
- * Token names are kept stable for the dashboard; values define a calm, editorial palette:
- * neutral surfaces, near-black navy text and one confident brand blue ("cyan" is the legacy name for the accent).
+ * Token names are kept stable for the dashboard; values define a light, futuristic teal palette with a coral accent
+ * ("cyan" is the legacy name for the primary, "spark"/"violet" for the accent).
  */
 :root {
   --ink: #ffffff; /* page background */
-  --indigo: #f0f8ff; /* faint sky-tinted alternate section background */
+  --indigo: #effbf9; /* faint teal-tinted alternate section background */
   --surface: #ffffff; /* cards */
-  --circuit: #ddeefc; /* secondary fills */
+  --circuit: #d9f3ee; /* secondary fills */
   --hero-fade: var(--indigo); /* colour the hero dissolves into (immune to .on-photo token flips) */
-  --cyan: #0a6fd0; /* primary: clear summer-afternoon sky (AA on white) */
-  --cyan-strong: #0858a8; /* primary hover */
-  --cyan-soft: #def0ff; /* primary tint (icon chips, selections) */
-  --sky: #2ea3f7; /* bright sky, decorative fills and gradients only */
-  --sky-light: #8fd0ff; /* horizon haze */
-  --mark-top: #9bd6ff; /* logo faces: lit top, mid left, deep right */
-  --mark-mid: #38a6f7;
-  --mark-deep: #0a6fd0;
-  --mark-accent-top: #ffd28f; /* top cube in the sun-amber accent */
-  --mark-accent-mid: #ffad33;
-  --mark-accent-deep: #f08c00;
+  --cyan: #0d7f74; /* primary: deep teal (AA on white) */
+  --cyan-strong: #0a655c; /* primary hover */
+  --cyan-soft: #d7f5ef; /* primary tint (icon chips, selections) */
+  --sky: #14b8a6; /* electric teal, decorative fills, glows and borders only */
+  --sky-light: #7eeedb; /* pale teal */
+  --mark-top: #9ff3e4; /* logo faces: lit top, mid left, deep right */
+  --mark-mid: #2cc9b2;
+  --mark-deep: #0d8f82;
+  --mark-accent-top: #ffc4b2; /* top cube in the coral accent */
+  --mark-accent-mid: #ff8a6a;
+  --mark-accent-deep: #f0522e;
   --accent-ink: #ffffff; /* text on primary */
-  --violet: #b45309; /* complementary accent: afternoon-sun amber (AA as text) */
-  --violet-soft: #b45309;
-  --spark: #ff9f1c; /* sunlight, decorative fills only */
-  --fg: #09182c;
-  --muted: #4f6178;
-  --line: rgb(10 22 40 / 0.09);
-  --line-strong: rgb(10 22 40 / 0.16);
+  --violet: #c43d1f; /* complementary accent: coral (AA as text) */
+  --violet-soft: #c43d1f;
+  --spark: #ff6b4a; /* coral, fills and accent buttons (with dark text) */
+  --spark-ink: #1a0b06; /* text on coral */
+  --fg: #061a1c;
+  --muted: #4b6264;
+  --line: rgb(6 26 28 / 0.09);
+  --line-strong: rgb(6 26 28 / 0.16);
+  --grid-line: rgb(13 127 116 / 0.07); /* tech-grid lines */
   --danger: #c22a3a;
   --warn: #9a5b00;
   --ok: #0a7d5c;
-  --glow: rgb(10 111 208 / 0.24);
-  --shadow: rgb(9 24 44 / 0.1);
+  --glow: rgb(20 184 166 / 0.3);
+  --shadow: rgb(6 26 28 / 0.1);
   --trace: #d7dbe5;
   --glass: rgb(255 255 255 / 0.86);
   --scrim: rgb(255 255 255 / 0.86);
   --grain: 0;
-  --band: #08325f; /* deep late-sky blue feature band (CTA) */
+  --band: #052a2c; /* deep teal feature band (CTA) */
   --band-fg: #ffffff;
-  --band-muted: rgb(255 255 255 / 0.68);
+  --band-muted: rgb(255 255 255 / 0.7);
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --iris-x: 50%;
   --iris-y: 50%;
   color-scheme: light;
 }
-
 
 @theme inline {
   --color-ink: var(--ink);
@@ -59,6 +60,7 @@
   --color-sky: var(--sky);
   --color-sky-light: var(--sky-light);
   --color-spark: var(--spark);
+  --color-spark-ink: var(--spark-ink);
   --color-accent-ink: var(--accent-ink);
   --color-violet: var(--violet);
   --color-fg: var(--fg);
@@ -107,16 +109,17 @@
 .on-photo {
   --fg: #ffffff;
   --muted: rgb(255 255 255 / 0.8);
-  --line: rgb(255 255 255 / 0.24);
-  --line-strong: rgb(255 255 255 / 0.4);
-  --surface: rgb(6 36 70 / 0.5);
-  --cyan: #8fd0ff;
-  --cyan-strong: #c4e7ff;
-  --cyan-soft: rgb(255 255 255 / 0.14);
-  --accent-ink: #052648;
+  --line: rgb(255 255 255 / 0.2);
+  --line-strong: rgb(255 255 255 / 0.36);
+  --surface: rgb(4 32 34 / 0.5);
   --indigo: rgb(255 255 255 / 0.14);
-  --mark-top: #c4e7ff;
-  --shadow: rgb(2 18 40 / 0.45);
+  --cyan: #5eead4;
+  --cyan-strong: #99f6e4;
+  --cyan-soft: rgb(255 255 255 / 0.14);
+  --accent-ink: #04201f;
+  --grid-line: rgb(94 234 212 / 0.08);
+  --mark-top: #c6fbf1;
+  --shadow: rgb(0 12 14 / 0.5);
 }
 
 /* ---------- Base ---------- */
@@ -169,19 +172,21 @@ p {
 @utility hud-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  gap: 0.65rem;
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cyan);
   &::before {
     content: "";
-    width: 1.25rem;
-    height: 2px;
-    border-radius: 2px;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 1px;
     background: var(--spark);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--spark) 22%, transparent), 0 0 12px var(--spark);
+    animation: node-pulse 2.4s ease-in-out infinite;
   }
 }
 @utility container-x {
@@ -230,7 +235,8 @@ p {
 @keyframes page-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    filter: blur(6px);
+    transform: translateY(8px);
   }
 }
 ::view-transition-group(.morph) {
@@ -349,6 +355,7 @@ p {
 @keyframes hero-fade {
   from {
     opacity: 0;
+    filter: blur(10px);
   }
 }
 /* Slow zoom on the active hero slide */
@@ -400,4 +407,113 @@ p {
 /* Slower zoom for the full-screen hero photos */
 .ken-burns-slow {
   animation: ken-burns 9s ease-out both;
+}
+
+/* ---------- Futuristic layer ---------- */
+@keyframes node-pulse {
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+/* Faint drifting tech grid (lines only, no colour wash). */
+.tech-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  animation: grid-drift 24s linear infinite;
+}
+@keyframes grid-drift {
+  to {
+    background-position: 56px 56px;
+  }
+}
+
+/* Thin scanning line that sweeps down a section. */
+.scan-line {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: var(--sky);
+  box-shadow: 0 0 14px 2px color-mix(in srgb, var(--sky) 55%, transparent);
+  opacity: 0;
+  animation: scan 7s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  8%,
+  80% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(var(--scan-distance, 100vh));
+    opacity: 0;
+  }
+}
+
+/* Glowing text for highlight lines on dark backgrounds. */
+.glow-text {
+  text-shadow: 0 0 28px color-mix(in srgb, var(--cyan) 45%, transparent);
+}
+
+/* Rotating light beam around a card's border on hover/focus. */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.beam-card {
+  position: relative;
+}
+.beam-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--beam-angle), transparent 0 64%, var(--sky) 78%, var(--spark) 88%, transparent 96%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: beam-spin 3.6s linear infinite;
+  pointer-events: none;
+}
+.beam-card:hover::before,
+.beam-card:focus-within::before {
+  opacity: 1;
+}
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+/* Light sweep across buttons on hover. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--ease-out-expo);
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
 }
