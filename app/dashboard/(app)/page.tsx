@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight, FileText, FolderKanban, Inbox, PenLine, ShieldAlert } from "lucide-react";
+import { Activity, ArrowUpRight, FileText, FolderKanban, Inbox, PenLine, ShieldAlert } from "lucide-react";
+import { compact, Delta } from "@/components/analytics/breakdown";
 import { Badge, Panel } from "@/components/dashboard/ui";
+import { getAnalyticsSummary } from "@/lib/analytics";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { formatDate, truncate } from "@/lib/utils";
@@ -8,13 +10,14 @@ import { formatDate, truncate } from "@/lib/utils";
 export default async function Overview({ searchParams }: PageProps<"/dashboard">) {
   const user = await requireUser();
   const { denied } = await searchParams;
-  const [published, drafts, projects, unread, messages, recentDrafts] = await Promise.all([
+  const [published, drafts, projects, unread, messages, recentDrafts, traffic] = await Promise.all([
     db.post.count({ where: { status: "PUBLISHED" } }),
     db.post.count({ where: { status: "DRAFT" } }),
     db.project.count({ where: { published: true } }),
     db.message.count({ where: { read: false } }),
     db.message.findMany({ orderBy: { createdAt: "desc" }, take: 5 }),
     db.post.findMany({ where: { status: "DRAFT" }, orderBy: { updatedAt: "desc" }, take: 5, select: { id: true, title: true, updatedAt: true } }),
+    getAnalyticsSummary(),
   ]);
   const stats = [
     { label: "Published posts", value: published, href: "/dashboard/posts", Icon: FileText },
@@ -46,6 +49,33 @@ export default async function Overview({ searchParams }: PageProps<"/dashboard">
           </Link>
         ))}
       </div>
+
+      <Link href="/dashboard/analytics" className="group flex flex-col gap-4 rounded-2xl border border-line bg-indigo/40 p-5 transition hover:border-cyan/40 sm:flex-row sm:items-center sm:justify-between">
+        <span className="flex items-center gap-3">
+          <Activity className="h-5 w-5 text-cyan" />
+          <span>
+            <span className="block font-display font-semibold">Site traffic, last 7 days</span>
+            <span className="block text-sm text-muted">
+              <strong className="font-semibold text-fg">{traffic.live}</strong> on the site now
+            </span>
+          </span>
+        </span>
+        <span className="flex items-center gap-8">
+          {[
+            { label: "Visitors", now: traffic.current.visitors, before: traffic.previous.visitors },
+            { label: "Page views", now: traffic.current.pageviews, before: traffic.previous.pageviews },
+          ].map((m) => (
+            <span key={m.label}>
+              <span className="block text-xs text-muted">{m.label}</span>
+              <span className="flex items-baseline gap-2">
+                <span className="font-display text-2xl font-bold tabular-nums">{compact(m.now)}</span>
+                <Delta now={m.now} before={m.before} />
+              </span>
+            </span>
+          ))}
+          <ArrowUpRight className="hidden h-4 w-4 text-muted transition group-hover:rotate-45 group-hover:text-cyan sm:block" />
+        </span>
+      </Link>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Panel title="Latest messages" actions={<Link href="/dashboard/messages" className="text-sm text-cyan">Open inbox</Link>}>

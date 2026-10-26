@@ -175,3 +175,29 @@ model SiteSettings {
   stats          Json     @default("[]")
   updatedAt      DateTime @updatedAt
 }
+
+/// One row per page view on the public site. No cookies and no raw IPs: visitors are a
+/// salted hash of IP + user agent that rotates daily, so a person can't be tracked across days.
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  /// External referrer host (e.g. "google.com"); null for direct or internal navigation
+  referrer  String?
+  /// utm_source, when the landing URL carried one
+  source    String?
+  visitorId String
+  /// Random per-tab id (sessionStorage), used for sessions and bounce rate
+  sessionId String
+  /// ISO 3166-1 alpha-2, from the host's geo header
+  country   String?
+  /// "desktop" | "mobile" | "tablet"
+  device    String
+  browser   String?
+  os        String?
+  /// Seconds the page was visible, reported when the visitor leaves
+  duration  Int?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([path, createdAt])
+}

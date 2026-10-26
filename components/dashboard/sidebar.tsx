@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
-import { Briefcase, ExternalLink, FileText, FolderKanban, Inbox, LayoutDashboard, LogOut, Menu, MessageSquareQuote, Settings, Shapes, Users, UsersRound, X } from "lucide-react";
+import { BarChart3, Briefcase, ExternalLink, FileText, FolderKanban, Inbox, LayoutDashboard, LogOut, Menu, MessageSquareQuote, Settings, Shapes, Users, UsersRound, X } from "lucide-react";
 import { useState } from "react";
 import { useOnChange } from "@/lib/hooks";
 import { Co3Mark } from "@/components/brand/co3-mark";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/dashboard", label: "Overview", Icon: LayoutDashboard, exact: true },
+  { href: "/dashboard/analytics", label: "Analytics", Icon: BarChart3 },
   { href: "/dashboard/posts", label: "Blog posts", Icon: FileText },
   { href: "/dashboard/projects", label: "Portfolio", Icon: FolderKanban },
   { href: "/dashboard/services", label: "Services", Icon: Shapes },

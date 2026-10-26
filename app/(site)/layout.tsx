@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { PageTracker } from "@/components/analytics/page-tracker";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -17,6 +19,9 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
         {children}
       </main>
       <SiteFooter />
+      <Suspense fallback={null}>
+        <PageTracker />
+      </Suspense>
     </>
   );
 }
