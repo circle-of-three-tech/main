@@ -1,4 +1,5 @@
 import "server-only";
+import { createHash } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SignJWT, jwtVerify } from "jose";
@@ -70,4 +71,13 @@ export async function requireAdmin() {
   const user = await requireUser();
   if (user.role !== "ADMIN") redirect("/dashboard?denied=1");
   return user;
+}
+
+export const hashResetToken = (token: string) => createHash("sha256").update(token).digest("hex");
+
+/** The reset token row for an emailed token, or null if it's unknown or expired. */
+export async function findResetToken(token: string | undefined) {
+  if (!token) return null;
+  const row = await db.passwordResetToken.findUnique({ where: { tokenHash: hashResetToken(token) } });
+  return row && row.expiresAt > new Date() ? row : null;
 }

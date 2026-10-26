@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { login, type LoginState } from "@/lib/actions/auth";
@@ -8,7 +9,8 @@ import { inputClass } from "./form";
 
 export function LoginForm() {
   const [state, action, pending] = useActionState<LoginState, FormData>(login, {});
-  const next = useSearchParams().get("next") ?? "";
+  const params = useSearchParams();
+  const next = params.get("next") ?? "";
   return (
     <form action={action} className="space-y-5">
       <input type="hidden" name="next" value={next} />
@@ -16,8 +18,18 @@ export function LoginForm() {
         <span className="mb-2 block text-sm font-medium">Email</span>
         <input name="email" type="email" autoComplete="username" required className={inputClass} />
       </label>
+      {params.get("reset") && !state.error && (
+        <p role="status" className="rounded-lg border border-cyan/40 bg-cyan/10 px-3 py-2 text-sm">
+          Password updated. Sign in with your new password.
+        </p>
+      )}
       <label className="block">
-        <span className="mb-2 block text-sm font-medium">Password</span>
+        <span className="mb-2 flex items-center justify-between text-sm font-medium">
+          Password
+          <Link href="/dashboard/forgot-password" className="font-normal text-muted hover:text-fg">
+            Forgot password?
+          </Link>
+        </span>
         <input name="password" type="password" autoComplete="current-password" required className={inputClass} />
       </label>
       {state.error && (

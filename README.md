@@ -23,7 +23,7 @@ docker run -d --name co3-postgres -e POSTGRES_USER=co3 -e POSTGRES_PASSWORD=co3d
   -p 55440:5432 -v co3-pgdata:/var/lib/postgresql/data postgres:16
 ```
 
-Sign in at `/dashboard/login` with `ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`, then change the password under **Account**.
+Sign in at `/dashboard/login` with `ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`, then change the password under **Account**. Forgotten passwords can be reset from **Forgot password?** on the sign-in page, which emails a single-use link valid for 60 minutes (requires SMTP).
 
 ### Environment variables
 
@@ -34,7 +34,7 @@ Sign in at `/dashboard/login` with `ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`,
 | `NEXT_PUBLIC_SITE_URL` | yes | Canonical origin, e.g. `https://circleofthreetech.com` (used for canonicals, sitemap, OG) |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | seed only | First admin account |
 | `BLOB_READ_WRITE_TOKEN` | production | Image uploads via Vercel Blob (locally, uploads go to `public/uploads`) |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | optional | SMTP for transactional email via nodemailer (contact notifications and auto-replies). Email is skipped when unset |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | optional | SMTP for transactional email via nodemailer (contact notifications, auto-replies and password reset links). Email is skipped when unset |
 | `CONTACT_NOTIFY_EMAIL` | optional | Where enquiries are emailed; defaults to the email in dashboard Settings |
 | `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` | optional | Search Console / Bing Webmaster verification meta tags |
 
