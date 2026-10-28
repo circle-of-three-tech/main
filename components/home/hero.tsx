@@ -1,5 +1,5 @@
 import { ButtonLink } from "@/components/site/ui";
-import { servicePhoto } from "@/lib/photos";
+import { heroArt } from "@/lib/photos";
 import { HeroShowcase, type HeroSlide } from "./hero-showcase";
 
 type Service = { slug: string; title: string; tagline: string; icon: string };
@@ -9,7 +9,7 @@ const fade = (s: number) => ({ animationDelay: `${s}s` });
 
 export function Hero({ services }: { services: Service[] }) {
   const slides: HeroSlide[] = services.map((s) => {
-    const p = servicePhoto(s.slug);
+    const p = heroArt(s.slug);
     return { slug: s.slug, title: s.title, tagline: s.tagline, image: p.src, alt: `${s.title}: ${p.alt}` };
   });
 

@@ -17,6 +17,12 @@ import office from "@/public/images/office.jpg";
 import servers from "@/public/images/servers.jpg";
 import team from "@/public/images/team.jpg";
 import workspace from "@/public/images/workspace.jpg";
+import heroAi from "@/public/images/hero/ai-automation.jpg";
+import heroCloud from "@/public/images/hero/cloud-devops.jpg";
+import heroSoftware from "@/public/images/hero/custom-software-development.jpg";
+import heroMobile from "@/public/images/hero/mobile-app-development.jpg";
+import heroDesign from "@/public/images/hero/ui-ux-design.jpg";
+import heroWeb from "@/public/images/hero/web-development.jpg";
 
 /** Site photography (Unsplash License), self-hosted in public/images. */
 export const PHOTOS = { ai, circuit, codeCloseup, codeDesk, code, collab, cyber, datacenter, design, earth, lagos, laptopGlow, mobile, office, servers, team, workspace };
@@ -58,6 +64,20 @@ const SERVICE_PHOTOS: Record<string, keyof typeof PHOTOS> = {
 
 export function servicePhoto(slug: string) {
   return photo(SERVICE_PHOTOS[slug] ?? "circuit");
+}
+
+/** Abstract Lumio-style artwork for the home hero frame, one per service (generated in-house). */
+const HERO_ART: Record<string, Photo> = {
+  "custom-software-development": { src: heroSoftware, alt: "Abstract sunset light streaks in pink, orange and violet" },
+  "web-development": { src: heroWeb, alt: "Abstract warm ivory silk folds" },
+  "mobile-app-development": { src: heroMobile, alt: "Abstract coral and pink glass glow" },
+  "ai-automation": { src: heroAi, alt: "Abstract blue-to-purple aura" },
+  "cloud-devops": { src: heroCloud, alt: "Abstract beam of light across a graphite room" },
+  "ui-ux-design": { src: heroDesign, alt: "Abstract emerald light streaks" },
+};
+
+export function heroArt(slug: string): Photo {
+  return HERO_ART[slug] ?? servicePhoto(slug);
 }
 
 const POOL: (keyof typeof PHOTOS)[] = ["laptopGlow", "cyber", "codeDesk", "collab", "earth", "circuit", "workspace", "datacenter", "office"];
