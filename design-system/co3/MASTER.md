@@ -34,7 +34,6 @@ Light theme only. Token names are legacy (kept stable for the dashboard); values
 ## Components
 - **Header:** floating black pill (max 880px) centred near the top; ivory "Contact us" pill; mobile menu drops down as a dark rounded card.
 - **Home hero:** centred eyebrow, two-line headline (second line `text-highlight`), lead, two buttons; below, a 40px-radius media frame cycling service photos with a glass service rail (progress, pause, arrow keys) and a glass slide chip.
-- **Marquee:** shipped product names under the hero (`WorkMarquee`), edge-faded, pauses on hover.
 - **Pillars:** soft gradient panel with the active photo and a floating glass capability card, beside a vertical list with a sunset rail on the active item.
 - **Services:** edge-to-edge photo cards with a dark fade, glass icon chip, title + tagline at the bottom.
 - **Process:** sticky heading beside soft step cards; sunset rail draws on hover.

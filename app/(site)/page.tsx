@@ -5,7 +5,6 @@ import { ServicesGrid } from "@/components/home/services-grid";
 import { Stats } from "@/components/home/stats";
 import { Process } from "@/components/home/process";
 import { ImageBand } from "@/components/home/image-band";
-import { WorkMarquee } from "@/components/home/work-marquee";
 import { ParallaxBand } from "@/components/home/parallax-band";
 import { photo } from "@/lib/photos";
 import { Reveal } from "@/components/motion/reveal";
@@ -35,7 +34,6 @@ export default async function HomePage() {
   return (
     <PageTransition>
       <Hero services={services} />
-      <WorkMarquee projects={projects} />
 
       <Pillars />
       <ServicesGrid services={services} />
