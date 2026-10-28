@@ -47,14 +47,14 @@ export default async function ContactPage() {
         <aside aria-label="Contact details" className="order-first space-y-3 lg:order-none lg:col-span-4 lg:col-start-9 xl:col-span-5 xl:col-start-8">
           {channels.map(({ Icon, label, value, href }, i) => (
             <Reveal key={label} delay={i * 0.08}>
-              <div className="beam-card flex items-start gap-4 rounded-xl border border-line bg-surface p-5">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo text-cyan">
+              <div className="flex items-start gap-4 rounded-[24px] bg-indigo p-5 md:p-6">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-fg text-ink">
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-sm text-muted">{label}</p>
                   {href ? (
-                    <a href={href} className="mt-0.5 block font-medium transition-colors [overflow-wrap:anywhere] hover:text-cyan">{value}</a>
+                    <a href={href} className="mt-0.5 block font-medium transition-colors [overflow-wrap:anywhere] hover:opacity-70">{value}</a>
                   ) : (
                     <p className="mt-0.5 font-medium">{value}</p>
                   )}

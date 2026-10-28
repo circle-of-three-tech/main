@@ -28,19 +28,19 @@ export function PostCard({ post, large }: { post: PostCardData; large?: boolean 
   return (
     <Link href={`/blog/${post.slug}`} className={cn("group block", large && "grid items-center gap-8 lg:grid-cols-2 lg:gap-12")}>
       <ViewTransition name={`post-${post.slug}`} share="morph" default="none">
-        <div className={cn("relative overflow-hidden rounded-xl border border-line bg-indigo", large ? "aspect-[16/10]" : "aspect-[16/10]")}>
+        <div className={cn("relative overflow-hidden rounded-[28px] bg-indigo shadow-[0_30px_60px_-34px_rgb(27_27_27/0.4)] md:rounded-[32px]", large ? "aspect-[16/10]" : "aspect-[4/3]")}>
           <PostCover post={post} className="transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
         </div>
       </ViewTransition>
       <div>
-        <div className={cn("flex flex-wrap items-center gap-x-2 text-sm text-muted", large ? "" : "mt-5")}>
-          <span className="font-medium text-cyan">{post.category}</span>
+        <div className={cn("flex flex-wrap items-center gap-x-2 text-xs font-medium text-muted", large ? "" : "mt-6")}>
+          <span className="font-semibold uppercase tracking-[0.1em] text-violet">{post.category}</span>
           <span aria-hidden>·</span>
           <time dateTime={post.publishedAt?.toISOString()}>{formatDate(post.publishedAt)}</time>
           <span aria-hidden>·</span>
           <span>{post.readingTime} min read</span>
         </div>
-        <h3 className={cn("mt-2 font-display font-semibold leading-snug tracking-[-0.015em] transition-colors group-hover:text-cyan", large ? "text-2xl md:text-[2rem] md:leading-tight" : "text-lg md:text-xl")}>
+        <h3 className={cn("mt-3 font-display font-bold leading-snug tracking-[-0.025em] transition-opacity group-hover:opacity-70", large ? "text-2xl md:text-[2.25rem] md:leading-tight" : "text-xl")}>
           {post.title}
         </h3>
         <p className={cn("mt-2 leading-relaxed text-muted", large ? "line-clamp-3 text-lg" : "line-clamp-2")}>{post.excerpt}</p>

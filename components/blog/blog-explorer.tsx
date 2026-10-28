@@ -40,15 +40,15 @@ export function BlogExplorer({ posts }: { posts: Post[] }) {
               aria-selected={category === c}
               onClick={() => setCategory(c)}
               className={cn(
-                "cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors duration-200",
-                category === c ? "border-fg bg-fg text-ink" : "border-line text-muted hover:border-line-strong hover:text-fg",
+                "cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-[background-color,color,box-shadow] duration-200",
+                category === c ? "bg-fg text-ink shadow-[0_8px_20px_-10px_rgb(27_27_27/0.6)]" : "bg-surface text-muted shadow-[0_1px_2px_var(--shadow)] hover:text-fg",
               )}
             >
               {c}
             </button>
           ))}
         </div>
-        <label className="flex w-full items-center gap-2.5 rounded-lg border border-line bg-surface px-3.5 py-2.5 transition-colors focus-within:border-cyan md:w-80">
+        <label className="flex w-full items-center gap-2.5 rounded-full border border-line-strong bg-surface px-4 py-2.5 transition-colors focus-within:border-fg md:w-80">
           <Search className="h-4 w-4 text-muted" aria-hidden />
           <span className="sr-only">Search articles</span>
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search insights…" className="w-full bg-transparent text-sm outline-none placeholder:text-muted" type="search" />

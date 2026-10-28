@@ -59,7 +59,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
   return (
     <article>
       <JsonLd data={[projectJsonLd(project), breadcrumbJsonLd([{ name: "Portfolio", path: "/portfolio" }, { name: project.title, path: `/portfolio/${project.slug}` }])]} />
-      <header className="border-b border-line bg-indigo pb-36 pt-32 md:pb-52 md:pt-40">
+      <header className="rounded-b-[40px] bg-indigo pb-36 pt-36 md:rounded-b-[64px] md:pb-52 md:pt-48">
         <div className="container-x">
           <Link href="/portfolio" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-fg">
             <ArrowLeft className="h-4 w-4" /> All work
@@ -67,13 +67,13 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
           <p className="hud-label mt-8">
             {project.category} · {project.year}
           </p>
-          <RiseText text={project.title} className="mt-3 font-display text-[clamp(2.4rem,5.4vw,4.2rem)] font-semibold leading-[1.04] tracking-[-0.035em]" />
+          <RiseText text={project.title} className="mt-3 font-display text-[clamp(2.5rem,6.4vw,5.25rem)] font-bold leading-[1.02] tracking-[-0.05em]" />
           <Reveal delay={0.08}>
             <p className="mt-5 max-w-3xl text-xl leading-relaxed text-muted">{project.summary}</p>
           </Reveal>
           {project.url && (
             <Reveal delay={0.12} className="mt-8">
-              <ButtonLink href={project.url} target="_blank" rel="noopener">
+              <ButtonLink href={project.url} target="_blank" rel="noopener" variant="accent">
                 Visit live site
               </ButtonLink>
             </Reveal>
@@ -91,7 +91,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
 
       <section className="container-x grid gap-16 py-20 lg:grid-cols-12">
         <aside className="lg:col-span-4">
-          <dl className="divide-y divide-line rounded-xl border border-line bg-surface lg:sticky lg:top-28">
+          <dl className="divide-y divide-line rounded-[28px] border border-line bg-surface lg:sticky lg:top-28">
             {facts.map((f) => (
               <div key={f.k} className="px-6 py-5">
                 <dt className="text-sm text-muted">{f.k}</dt>
@@ -103,7 +103,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
                 <dt className="text-sm text-muted">Technology</dt>
                 <dd className="mt-3 flex flex-wrap gap-2">
                   {project.techStack.map((t) => (
-                    <span key={t} className="rounded-md bg-indigo px-2.5 py-1 text-xs font-medium">{t}</span>
+                    <span key={t} className="rounded-full bg-indigo px-3 py-1 text-xs font-medium">{t}</span>
                   ))}
                 </dd>
               </div>
@@ -114,11 +114,11 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
           <SectionLabel>Case study</SectionLabel>
           <div className="prose-co3 mt-5" dangerouslySetInnerHTML={{ __html: sanitize(project.content) }} />
           {project.metrics.length > 0 && (
-            <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line">
+            <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-[28px] border border-line bg-line">
               {project.metrics.map((m) => (
                 <div key={m.label} className="flex flex-col-reverse bg-surface p-6">
                   <dt className="mt-1 text-sm text-muted">{m.label}</dt>
-                  <dd className="font-display text-3xl font-semibold tracking-[-0.03em] text-cyan">{m.value}</dd>
+                  <dd className="font-display text-4xl font-bold tracking-[-0.045em]">{m.value}</dd>
                 </div>
               ))}
             </dl>
@@ -126,7 +126,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
           {project.gallery.length > 0 && (
             <div className="mt-12 grid gap-6">
               {project.gallery.map((src, i) => (
-                <div key={src} className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line">
+                <div key={src} className="relative aspect-[16/10] overflow-hidden rounded-[28px] border border-line">
                   <Image src={src} alt={`${project.title} screen ${i + 1}`} fill sizes="(min-width: 1024px) 800px, 100vw" className="object-cover" />
                 </div>
               ))}
@@ -140,9 +140,9 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
           <Link href={`/portfolio/${next.slug}`} className="group flex items-center justify-between gap-6 border-y border-line py-10">
             <div>
               <p className="text-sm text-muted">Next project</p>
-              <p className="mt-1 font-display text-2xl font-semibold tracking-[-0.02em] transition-colors group-hover:text-cyan md:text-4xl">{next.title}</p>
+              <p className="mt-1 font-display text-3xl font-bold tracking-[-0.04em] transition-opacity group-hover:opacity-70 md:text-5xl">{next.title}</p>
             </div>
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line transition-colors group-hover:border-cyan group-hover:bg-cyan group-hover:text-accent-ink">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line-strong transition-colors group-hover:border-fg group-hover:bg-fg group-hover:text-ink">
               <ArrowUpRight className="h-5 w-5" />
             </span>
           </Link>

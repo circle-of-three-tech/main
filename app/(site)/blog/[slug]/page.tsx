@@ -61,18 +61,18 @@ async function PostContent({ params }: { params: PageProps<"/blog/[slug]">["para
   return (
     <article>
       <JsonLd data={[articleJsonLd(post), breadcrumbJsonLd([{ name: "Insights", path: "/blog" }, { name: post.title, path: `/blog/${post.slug}` }])]} />
-      <header className="container-x max-w-4xl pb-12 pt-32 md:pt-40">
+      <header className="container-x max-w-4xl pb-12 pt-36 md:pt-48">
         <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-fg">
           <ArrowLeft className="h-4 w-4" /> All insights
         </Link>
         <div className="mt-8 flex flex-wrap items-center gap-x-2 text-sm text-muted">
-          <span className="font-medium text-cyan">{post.category}</span>
+          <span className="font-semibold uppercase tracking-[0.1em] text-violet">{post.category}</span>
           <span aria-hidden>·</span>
           <time dateTime={post.publishedAt?.toISOString()}>{formatDate(post.publishedAt)}</time>
           <span aria-hidden>·</span>
           <span>{post.readingTime} min read</span>
         </div>
-        <RiseText text={post.title} className="mt-4 font-display text-[clamp(2.1rem,4.6vw,3.4rem)] font-semibold leading-[1.08] tracking-[-0.03em]" />
+        <RiseText text={post.title} className="mt-4 font-display text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.03] tracking-[-0.045em]" />
         <Reveal delay={0.08}>
           <p className="mt-5 text-xl leading-relaxed text-muted">{post.excerpt}</p>
         </Reveal>
@@ -86,7 +86,7 @@ async function PostContent({ params }: { params: PageProps<"/blog/[slug]">["para
 
       <div className="container-x">
         <ViewTransition name={`post-${post.slug}`} share="morph" default="none">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-2xl border border-line bg-indigo">
+          <div className="relative aspect-[21/9] overflow-hidden rounded-[28px] bg-indigo shadow-[0_40px_80px_-40px_rgb(27_27_27/0.35)] md:rounded-[40px]">
             <ParallaxImage src={post.coverImage ?? fallbackPhoto(post.slug).src} alt={post.title} sizes="(min-width: 1280px) 1240px, 100vw" priority />
           </div>
         </ViewTransition>
@@ -104,7 +104,7 @@ async function PostContent({ params }: { params: PageProps<"/blog/[slug]">["para
             <ul className="mt-12 flex flex-wrap gap-2 border-t border-line pt-8" aria-label="Tags">
               {post.tags.map((t) => (
                 <li key={t}>
-                  <Link href={`/blog?q=${encodeURIComponent(t)}`} className="rounded-md border border-line px-3 py-1 text-sm text-muted transition-colors hover:border-line-strong hover:text-fg">
+                  <Link href={`/blog?q=${encodeURIComponent(t)}`} className="rounded-full border border-line-strong px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-line-strong hover:text-fg">
                     #{t}
                   </Link>
                 </li>
@@ -115,7 +115,7 @@ async function PostContent({ params }: { params: PageProps<"/blog/[slug]">["para
       </div>
 
       {related.length > 0 && (
-        <section className="container-x section-y border-t border-line" aria-labelledby="related-heading">
+        <section className="container-x section-y" aria-labelledby="related-heading">
           <SectionHeading id="related-heading" label="Keep reading" title="Related insights" />
           <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-3">
             {related.map((p) => (

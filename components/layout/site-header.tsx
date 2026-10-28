@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useOnChange } from "@/lib/hooks";
 import { LogoLink } from "@/components/brand/logo-link";
 import { buttonClass } from "@/components/site/ui";
-import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+/** Floating black pill navigation, centred near the top of every page; the mobile menu drops down as a dark card. */
 export function SiteHeader() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -28,47 +28,38 @@ export function SiteHeader() {
     document.documentElement.style.overflow = open ? "hidden" : "";
   }, [open]);
 
-  // Over the photographic home hero the header reads light-on-photo until the page scrolls (or the menu opens).
-  const onPhoto = pathname === "/" && !scrolled && !open;
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
-        scrolled || open ? "border-line bg-ink/85 shadow-[0_6px_24px_-16px_var(--shadow)] backdrop-blur-md" : "border-transparent bg-transparent",
-        onPhoto && "on-photo",
-      )}
-    >
-      <nav aria-label="Primary" className="container-x flex h-[72px] items-center justify-between gap-6">
-        <LogoLink />
+    <header className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 md:top-5">
+      <nav
+        aria-label="Primary"
+        className={cn(
+          "on-dark pointer-events-auto mx-auto flex h-14 max-w-[880px] items-center justify-between gap-4 rounded-full border border-white/10 bg-[#0b0b0b]/95 py-2 pl-2 pr-2 backdrop-blur-xl transition-shadow duration-300",
+          scrolled ? "shadow-[0_18px_40px_-12px_rgb(0_0_0/0.45)]" : "shadow-[0_10px_30px_-14px_rgb(0_0_0/0.35)]",
+        )}
+      >
+        <LogoLink compact />
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {site.nav.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "group relative rounded-md px-3.5 py-2 text-[0.9rem] font-medium transition-colors duration-200",
-                  isActive(item.href) ? "text-fg" : "text-muted hover:text-fg",
+                  "rounded-full px-3.5 py-2 text-[0.82rem] font-medium transition-colors duration-200",
+                  isActive(item.href) ? "bg-white/10 text-fg" : "text-muted hover:text-fg",
                 )}
               >
                 {item.label}
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left rounded-full bg-cyan transition-transform duration-300 ease-out",
-                    isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
-                  )}
-                />
               </Link>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
-          <Link href="/contact" className={cn(buttonClass("accent"), "hidden px-4 py-2.5 sm:inline-flex")}>
+        <div className="flex items-center gap-1.5">
+          <Link href="/contact" className={cn(buttonClass("light"), "hidden h-10 px-5 py-0 text-[0.72rem] uppercase tracking-[0.08em] sm:inline-flex")}>
             Contact us
           </Link>
           <button
@@ -77,35 +68,35 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-line text-fg lg:hidden"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/10 text-fg transition-colors hover:bg-white/15 lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
-      {scrolled && <ScrollProgress />}
-
       {open && (
-        <div id="mobile-menu" className="hero-fade h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-ink [animation-duration:300ms] lg:hidden">
-          <ul className="container-x divide-y divide-line py-2">
+        <div
+          id="mobile-menu"
+          className="on-dark hero-fade pointer-events-auto mx-auto mt-2 max-h-[calc(100dvh-6rem)] max-w-[880px] overflow-y-auto rounded-[28px] border border-white/10 bg-[#0b0b0b] p-3 shadow-[0_24px_60px_-20px_rgb(0_0_0/0.5)] [animation-duration:300ms] lg:hidden"
+        >
+          <ul className="divide-y divide-line">
             {[{ label: "Home", href: "/" }, ...site.nav, { label: "Contact", href: "/contact" }].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className={cn("block py-4 text-lg font-medium", pathname === item.href ? "text-cyan" : "text-fg")}
+                  className={cn("flex items-center justify-between px-4 py-4 text-lg font-semibold tracking-[-0.01em]", pathname === item.href ? "text-fg" : "text-muted")}
                 >
                   {item.label}
+                  <ArrowRight className="h-4 w-4 opacity-50" aria-hidden />
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="container-x pb-10 pt-4">
-            <Link href="/contact" className={cn(buttonClass("accent"), "w-full py-3.5")}>
-              Start a project
-            </Link>
-          </div>
+          <Link href="/contact" className={cn(buttonClass("light"), "mt-3 w-full py-3.5")}>
+            Start a project
+          </Link>
         </div>
       )}
     </header>

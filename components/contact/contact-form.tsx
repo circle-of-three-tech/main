@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const BUDGETS = ["< ₦5M", "₦5M – ₦20M", "₦20M – ₦50M", "₦50M+", "Not sure yet"];
 
 const inputClass =
-  "w-full rounded-lg border border-line-strong bg-surface px-3.5 py-2.5 text-[0.95rem] text-fg outline-none transition-colors placeholder:text-muted/70 focus:border-cyan focus:ring-3 focus:ring-[var(--glow)] aria-[invalid=true]:border-danger";
+  "w-full rounded-2xl border border-line-strong bg-ink px-4 py-3 text-[0.95rem] font-medium text-fg outline-none transition-[border-color,box-shadow] placeholder:font-normal placeholder:text-muted/70 focus:border-[#ff4b2b] focus:ring-4 focus:ring-[var(--glow)] aria-[invalid=true]:border-danger";
 
 function Field({ label, name, error, textarea, ...props }: { label: string; name: string; error?: string; textarea?: boolean } & React.InputHTMLAttributes<HTMLInputElement>) {
   const id = `field-${name}`;
@@ -31,8 +31,8 @@ function Field({ label, name, error, textarea, ...props }: { label: string; name
 
 const chip = (on: boolean) =>
   cn(
-    "cursor-pointer rounded-lg border px-3.5 py-2 text-sm transition-colors duration-200",
-    on ? "border-cyan bg-cyan text-accent-ink" : "border-line-strong text-muted hover:border-fg/40 hover:text-fg",
+    "cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-200",
+    on ? "border-fg bg-fg text-ink" : "border-line-strong bg-ink text-muted hover:border-fg/40 hover:text-fg",
   );
 
 export function ContactForm({ services }: { services: string[] }) {
@@ -47,7 +47,7 @@ export function ContactForm({ services }: { services: string[] }) {
   return (
     <AnimatePresence mode="wait">
       {state.ok ? (
-        <motion.div ref={done} key="done" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center rounded-xl border border-line bg-surface p-12 text-center" role="status">
+        <motion.div ref={done} key="done" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center rounded-[32px] border border-line bg-surface p-12 text-center" role="status">
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ok/15 text-ok">
             <Check className="h-7 w-7" />
           </span>
@@ -55,9 +55,9 @@ export function ContactForm({ services }: { services: string[] }) {
           <p className="mt-3 max-w-sm text-muted">{state.message ?? "Thanks! We'll be in touch shortly."}</p>
         </motion.div>
       ) : (
-        <motion.form key="form" action={action} exit={{ opacity: 0, y: -20 }} className="relative space-y-6 rounded-xl border border-line bg-surface p-6 shadow-[0_1px_2px_var(--shadow)] md:p-8" noValidate>
+        <motion.form key="form" action={action} exit={{ opacity: 0, y: -20 }} className="relative space-y-7 rounded-[28px] border border-line bg-surface p-6 shadow-[0_30px_60px_-40px_rgb(27_27_27/0.3)] md:rounded-[36px] md:p-10" noValidate>
           <div>
-            <h2 className="font-display text-xl font-semibold">Tell us about your project</h2>
+            <h2 className="font-display text-2xl font-bold tracking-[-0.03em]">Tell us about your project</h2>
             <p className="mt-1 text-sm text-muted">Fields marked * are required.</p>
           </div>
           <input type="text" name="website" tabIndex={-1} autoComplete="off" className="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden />

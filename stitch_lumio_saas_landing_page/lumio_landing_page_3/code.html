@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumio - The Operating System for Modern Work</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-primary-fixed": "#1c1b1b",
+                  "inverse-on-surface": "#f4f0ef",
+                  "surface-tint": "#5f5e5e",
+                  "primary-fixed": "#e5e2e1",
+                  "on-surface": "#1c1b1b",
+                  "tertiary-container": "#1c1b1a",
+                  "on-error-container": "#93000a",
+                  "on-secondary-fixed-variant": "#494641",
+                  "surface-bright": "#fdf8f8",
+                  "secondary-fixed-dim": "#cbc6be",
+                  "surface-container-highest": "#e5e2e1",
+                  "tertiary": "#000000",
+                  "outline": "#747878",
+                  "surface-variant": "#e5e2e1",
+                  "on-secondary-fixed": "#1d1b17",
+                  "secondary": "#615e58",
+                  "primary-fixed-dim": "#c8c6c5",
+                  "error-container": "#ffdad6",
+                  "on-error": "#ffffff",
+                  "on-primary": "#ffffff",
+                  "on-surface-variant": "#444748",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary-container": "#67645d",
+                  "inverse-primary": "#c8c6c5",
+                  "surface-container-lowest": "#ffffff",
+                  "on-tertiary-fixed-variant": "#484645",
+                  "tertiary-fixed": "#e6e2df",
+                  "primary-container": "#1c1b1b",
+                  "inverse-surface": "#313030",
+                  "surface-container-low": "#f7f3f2",
+                  "surface-container-high": "#ebe7e6",
+                  "tertiary-fixed-dim": "#cac6c4",
+                  "outline-variant": "#c4c7c7",
+                  "primary": "#000000",
+                  "on-tertiary-fixed": "#1c1b1a",
+                  "on-primary-container": "#858383",
+                  "on-tertiary-container": "#868382",
+                  "on-background": "#1c1b1b",
+                  "surface-container": "#f1edec",
+                  "on-primary-fixed-variant": "#474746",
+                  "error": "#ba1a1a",
+                  "background": "#fdf8f8",
+                  "secondary-container": "#e7e2d9",
+                  "on-secondary": "#ffffff",
+                  "secondary-fixed": "#e7e2d9",
+                  "surface-dim": "#ddd9d8",
+                  "surface": "#fdf8f8",
+                  "page-bg": "#F7F6F2"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem",
+                  "3xl": "2rem",
+                  "4xl": "3rem"
+          },
+          "spacing": {
+                  "gutter": "24px",
+                  "unit": "4px",
+                  "sm": "16px",
+                  "md": "32px",
+                  "xl": "128px",
+                  "lg": "64px",
+                  "margin": "40px",
+                  "xs": "8px",
+                  "section": "160px"
+          },
+          "fontFamily": {
+                  "label": [
+                          "Inter"
+                  ],
+                  "body-lg": [
+                          "Inter"
+                  ],
+                  "display": [
+                          "Inter"
+                  ],
+                  "h2": [
+                          "Inter"
+                  ],
+                  "h1": [
+                          "Inter"
+                  ],
+                  "h3": [
+                          "Inter"
+                  ],
+                  "body-md": [
+                          "Inter"
+                  ]
+          },
+          "fontSize": {
+                  "label": [
+                          "12px",
+                          {
+                                  "lineHeight": "1",
+                                  "letterSpacing": "0.05em",
+                                  "fontWeight": "600"
+                          }
+                  ],
+                  "body-lg": [
+                          "18px",
+                          {
+                                  "lineHeight": "1.6",
+                                  "letterSpacing": "0",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "display": [
+                          "82px",
+                          {
+                                  "lineHeight": "1.05",
+                                  "letterSpacing": "-0.04em",
+                                  "fontWeight": "600"
+                          }
+                  ],
+                  "h2": [
+                          "32px",
+                          {
+                                  "lineHeight": "1.2",
+                                  "letterSpacing": "-0.02em",
+                                  "fontWeight": "500"
+                          }
+                  ],
+                  "h1": [
+                          "48px",
+                          {
+                                  "lineHeight": "1.1",
+                                  "letterSpacing": "-0.03em",
+                                  "fontWeight": "600"
+                          }
+                  ],
+                  "h3": [
+                          "24px",
+                          {
+                                  "lineHeight": "1.3",
+                                  "letterSpacing": "-0.01em",
+                                  "fontWeight": "500"
+                          }
+                  ],
+                  "body-md": [
+                          "15px",
+                          {
+                                  "lineHeight": "1.6",
+                                  "letterSpacing": "0",
+                                  "fontWeight": "400"
+                          }
+                  ]
+          }
+  },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: theme('colors.page-bg');
+    }
+    .text-balance { text-wrap: balance; }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-container {
+      display: flex;
+      overflow: hidden;
+      user-select: none;
+      gap: 64px;
+      width: 100%;
+    }
+    .marquee-content {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-around;
+      gap: 64px;
+      min-width: 100%;
+      animation: marquee 20s linear infinite;
+    }
+  </style>
+</head>
+<body class="text-on-background font-body-lg min-h-screen antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- 1. Floating Nav (TopAppBar) -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-sm py-xs max-w-[1130px] mx-auto mt-gutter pointer-events-none">
+<div class="pointer-events-auto w-full flex items-center justify-between bg-primary-container dark:bg-primary-container rounded-full px-sm shadow-xl py-1">
+<div class="flex items-center gap-sm pl-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center shrink-0">
+<img alt="Lumio logo badge" class="w-6 h-6 object-contain" data-alt="A pristine, minimalist logo badge for Lumio, featuring a sharp geometric 'L' enclosed in a delicate circle. The badge is set against a pure white circular background, contrasting sharply with the deep black surrounding container. The lighting is perfectly even, typical of high-end UI assets. The overall style is modern, reductive, and highly polished." src="data:image/png;base64,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"/>
+</div>
+<nav class="hidden md:flex items-center gap-md">
+<a class="font-label text-label text-on-primary-container dark:text-on-primary-container hover:text-on-primary transition-colors duration-300" href="#">Platform</a>
+<a class="font-label text-label text-on-primary-container dark:text-on-primary-container hover:text-on-primary transition-colors duration-300" href="#">Solutions</a>
+<a class="font-label text-label text-on-primary-container dark:text-on-primary-container hover:text-on-primary transition-colors duration-300" href="#">Resources</a>
+<a class="font-label text-label text-on-primary-container dark:text-on-primary-container hover:text-on-primary transition-colors duration-300" href="#">Pricing</a>
+</nav>
+</div>
+<button class="bg-surface-container-lowest text-on-surface font-label text-[11px] leading-none uppercase tracking-wider rounded-full hover:bg-surface-container-low transition-colors duration-300 hover:scale-100 shrink-0 px-5 py-2.5">
+        Book a demo
+      </button>
+</div>
+</header>
+<main>
+<!-- 2. Hero -->
+<section class="pt-[200px] pb-xl px-margin max-w-7xl mx-auto flex flex-col items-center text-center mb-[80px]">
+<h1 class="font-display text-display text-balance max-w-4xl mb-lg">
+        Bring every team into focus
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-lg">
+        Decode your lorem ipsum DNA. Bring absolute clarity to your organization's most critical assets with a platform designed for deep focus.
+      </p>
+<button class="bg-primary text-on-primary font-label text-[11px] leading-none uppercase tracking-widest rounded-full hover:opacity-90 transition-opacity mb-[120px] px-6 py-3">
+        Get started
+      </button>
+<div class="w-full max-w-5xl h-[600px] bg-surface-container-high rounded-[40px] overflow-hidden shadow-2xl relative">
+<img alt="Editorial workspace" class="w-full h-full object-cover opacity-90 mix-blend-luminosity" data-alt="A highly curated, editorial-style photograph of a modern, minimalist workspace. The scene features a sleek, uncluttered desk surface with subtle, warm natural light spilling across it from an unseen window. The color palette is strictly monochrome with soft greys, deep blacks, and crisp whites. The mood is tranquil, focused, and embodies quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAMeDKMobeckAulS944HeNHVqNrccrJ84ZxVU5rr5o20H4pkeX0ASb04JjQRqAgT3sV52T5nU9bUdl3m5oJ4YwX0i0JnVQJVe1scq0EM4g8XznVYQUazPo8QwJznkOY1IU1F1zD7cXoImlQbNqb-43CZ3sbM7tAI8q3iamFjU3UKkUuf3qfjaJEXX_2InK7J0P3RH-1OT_FeJMQZ4hQEnDS4fy7MBhWknknR4sjjTLLFBDKcucpLpSIAz9TvJZLns28cSxyfhSNCDN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+</div>
+</section>
+<!-- 3. Trust -->
+<section class="py-0 mt-[80px] px-margin border-t border-outline-variant/30 max-w-7xl mx-auto flex flex-col items-center">
+<p class="font-label text-label text-on-surface-variant mb-md uppercase tracking-widest text-center pt-lg">Built with lorem ipsum leaders from</p>
+<div class="flex flex-wrap justify-center gap-xl items-center opacity-100 w-full overflow-hidden">
+<div class="marquee-container mt-md">
+<div class="marquee-content">
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">ACME Corp</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">GlobalTek</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">Nexus</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">Stark Ind</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">Wayne Ent</span>
+</div>
+<div aria-hidden="true" class="marquee-content">
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">ACME Corp</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">GlobalTek</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">Nexus</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">Stark Ind</span>
+<span class="font-h3 text-h3 font-bold tracking-tight text-primary whitespace-nowrap">Wayne Ent</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 12. Footer -->
+<footer class="bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container font-body-md text-body-md w-full py-xl px-margin flex flex-col items-center text-center mt-section rounded-t-[40px]">
+<div class="max-w-7xl mx-auto w-full">
+<div class="flex flex-col items-center mb-xl">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest flex items-center justify-center mb-md">
+<img alt="Lumio Logo" class="w-8 h-8 object-contain invert" data-alt="The Lumio primary logo badge, an elegant geometric 'L' in a circle, rendered in pure white against a deep black background. The image is crisp, high-contrast, and embodies a minimalist, editorial aesthetic. It serves as a strong visual anchor for the dark-mode footer section." src="data:image/png;base64,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"/>
+</div>
+<h2 class="font-display text-display font-black text-on-primary dark:text-on-primary mb-md">LUMIO</h2>
+<p class="text-on-primary-container font-body-lg">Decode your lorem ipsum DNA.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-lg w-full mb-xl text-left">
+<!-- Footer Links Columns -->
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Product</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Features</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Integrations</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Pricing</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Company</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">About Us</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Careers</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Blog</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Legal</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Terms</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Social</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Twitter</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Contact</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Sales</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Press</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Support</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Help Center</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Status</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label text-label text-on-primary uppercase mb-xs">Security</h4>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Compliance</a>
+<a class="hover:text-on-primary transition-opacity opacity-80 hover:opacity-100" href="#">Report Issue</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between border-t border-surface-tint/20 pt-lg w-full">
+<p class="opacity-80">© 2024 Lumio. Decode your lorem ipsum DNA.</p>
+<div class="flex items-center gap-xs mt-md md:mt-0 bg-surface-tint/10 px-4 py-2 rounded-full">
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<span class="font-label text-label">All Systems Operational</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

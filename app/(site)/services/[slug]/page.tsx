@@ -64,12 +64,12 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
       <section className="container-x section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">
           <SectionLabel>Overview</SectionLabel>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-[-0.025em] md:text-[2.4rem] md:leading-tight">{service.title} by Circle of Three Technologies</h2>
+          <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.06] tracking-[-0.04em]">{service.title} by Circle of Three Technologies</h2>
           <div className="prose-co3 mt-6" dangerouslySetInnerHTML={{ __html: sanitize(service.content) }} />
         </div>
         <aside className="lg:col-span-5">
-          <div className="rounded-xl border border-line bg-indigo p-7 lg:sticky lg:top-28">
-            <p className="font-display text-lg font-semibold">What you get</p>
+          <div className="rounded-[28px] bg-indigo p-7 md:rounded-[32px] md:p-9 lg:sticky lg:top-28">
+            <p className="font-display text-xl font-bold tracking-[-0.02em]">What you get</p>
             <ul className="mt-5 space-y-3.5">
               {service.deliverables.map((d, i) => (
                 <Reveal key={d} delay={i * 0.05} y={12} blur={false}>
@@ -87,7 +87,7 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
       </section>
 
       {service.faqs.length > 0 && (
-        <section className="container-x section-y border-t border-line" aria-labelledby="faq-heading">
+        <section className="container-x section-y" aria-labelledby="faq-heading">
           <div className="grid gap-10 lg:grid-cols-12">
           <SectionHeading id="faq-heading" label="FAQ" title="Frequently asked questions" className="lg:col-span-4" />
           <div className="divide-y divide-line border-y border-line lg:col-span-8">
@@ -106,7 +106,7 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
       )}
 
       {related.length > 0 && (
-        <section className="container-x section-y border-t border-line" aria-labelledby="related-heading">
+        <section className="container-x section-y" aria-labelledby="related-heading">
           <SectionHeading id="related-heading" label="Related work" title={`${service.title} projects`} />
           <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2">
             {related.map((p) => (
@@ -116,14 +116,16 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
         </section>
       )}
 
-      <section className="container-x section-y border-t border-line" aria-labelledby="more-heading">
+      <section className="container-x section-y" aria-labelledby="more-heading">
         <SectionHeading id="more-heading" label="Explore more" title="Other services" />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {others.map((s) => (
             <li key={s.slug}>
               <GlowCard className="h-full">
-                <Link href={`/services/${s.slug}`} className="flex h-full flex-col gap-4 p-5">
-                  <ServiceIcon name={s.icon} className="h-5 w-5 text-cyan" />
+                <Link href={`/services/${s.slug}`} className="flex h-full flex-col gap-5 p-6">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo transition-colors duration-300 group-hover:bg-fg group-hover:text-ink">
+                    <ServiceIcon name={s.icon} className="h-5 w-5" />
+                  </span>
                   <span className="font-semibold">{s.title}</span>
                 </Link>
               </GlowCard>

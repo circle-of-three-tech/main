@@ -1,59 +1,52 @@
 # Co3 Design Direction (takes precedence over everything below)
 
-**Positioning:** a calm, editorial, globally credible look, closer to an established consultancy or product company than a sci-fi studio. Content and real client work lead; decoration is minimal.
+**Source:** the "Lumio" template in `stitch_lumio_saas_landing_page/` (see its `DESIGN.md` and `code.html`).
+**Positioning:** premium, calm and editorial, like a consumer-electronics product site. Warm ivory, near-monochrome, huge tight headlines, very large radii, frosted glass layers and one sunset accent. Content and real client work lead.
 
 ## Palette
 Light theme only. Token names are legacy (kept stable for the dashboard); values are what matter.
 
 | Token | Value | Use |
 |---|---|---|
-| `--ink` / `--surface` | `#FFFFFF` | Page background, cards |
-| `--indigo` | `#EFFBF9` | Teal-tinted alternate section |
-| `--fg` / `--muted` | `#061A1C` / `#4B6264` | Text / secondary text |
-| `--cyan` | `#0D7F74` | **Primary: deep teal.** Buttons, links, eyebrows, icons (4.9:1 on white). Flips to `#5EEAD4` on photos (`.on-photo`) |
-| `--cyan-strong` / `--cyan-soft` | `#0A655C` / `#D7F5EF` | Primary hover / tint |
-| `--sky` / `--sky-light` | `#14B8A6` / `#7EEEDB` | Electric teal for glows, beams, logo ring (not text) |
-| `--spark` / `--spark-ink` | `#FF6B4A` / `#1A0B06` | **Complementary accent: coral.** Accent buttons (dark text, 6.8:1), HUD nodes |
-| `--violet` | `#C43D1F` | Coral as text (AA) |
-| `--band` | `#052A2C` | Deep teal overlay for photo bands and CTA |
-| `--mark-*` | teal shades | Logo cube faces (all three cubes) |
+| `--ink` | `#FAF9F5` | Page background (warm ivory) |
+| `--indigo` | `#F0EFEB` | Soft panels: stats, process steps, testimonials, sidebars |
+| `--surface` | `#FFFDF8` | Cards, form |
+| `--fg` / `--muted` | `#1B1B1B` / `#6B675F` | Text / secondary text (5.3:1) |
+| `--cyan` | `#181818` | **Primary: near-black.** Buttons, chips, number badges |
+| `--spark` / `--sunset` | `#FF4B2B` / `#FF416C → #FF4B2B` | **Accent gradient** (`bg-sunset`): indicator rails, dots, small icon chips, progress. Decorative only, never body text |
+| `--violet` | `#C7321F` | Sunset as text (AA): eyebrow categories, check icons |
+| `--band` | `#151515` | Footer, header pill, photo cards |
+| `--mark-*`, `--sky` | teal | Logo only (unchanged brand mark) |
 
-## Futuristic layer and motion
-- `.tech-grid`: faint 56px line grid drifting slowly on the dark photo bands and CTA only (never on page heroes).
-- `.beam-card`: a teal-to-coral light beam circles the card border on hover/focus (service grid, pillars, testimonials, contact cards, `GlowCard`).
-- `.btn-shine`: light sweep across primary/accent buttons on hover. `.glow-text`: soft teal glow on the hero's second line.
-- Reveals fade in from a soft blur (`Reveal`, `.hero-fade`, page transitions). `hud-label` is JetBrains Mono uppercase with a pulsing coral node.
-- All motion is disabled under `prefers-reduced-motion`.
-
-## Hero and logo
-- **Hero:** full-screen service showcase. Each service photo fills the hero as a cross-fading background (slow Ken Burns) inside a parallax layer, under a flat dark overlay (`#040B16` at 65%, no gradients). Copy sits on the left; the main call to action uses the coral accent button (`buttonClass("accent")`, dark text); a frosted service rail along the bottom shows the active service, its link and progress. All slides are server-rendered; reduced motion stops autoplay and transforms.
-- **Header:** transparent and `.on-photo` over the home hero, then a frosted `bg-ink/85` bar once scrolled.
-- **Logo:** three isometric cubes, all in the same teal shades (`--mark-*`), inside a teal ring; outlines and the wordmark follow `--fg`; "Technologies" is set in the primary teal. `markSvg()` in `lib/mark.ts` renders the same mark for icons and OG images.
+`.on-photo` / `.on-dark` flip the tokens to light-on-dark (header pill, footer, service cards, hero frame, photo bands).
 
 ## Typography
-- **Display:** Inter Tight 600, tracking −0.025 to −0.035em, sentence case.
-- **Body/UI:** Inter. `font-mono` now maps to Inter so legacy HUD labels read as normal UI text.
-- **Code:** JetBrains Mono via `font-code` / `--font-code` (article `code`/`pre`).
-- **Eyebrow:** `hud-label` / `SectionLabel`: 12px, 600, uppercase, 0.08em tracking, accent colour.
-- **Headline second tone:** muted colour for the second clause ("Three disciplines. *One accountable team.*"), not a bright highlight.
+- **Display:** Inter Tight 700–800, tracking −0.04 to −0.055em, leading ~1.0. Hero `clamp(2.75rem, 7.6vw, 6.25rem)`; section titles `clamp(2rem, 4.2vw, 3.25rem)`.
+- **Body/UI:** Inter. **Code:** JetBrains Mono via `font-code`.
+- **Eyebrow:** `hud-label` / `SectionLabel`: 12px, 600, uppercase, 0.12em, muted, with a sunset dot.
+- **Second tone:** `text-highlight` (charcoal at 55% on ivory) for the second clause of a headline. Large text only.
+
+## Shape and depth
+- Radii: buttons/chips/inputs pill (`rounded-full` / `rounded-2xl`); cards 24–32px; large frames 40px; footer top 64px.
+- `glass`: white 55% + 24px backdrop blur + white edge + charcoal-tinted shadow. `glass-dark` for chips/rails on photos.
+- Shadows are always low-opacity charcoal, never pure black. Prefer no borders; separate sections with space, not rules.
 
 ## Components
-- Buttons: `rounded-lg`, `px-5 py-3`, 14px semibold. Primary = accent fill; ghost = 1px border on surface. Use `ButtonLink` / `buttonClass()`.
-- Cards: 1px `line` border, `rounded-xl`, flat surface; hover only strengthens the border or adds a soft shadow. No glow, no tilt, no HUD brackets.
-- Sections: `section-y` vertical rhythm, `container-x` (1240px). Alternate white and `bg-indigo` bands separated by 1px borders.
-- Use `SectionHeading` for eyebrow + title + lead.
+- **Header:** floating black pill (max 880px) centred near the top; ivory "Contact us" pill; mobile menu drops down as a dark rounded card.
+- **Home hero:** centred eyebrow, two-line headline (second line `text-highlight`), lead, two buttons; below, a 40px-radius media frame cycling service photos with a glass service rail (progress, pause, arrow keys) and a glass slide chip.
+- **Marquee:** shipped product names under the hero (`WorkMarquee`), edge-faded, pauses on hover.
+- **Pillars:** soft gradient panel with the active photo and a floating glass capability card, beside a vertical list with a sunset rail on the active item.
+- **Services:** edge-to-edge photo cards with a dark fade, glass icon chip, title + tagline at the bottom.
+- **Process:** sticky heading beside soft step cards; sunset rail draws on hover.
+- **Testimonials:** first quote large and centred; any others as soft cards.
+- **CTA:** mark in a ring, huge centred headline, two buttons on ivory (faint sunset glow behind).
+- **Footer:** black, rounded top, column links, oversized faint "Circle of Three" wordmark.
+- **Inner page hero (`PageHero`):** centred title and intro, image in a wide 40px-radius parallax frame below.
+- **Buttons (`buttonClass`):** `accent`/`primary` charcoal pill (accent gains a sunset glow on hover), `ghost` translucent bordered pill that fills charcoal on hover, `light` ivory pill for dark surfaces.
+- **Filter chips:** pills; active charcoal, inactive white with a hairline shadow.
 
 ## Motion
-- Hero copy: pure opacity fade (`hero-fade`), staggered with `animation-delay`. The text is in the HTML from first byte.
-- Scroll: fade-ups (`Reveal`, ≤0.6s, ≤16px) on section headings, cards and stats; counters on stats.
-- Parallax: `ParallaxImage` (photo drifts inside its frame, travel clamped so edges never show) and `Parallax` (foreground offset). Used in inner page heroes, pillar cards, the Lagos section, full-bleed `ParallaxBand`s and the CTA.
-- Hover: buttons lift 1px with a soft azure shadow; cards lift 4px; images zoom slightly; nav links get an azure underline that draws in.
-- Header: shadow and a thin azure scroll-progress bar once scrolled.
-- Hero service rail (`HeroShowcase`): services cross-fade every 6s as full-screen backgrounds with a slow Ken Burns zoom; the rail shows progress, pauses on hover/focus, has a pause control and arrow-key support, and does not autoplay under reduced motion. All slides are server-rendered so every service and link is crawlable.
-- No custom cursor, preloader, film grain, scroll-jacking, text scrambles or WebGL. Everything respects `prefers-reduced-motion`.
-
-## Imagery
-Real product screenshots first. Photography sits in rounded frames or full-bleed parallax bands; text on photos always sits on the flat `band` overlay. No gradient fills (soft blurred azure/orange shapes behind heroes are fine).
+Unchanged principles: CSS hero fades, `Reveal` fade-ups, `ParallaxImage`, Ken Burns in the hero frame, marquee; all disabled under `prefers-reduced-motion`. No beams, tech grids or glows.
 
 ---
 

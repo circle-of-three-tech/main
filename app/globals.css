@@ -2,45 +2,46 @@
 
 /*
  * Co3 design tokens (see design-system/co3/MASTER.md).
- * Token names are kept stable for the dashboard; values define a light, futuristic teal palette with a coral accent
- * ("cyan" is the legacy name for the primary, "spark"/"violet" for the accent).
+ * Token names are kept stable for the dashboard; values define the warm-ivory, near-monochrome "Lumio" palette with a
+ * sunset (pink-to-orange) accent ("cyan" is the legacy name for the primary, "spark"/"violet" for the accent).
  */
 :root {
-  --ink: #ffffff; /* page background */
-  --indigo: #effbf9; /* faint teal-tinted alternate section background */
-  --surface: #ffffff; /* cards */
-  --circuit: #d9f3ee; /* secondary fills */
+  --ink: #faf9f5; /* page background: warm ivory */
+  --indigo: #f0efeb; /* soft panel / alternate section background */
+  --surface: #fffdf8; /* cards */
+  --circuit: #e9e8e4; /* secondary fills */
   --hero-fade: var(--indigo); /* colour the hero dissolves into (immune to .on-photo token flips) */
-  --cyan: #0d7f74; /* primary: deep teal (AA on white) */
-  --cyan-strong: #0a655c; /* primary hover */
-  --cyan-soft: #d7f5ef; /* primary tint (icon chips, selections) */
-  --sky: #14b8a6; /* electric teal, decorative fills, glows and borders only */
-  --sky-light: #7eeedb; /* pale teal */
+  --cyan: #181818; /* primary: near-black */
+  --cyan-strong: #000000; /* primary hover */
+  --cyan-soft: #e9e8e4; /* primary tint (icon chips, selections) */
+  --sky: #14b8a6; /* logo ring only */
+  --sky-light: #7eeedb;
   --mark-top: #9ff3e4; /* logo faces: lit top, mid left, deep right */
   --mark-mid: #2cc9b2;
   --mark-deep: #0d8f82;
-  --accent-ink: #ffffff; /* text on primary */
-  --violet: #c43d1f; /* complementary accent: coral (AA as text) */
-  --violet-soft: #c43d1f;
-  --spark: #ff6b4a; /* coral, fills and accent buttons (with dark text) */
-  --spark-ink: #1a0b06; /* text on coral */
-  --fg: #061a1c;
-  --muted: #4b6264;
-  --line: rgb(6 26 28 / 0.09);
-  --line-strong: rgb(6 26 28 / 0.16);
-  --grid-line: rgb(13 127 116 / 0.07); /* tech-grid lines */
+  --accent-ink: #faf9f5; /* text on primary */
+  --violet: #c7321f; /* sunset accent as text (AA on ivory) */
+  --violet-soft: #c7321f;
+  --spark: #ff4b2b; /* sunset accent fill (decorative) */
+  --spark-ink: #1a0b06;
+  --sunset: linear-gradient(135deg, #ff416c, #ff4b2b); /* signature accent gradient */
+  --fg: #1b1b1b;
+  --muted: #6b675f; /* 5.3:1 on ivory */
+  --line: rgb(27 27 27 / 0.08);
+  --line-strong: rgb(27 27 27 / 0.16);
+  --grid-line: rgb(27 27 27 / 0.05);
   --danger: #c22a3a;
   --warn: #9a5b00;
   --ok: #0a7d5c;
-  --glow: rgb(20 184 166 / 0.3);
-  --shadow: rgb(6 26 28 / 0.1);
-  --trace: #d7dbe5;
-  --glass: rgb(255 255 255 / 0.86);
-  --scrim: rgb(255 255 255 / 0.86);
+  --glow: rgb(255 75 43 / 0.28);
+  --shadow: rgb(27 27 27 / 0.08);
+  --trace: #d9d7d0;
+  --glass: rgb(255 255 255 / 0.55);
+  --scrim: rgb(250 249 245 / 0.86);
   --grain: 0;
-  --band: #052a2c; /* deep teal feature band (CTA) */
-  --band-fg: #ffffff;
-  --band-muted: rgb(255 255 255 / 0.7);
+  --band: #151515; /* deep black band (footer, photo overlays) */
+  --band-fg: #faf9f5;
+  --band-muted: rgb(250 249 245 / 0.62);
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --iris-x: 50%;
   --iris-y: 50%;
@@ -102,21 +103,23 @@
   }
 }
 
-/* Subtree sitting on the photographic hero: tokens flip to light-on-photo (header at top of home, hero copy and carousel). */
-.on-photo {
-  --fg: #ffffff;
-  --muted: rgb(255 255 255 / 0.8);
-  --line: rgb(255 255 255 / 0.2);
-  --line-strong: rgb(255 255 255 / 0.36);
-  --surface: rgb(4 32 34 / 0.5);
-  --indigo: rgb(255 255 255 / 0.14);
-  --cyan: #5eead4;
-  --cyan-strong: #99f6e4;
-  --cyan-soft: rgb(255 255 255 / 0.14);
-  --accent-ink: #04201f;
-  --grid-line: rgb(94 234 212 / 0.08);
+/* Subtree on a photo or the black band (hero frame, service cards, footer): tokens flip to light-on-dark. */
+.on-photo,
+.on-dark {
+  --fg: #faf9f5;
+  --muted: rgb(250 249 245 / 0.66);
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: rgb(255 255 255 / 0.24);
+  --surface: rgb(255 255 255 / 0.06);
+  --indigo: rgb(255 255 255 / 0.08);
+  --cyan: #faf9f5;
+  --cyan-strong: #ffffff;
+  --cyan-soft: rgb(255 255 255 / 0.12);
+  --accent-ink: #151515;
+  --violet: #ff8a73;
+  --grid-line: rgb(255 255 255 / 0.06);
   --mark-top: #c6fbf1;
-  --shadow: rgb(0 12 14 / 0.5);
+  --shadow: rgb(0 0 0 / 0.5);
 }
 
 /* ---------- Base ---------- */
@@ -152,53 +155,64 @@ p {
 }
 
 /* ---------- Utilities ---------- */
-/* Quiet bordered surface (formerly frosted glass). */
+/* Frosted glass layer: translucent white over ivory or photos, with a soft charcoal-tinted shadow. */
 @utility glass {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 1px 2px var(--shadow);
+  background: var(--glass);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  box-shadow: 0 12px 40px rgb(27 27 27 / 0.08);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+}
+/* Dark frosted glass for chips and rails sitting on photos. */
+@utility glass-dark {
+  background: rgb(10 10 10 / 0.38);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+}
+/* Signature sunset gradient (indicators, dots, small icon chips). */
+@utility bg-sunset {
+  background-image: var(--sunset);
 }
 /* Second, quieter tone inside a headline ("Three disciplines. One accountable team."). */
 @utility text-highlight {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--fg) 55%, var(--ink)); /* ~3.7:1, large display text only */
 }
 @utility scrim {
   background: var(--scrim);
 }
-/* Eyebrow / small label. */
+/* Eyebrow / small label: 12px uppercase with a sunset dot. */
 @utility hud-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-code);
+  gap: 0.6rem;
+  font-family: var(--font-sans);
   font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cyan);
+  color: var(--muted);
   &::before {
     content: "";
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 1px;
-    background: var(--spark);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--spark) 22%, transparent), 0 0 12px var(--spark);
-    animation: node-pulse 2.4s ease-in-out infinite;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--sunset);
   }
 }
 @utility container-x {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1320px;
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 1rem;
   @media (width >= 768px) {
-    padding-inline: 2rem;
+    padding-inline: 2.5rem;
   }
 }
 @utility section-y {
-  padding-block: 5rem;
+  padding-block: 5.5rem;
   @media (width >= 768px) {
-    padding-block: 7rem;
+    padding-block: 8.5rem;
   }
 }
 
@@ -414,61 +428,6 @@ p {
   }
 }
 
-/* Faint drifting tech grid (lines only, no colour wash). */
-.tech-grid {
-  background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  animation: grid-drift 24s linear infinite;
-}
-@keyframes grid-drift {
-  to {
-    background-position: 56px 56px;
-  }
-}
-
-
-/* Glowing text for highlight lines on dark backgrounds. */
-.glow-text {
-  text-shadow: 0 0 28px color-mix(in srgb, var(--cyan) 45%, transparent);
-}
-
-/* Rotating light beam around a card's border on hover/focus. */
-@property --beam-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-.beam-card {
-  position: relative;
-}
-.beam-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  padding: 1px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--beam-angle), transparent 0 64%, var(--sky) 78%, var(--spark) 88%, transparent 96%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  animation: beam-spin 3.6s linear infinite;
-  pointer-events: none;
-}
-.beam-card:hover::before,
-.beam-card:focus-within::before {
-  opacity: 1;
-}
-@keyframes beam-spin {
-  to {
-    --beam-angle: 360deg;
-  }
-}
-
 /* Light sweep across buttons on hover. */
 .btn-shine {
   position: relative;
@@ -480,7 +439,7 @@ p {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.22) 50%, transparent 70%);
   transform: translateX(-120%);
   transition: transform 0.8s var(--ease-out-expo);
   pointer-events: none;

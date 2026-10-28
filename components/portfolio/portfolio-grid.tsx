@@ -14,7 +14,7 @@ export function PortfolioGrid({ items }: { items: Item[] }) {
 
   return (
     <LayoutGroup>
-      <div role="tablist" aria-label="Filter projects by category" className="mb-10 flex flex-wrap gap-2">
+      <div role="tablist" aria-label="Filter projects by category" className="mb-12 flex flex-wrap justify-center gap-2">
         {categories.map((c) => (
           <button
             key={c}
@@ -22,15 +22,15 @@ export function PortfolioGrid({ items }: { items: Item[] }) {
             aria-selected={active === c}
             onClick={() => setActive(c)}
             className={cn(
-              "cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors duration-200",
-              active === c ? "border-fg bg-fg text-ink" : "border-line text-muted hover:border-line-strong hover:text-fg",
+              "cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-[background-color,color,box-shadow] duration-200",
+              active === c ? "bg-fg text-ink shadow-[0_8px_20px_-10px_rgb(27_27_27/0.6)]" : "bg-surface text-muted shadow-[0_1px_2px_var(--shadow)] hover:text-fg",
             )}
           >
             {c}
           </button>
         ))}
       </div>
-      <motion.ul layout className="grid gap-x-8 gap-y-14 md:grid-cols-2">
+      <motion.ul layout className="grid gap-x-8 gap-y-16 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {visible.map((item, i) => (
             <motion.li

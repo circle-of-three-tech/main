@@ -20,8 +20,9 @@ export type ProjectCardData = {
 export function BrowserFrame({ project, priority, sizes = "(min-width: 1024px) 50vw, 100vw" }: { project: ProjectCardData; priority?: boolean; sizes?: string }) {
   const host = project.url ? new URL(project.url).host : `${project.slug}.app`;
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-indigo">
-      <div className="flex items-center gap-3 border-b border-line bg-surface px-3.5 py-2">
+    <div className="rounded-[28px] bg-indigo p-2.5 md:rounded-[32px] md:p-3">
+      <div className="overflow-hidden rounded-[20px] border border-line bg-surface md:rounded-[24px]">
+      <div className="flex items-center gap-3 border-b border-line px-4 py-2.5">
         <span className="flex gap-1.5" aria-hidden>
           <span className="h-2 w-2 rounded-full bg-line-strong" />
           <span className="h-2 w-2 rounded-full bg-line-strong" />
@@ -41,6 +42,7 @@ export function BrowserFrame({ project, priority, sizes = "(min-width: 1024px) 5
           </>
         )}
       </div>
+      </div>
     </div>
   );
 }
@@ -50,19 +52,21 @@ export function ProjectCard({ project, index, className, priority }: { project: 
   return (
     <Link href={`/portfolio/${project.slug}`} className={cn("group block", className)}>
       <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
-        <div className="rounded-xl transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_24px_48px_-24px_var(--shadow)]">
+        <div className="rounded-[28px] transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_30px_60px_-30px_rgb(27_27_27/0.35)] md:rounded-[32px]">
           <BrowserFrame project={project} priority={priority} />
         </div>
       </ViewTransition>
-      <div className="flex items-start justify-between gap-4 pt-5">
+      <div className="flex items-start justify-between gap-4 px-1 pt-6">
         <div>
-          <p className="text-sm text-muted">
+          <p className="text-xs font-medium uppercase tracking-[0.1em] text-muted">
             {project.category} · {project.year}
           </p>
-          <h3 className="mt-1 font-display text-xl font-semibold tracking-[-0.015em] transition-colors duration-200 group-hover:text-cyan">{project.title}</h3>
+          <h3 className="mt-1 font-display text-2xl font-bold tracking-[-0.03em]">{project.title}</h3>
           <p className="mt-2 line-clamp-2 leading-relaxed text-muted">{project.summary}</p>
         </div>
-        <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted transition-[color,transform] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" aria-hidden />
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong transition-colors duration-300 group-hover:border-fg group-hover:bg-fg group-hover:text-ink">
+          <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+        </span>
       </div>
     </Link>
   );

@@ -45,13 +45,13 @@ export default async function AboutPage() {
 
       <section className="container-x section-y grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-line">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[28px] shadow-[0_40px_80px_-40px_rgb(27_27_27/0.35)] md:rounded-[40px]">
             <ParallaxImage src={photo("team").src} alt={photo("team").alt} sizes="(min-width: 1024px) 50vw, 100vw" />
           </div>
         </Reveal>
         <div>
           <SectionLabel>Our story</SectionLabel>
-          <SplitReveal text="Why the circle of three?" className="mt-3 font-display text-3xl font-semibold tracking-[-0.025em] md:text-[2.6rem]" />
+          <SplitReveal text="Why the circle of three?" className="mt-4 font-display text-[clamp(2rem,4.2vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.04em]" />
           <div className="prose-co3 mt-6">
             <p>
               Our mark is three cubes held inside a circle. Each cube is a discipline: <strong>design</strong> that makes software human, <strong>engineering</strong> that makes it
@@ -73,8 +73,8 @@ export default async function AboutPage() {
           {VALUES.map((v, i) => (
             <li key={v.title}>
               <Reveal delay={i * 0.08} className="h-full">
-                <GlowCard className="h-full p-7">
-                  <h3 className="font-display text-xl font-semibold tracking-[-0.015em]">{v.title}</h3>
+                <GlowCard className="h-full p-8 md:p-10">
+                  <h3 className="font-display text-2xl font-bold tracking-[-0.025em]">{v.title}</h3>
                   <p className="mt-3 leading-relaxed text-muted">{v.body}</p>
                 </GlowCard>
               </Reveal>
@@ -92,20 +92,20 @@ export default async function AboutPage() {
       />
 
       {team.length > 0 && (
-        <section className="container-x section-y border-t border-line" aria-labelledby="team-heading">
+        <section className="container-x section-y" aria-labelledby="team-heading">
           <SectionHeading id="team-heading" label="Leadership" title="The people behind Co3" />
           <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m, i) => (
               <li key={m.id}>
                 <Reveal delay={(i % 4) * 0.08}>
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line bg-indigo">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-indigo">
                     {m.photo ? (
                       <Image src={m.photo} alt={m.name} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                     ) : (
                       <div className="flex h-full items-center justify-center font-display text-5xl font-semibold text-muted/50">{m.name.split(" ").map((n) => n[0]).join("")}</div>
                     )}
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold">{m.name}</h3>
+                  <h3 className="mt-5 font-display text-lg font-bold tracking-[-0.02em]">{m.name}</h3>
                   <p className="text-sm text-muted">{m.role}</p>
                   {(m.linkedin || m.twitter) && (
                     <div className="mt-3 flex gap-2">

@@ -27,16 +27,16 @@ export default async function CareersPage() {
         <SectionHeading id="roles-heading" label="Open positions" title={jobs.length === 1 ? "1 open role" : `${jobs.length} open roles`} />
         {jobs.length === 0 ? (
           <p className="mt-10 text-lg text-muted">
-            No open roles right now. Send your portfolio to <a className="text-cyan underline underline-offset-2" href={`mailto:${settings.email}`}>{settings.email}</a> and we&apos;ll reach out when something fits.
+            No open roles right now. Send your portfolio to <a className="font-medium text-fg underline underline-offset-4" href={`mailto:${settings.email}`}>{settings.email}</a> and we&apos;ll reach out when something fits.
           </p>
         ) : (
-          <ul className="mt-10 divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface">
+          <ul className="mt-10 divide-y divide-line overflow-hidden rounded-[28px] border border-line bg-surface md:rounded-[32px]">
             {jobs.map((job, i) => (
               <li key={job.id}>
                 <Reveal delay={i * 0.06} y={16}>
-                  <Link href={`/careers/${job.slug}`} className="group grid items-center gap-2 px-6 py-6 transition-colors hover:bg-indigo md:grid-cols-12 md:gap-4">
-                    <span className="text-sm font-medium text-cyan md:col-span-2">{job.department}</span>
-                    <span className="font-display text-lg font-semibold tracking-[-0.01em] md:col-span-6 md:text-xl">{job.title}</span>
+                  <Link href={`/careers/${job.slug}`} className="group grid items-center gap-2 px-6 py-7 transition-colors hover:bg-indigo md:px-8 md:grid-cols-12 md:gap-4">
+                    <span className="text-xs font-semibold uppercase tracking-[0.1em] text-violet md:col-span-2">{job.department}</span>
+                    <span className="font-display text-lg font-bold tracking-[-0.02em] md:col-span-6 md:text-2xl">{job.title}</span>
                     <span className="flex items-center gap-2 text-sm text-muted md:col-span-3">
                       <MapPin className="h-4 w-4" /> {job.location} · {job.type}
                       {job.remote && " · Remote"}
