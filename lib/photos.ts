@@ -66,14 +66,14 @@ export function servicePhoto(slug: string) {
   return photo(SERVICE_PHOTOS[slug] ?? "circuit");
 }
 
-/** Abstract Lumio-style artwork for the home hero frame, one per service (generated in-house). */
+/** Home hero frame photos, one per service: site photography re-cropped to the frame with a warm, muted grade. */
 const HERO_ART: Record<string, Photo> = {
-  "custom-software-development": { src: heroSoftware, alt: "Abstract sunset light streaks in pink, orange and violet" },
-  "web-development": { src: heroWeb, alt: "Abstract warm ivory silk folds" },
-  "mobile-app-development": { src: heroMobile, alt: "Abstract coral and pink glass glow" },
-  "ai-automation": { src: heroAi, alt: "Abstract blue-to-purple aura" },
-  "cloud-devops": { src: heroCloud, alt: "Abstract beam of light across a graphite room" },
-  "ui-ux-design": { src: heroDesign, alt: "Abstract emerald light streaks" },
+  "custom-software-development": { src: heroSoftware, alt: "Developer writing code on a laptop" },
+  "web-development": { src: heroWeb, alt: "Laptop glowing in a dark room" },
+  "mobile-app-development": { src: heroMobile, alt: "Smartphone home screen with apps" },
+  "ai-automation": { src: heroAi, alt: "Glowing circuit lines on a dark surface" },
+  "cloud-devops": { src: heroCloud, alt: "Engineers walking through a data centre" },
+  "ui-ux-design": { src: heroDesign, alt: "Designer sketching wireframes on a tablet" },
 };
 
 export function heroArt(slug: string): Photo {

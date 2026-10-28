@@ -394,6 +394,18 @@ p {
     transform: scaleX(1);
   }
 }
+/* Vertical progress fill on the active "Why Co3" pillar while the section auto-advances */
+.rail-progress {
+  animation: rail-progress var(--rail-ms, 5000ms) linear both;
+}
+@keyframes rail-progress {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
 /* Gentle floating for decorative chips */
 .float-y {
   animation: float-y 6s ease-in-out infinite;

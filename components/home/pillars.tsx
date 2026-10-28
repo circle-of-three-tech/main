@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "motion/react";
 import { Check, Layers, Rocket, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/site/ui";
@@ -35,15 +36,30 @@ const PILLARS = [
   },
 ];
 
+const INTERVAL = 5000;
+
 /**
  * Two-column feature block: a soft panel holding the active pillar's photo and a floating card of its capabilities,
- * beside a vertical list of the three pillars with a sunset indicator on the active one. Hover, focus or click switches.
- * All three pillars' copy and points are in the HTML.
+ * beside a vertical list of the three pillars with a sunset indicator on the active one. The pillars loop on their own
+ * while the section is on screen (the indicator fills as a progress bar); hovering or focusing the list pauses, click switches.
+ * No autoplay under reduced motion. All three pillars' copy and points are in the HTML.
  */
 export function Pillars() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { amount: 0.35 });
+  const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
+  const [held, setHeld] = useState(false);
+  const playing = inView && !held && !reduce;
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = window.setTimeout(() => !document.hidden && setActive((i) => (i + 1) % PILLARS.length), INTERVAL);
+    return () => window.clearTimeout(id);
+  }, [playing, active]);
+
   return (
-    <section id="approach" className="section-y" aria-labelledby="pillars-heading">
+    <section ref={ref} id="approach" className="section-y" aria-labelledby="pillars-heading">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
         <Reveal className="relative order-2 lg:order-1">
           <div className="relative grid aspect-[4/5] max-h-[700px] w-full overflow-hidden rounded-[32px] bg-linear-to-br from-[#f4f3ef] to-[#e9e8e4] p-5 shadow-[0_1px_2px_var(--shadow)] sm:aspect-square md:rounded-[40px] md:p-8 lg:aspect-[5/6]">
@@ -94,12 +110,23 @@ export function Pillars() {
             }
             lead="Design, engineering and intelligence work best together. We bring all three under one roof, so nothing gets lost between handovers."
           />
-          <ul className="mt-12 space-y-9 border-l-[3px] border-line pl-8">
+          <ul
+            className="mt-12 space-y-9 border-l-[3px] border-line pl-8"
+            onMouseEnter={() => setHeld(true)}
+            onMouseLeave={() => setHeld(false)}
+            onFocusCapture={() => setHeld(true)}
+            onBlurCapture={(e) => !e.currentTarget.contains(e.relatedTarget as Node) && setHeld(false)}
+          >
             {PILLARS.map((p, i) => {
               const on = i === active;
               return (
                 <li key={p.key} className={cn("relative transition-opacity duration-300", on ? "opacity-100" : "opacity-50 hover:opacity-100")} onMouseEnter={() => setActive(i)}>
-                  <span aria-hidden className={cn("bg-sunset absolute -left-[35px] top-0 h-full w-[3px] origin-top rounded-full transition-transform duration-500 ease-out", on ? "scale-y-100" : "scale-y-0")} />
+                  <span
+                    key={on ? `on-${active}-${playing}` : "off"}
+                    aria-hidden
+                    className={cn("bg-sunset absolute -left-[35px] top-0 h-full w-[3px] origin-top rounded-full", on && playing ? "rail-progress" : "transition-transform duration-500 ease-out", on ? "scale-y-100" : "scale-y-0")}
+                    style={{ ["--rail-ms" as string]: `${INTERVAL}ms` }}
+                  />
                   <p className="text-xs font-bold uppercase tracking-[0.12em] text-violet">{p.key}</p>
                   <h3 className="mt-1.5 font-display text-xl font-bold tracking-[-0.02em] md:text-2xl">
                     <button type="button" aria-pressed={on} onClick={() => setActive(i)} onFocus={() => setActive(i)} className="cursor-pointer text-left">
